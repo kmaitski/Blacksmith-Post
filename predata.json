@@ -1,0 +1,141 @@
+[
+  {
+    "name" : "Broad Sword",
+    "description" : "If it's semi-historical/realistic game, then it's the iconic zweihander or the broad Sword type. Works more or less like a clumsier bastard (you can only use it 2 handed), may have reach benefits. ",
+    "cost" : 531,
+    "email" : "gandalf@hotmail.com",
+    "condition" : "good",
+    "blacksmith" : "Sam Smith",
+    "material" : "steel",
+    "image" : "http://i.imgur.com/P3c0a.gif",
+    "class" : "weapon",
+    "subclass" :"",
+    "active" : true
+  },
+
+  {
+    "name" : "Greek Corinthian Helmet",
+    "description" : "Going back to classic Greek style, the Greek Corinthian Helmet is truly a sight to behold.",
+    "cost" : 155,
+    "email" : "squire@hotmail.com",
+    "condition" : "old",
+    "blacksmith" : "Lady Steel",
+    "material" : "iron",
+    "image" : "https://sep.yimg.com/ay/yhst-87491460501412/greek-corinthian-armor-helmet-with-plume-40.gif",
+    "class" : "armor",
+    "subclass" :"",
+    "active" : true
+  },
+
+  {
+    "name" : "Phoenix Spear",
+    "description" : "a spear forged from the ashes of a phoenix",
+    "cost" : 999999,
+    "email" : "BrightOrangeSam@hotmail.com",
+    "condition" : "New",
+    "blacksmith" : "Alarian",
+    "material" : "flame steel",
+    "image" : "https://vignette.wikia.nocookie.net/nier/images/a/a1/PhoenixSpearClean.png/revision/latest?cb=20170718134412",
+    "class" : "weapon",
+    "subclass" :"",
+    "active" : true
+  },
+
+  {
+    "name" : "Newb Sword",
+    "description" : "test sword",
+    "cost" : 7,
+    "email" : "squire@hotmail.com",
+    "condition" : "old",
+    "blacksmith" : "Grandma",
+    "material" : "iron",
+    "image" : "http://www.coldsteel.com/media/catalog/product/cache/1/thumbnail/960x/17f82f742ffe127f42dca9de82fb58b1/8/8/88nor.jpg",
+    "class" : "weapon",
+    "subclass" :"",
+    "active" : true
+  },
+
+  {
+    "name" : "Dark Iron Breastplate",
+    "description" : "classic dark iron breastplate",
+    "cost" : 999999,
+    "email" : "tinydwarfguy@hotmail.com",
+    "condition" : "New",
+    "blacksmith" : "John",
+    "material" : "dark iron",
+    "image" : "http://www.allenantiques.com/images/A-17new.jpg",
+    "class" : "armor",
+    "subclass" :"",
+    "active" : true
+  },
+
+  {
+    "name" : "Full Light Iron Suit",
+    "description" : "Paladin armor style gear fully functional, only wore once in battle",
+    "cost" : 1450,
+    "email" : "knightman@hotmail.com",
+    "condition" : "slightly worn",
+    "blacksmith" : "Sir Jackson Hole",
+    "material" : "cold steel",
+    "image" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZtA8q3E_BczvEL_tKeaRqxyu6vq-2WkkyJBm_S0Ox3uCQDu5xEA",
+    "class" : "armor",
+    "subclass" :"",
+    "active" : true
+  },
+
+  {
+    "name" : "Phoenix Spear",
+    "description" : "a spear forged from the ashes of a phoenix",
+    "cost" : 999999,
+    "email" : "BrightOrangeSam@hotmail.com",
+    "condition" : "New",
+    "blacksmith" : "Alarian",
+    "material" : "flame steel",
+    "image" : "https://vignette.wikia.nocookie.net/nier/images/a/a1/PhoenixSpearClean.png/revision/latest?cb=20170718134412",
+    "class" : "weapon",
+    "subclass" :"",
+    "active" : true
+  },
+
+  {
+    "name" : "Oblivion axe",
+    "description" : "An axe to decimate your enemies",
+    "cost" : 4532,
+    "email" : "darkLordJeff@hotmail.com",
+    "condition" : "worn",
+    "blacksmith" : "Nethedza the great",
+    "material" : "green oynx",
+    "image" : "https://vignette.wikia.nocookie.net/elderscrolls/images/c/c7/Glass_battleaxe_skyrim.png/revision/latest/scale-to-width-down/1000?cb=20130120152447",
+    "class" : "weapon",
+    "subclass" :"",
+    "active" : true
+  },
+
+  {
+    "name" : "Roman Breast Plate",
+    "description" : "Roman style breastplate made in 1705",
+    "cost" : 7,
+    "email" : "sirMaxxy@hotmail.com",
+    "condition" : "old",
+    "blacksmith" : "Cesear",
+    "material" : "iron",
+    "image" : "http://thecostumeshop.net/wp-content/uploads/2013/10/Roman-breastplate.jpg",
+    "class" : "armor",
+    "subclass" :"",
+    "active" : true
+  },
+
+  {
+    "name" : "The_Dark_Dragon_Blade",
+    "description" : "from the swamp of Darkness",
+    "cost" : 999999,
+    "email" : "Dragonboi@hotmail.com",
+    "condition" : "Like New",
+    "blacksmith" : "hatori hanzo",
+    "material" : "dragonsteel",
+    "image" : "https://vignette.wikia.nocookie.net/ninjagaiden/images/7/76/The_Dark_Dragon_Blade.jpg/revision/latest?cb=20120929210744",
+    "class" : "weapon",
+    "subclass" :"",
+    "active" : true
+  }
+]

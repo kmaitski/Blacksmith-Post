@@ -61,11 +61,8 @@ class ItemForm extends React.Component {
 //form to collect data
     render () {
       return (
-        <div class="container" id="form">
-          <div class="row main">
-            <div class="main-login main-center">
-    
         <div className="container">
+        <div className="container" id="form">
         <div className="ItemForm">
           <h1>The Black Smith Post</h1>
           <form>
@@ -132,16 +129,15 @@ class ItemForm extends React.Component {
         </div>
 
         <h4>List thee item my lord:</h4>
-        <button className="btn btn-primary btn-lg btn-block" onClick={() => this.onSubmit()}>List Item</button>
+        <button className="btn btn-dark btn-lg btn-block" onClick={() => this.onSubmit()}>List Item</button>
       </form>
 
 
 
-        </div>
+       </div>
         </div>
           </div>
-      </div>
-    </div>
+     
       );
     };
 

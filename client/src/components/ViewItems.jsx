@@ -10,22 +10,36 @@ class ViewItems extends React.Component {
     super(props);
     this.state = {
       items: this.props.items,
+      category: undefined,
     }
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
-  handleCategoryChange(e){}
+  handleCategoryChange(e){
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
   render() {
     return (
       <div>
-
+        <div className="form-group">
+          <label><h5>Condition:</h5></label>
+            <select className="form-control" name="category"
+              value={this.state.category}
+              onChange={e => this.handleCategoryChange(e)}>
+              <option>Filter by Category</option>
+              <option>Weapon</option>
+              <option>Armor</option>
+            </select>
+        </div>
         <div className = "card-deck">
           {this.state.items.map((item) =>
+
           <SingleItem
           item={item}
-          key={item._id} />
-
+          key={item._id}
+          filter={this.state.category} />
           )}
-
         </div>
       </div>
     )

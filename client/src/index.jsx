@@ -39,11 +39,11 @@ class App extends React.Component {
   }
 
   sellItem(){ //redirect to login if not logged in when clicking sell
-    if (this.state.isLoggedIn) {
+    // if (this.state.isLoggedIn) {
       this.setState({viewState:'ItemForm'});
-    } else {
-      this.setState({viewState:'Login'})
-    }
+    // } else {
+    //   this.setState({viewState:'Login'})
+    // }
   }
 
   login(){

@@ -16,9 +16,15 @@ class SignUp extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('in handleSubmit');
-    var newUser = {username: this.state.email, password: this.state.password};
-    $.post('/signup', newUser, () =>
-      console.log('user ' + newUser + ' created'));
+    fetch('/login',
+    {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(this.state)
+    });
   }
 
   handleEmailChange(e) {

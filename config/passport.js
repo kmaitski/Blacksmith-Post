@@ -13,13 +13,13 @@ module.exports = passport => {
   });
 
   passport.use('local-signup', new LocalStrategy({
-    username: 'email',
-    password: 'password',
+    username: "username",
+    password: "password",
     passReqToCallback: true
   },
-  (req, email, password, cb) => {
+  (req, username, password, cb) => {
     process.nextTick(() => {
-      User.findOne({'local.username': email}, (err, user) => {
+      User.findOne({'local.username': usernmae}, (err, user) => {
         if (err) return cb(err);
         if (user) return(null, false, console.log('signupMessage', 'Email already taken'));
         else {
@@ -31,6 +31,22 @@ module.exports = passport => {
             return cb(null, newUser);
           });
         }
+      });
+    });
+  }));
+
+  passport.use('local-login', new LocalStrategy({
+    username: "username",
+    password: "password",
+    passReqToCallback: true
+  },
+  (req, username, password, cb) => {
+    process.nextTick(() => {
+      User.findone({'local.username': username}, (err, user) => {
+        if (err) return cb(err);
+        if (!user) return cb(null, false, console.log('loginMessage', 'no user found'));
+        if (user.password !== password) return cb(null, false, console.log('loginMessage', 'passwords do not match'));
+        return cb(null, user);
       });
     });
   }));

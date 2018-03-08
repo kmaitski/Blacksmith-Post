@@ -21,9 +21,9 @@ class ViewItems extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div style={{paddingTop: "10px"}}>
         <div className="form-group">
-          <label><h5>Condition:</h5></label>
+          <label style={{marginLeft: "10px"}}><h5>Condition:</h5></label>
             <select className="form-control" name="category"
               value={this.state.category}
               onChange={e => this.handleCategoryChange(e)}>

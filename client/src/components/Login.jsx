@@ -1,6 +1,7 @@
 
 import React from 'react';
 import {Component} from 'react';
+import PaymentForm from "./PaymentForm.jsx"
 
 
 class Login extends Component {
@@ -17,7 +18,7 @@ constructor(props){
 render() {
     return (
         <div className="container">
-
+        <PaymentForm stripeTokenHandler={this.props.stripeTokenHandler}/>
       <form className="form-signin">
         <h2 className="form-signin-heading">Please sign in</h2>
         <label  className="sr-only">Email address</label>

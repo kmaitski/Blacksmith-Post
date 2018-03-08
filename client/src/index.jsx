@@ -8,7 +8,6 @@ import ViewItems from './components/ViewItems.jsx'
 import Login from './components/Login.jsx'
 import LandingPage from './components/LandingPage.jsx'
 
-
 class App extends React.Component {
   constructor(props){
     super(props)
@@ -19,6 +18,8 @@ class App extends React.Component {
       viewState:'LandingPage',
       isLoading:false,
     }
+
+    this.stripeTokenHandler =  this.stripeTokenHandler.bind(this)
   }
 
     componentDidMount(){
@@ -33,6 +34,11 @@ class App extends React.Component {
     this.setState({viewState:'LandingPage'});
   } 
 
+  stripeTokenHandler(token) {
+    console.log(token);
+    console.log('credit card success!');
+  }
+
   buyItem(){
     this.setState({viewState:'ViewItems'});
   }
@@ -40,6 +46,7 @@ class App extends React.Component {
   sellItem(){
     this.setState({viewState:'ItemForm'});
   }
+
   login(){
     this.setState({viewState:'Login'});
   }
@@ -81,7 +88,7 @@ class App extends React.Component {
         {this.state.viewState === 'LandingPage' && <LandingPage />}
         {this.state.viewState === 'ItemForm' && <ItemForm />}
         {this.state.viewState === 'ViewItems' && <ViewItems items={this.state.items} />}
-        {this.state.viewState === 'Login' && <Login />}
+        {this.state.viewState === 'Login' && <Login stripeTokenHandler={this.stripeTokenHandler}/>}
         <Footer />
       </div>
       </div>

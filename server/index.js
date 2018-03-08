@@ -1,9 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var database = require('../database/index.js');
+var config = require('./config.js')
 
 var app = express();
 
+var stripe = require("stripe")(
+  config.api
+);
 //to view data in body of api calls
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

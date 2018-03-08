@@ -61,6 +61,11 @@ class ItemForm extends React.Component {
 //form to collect data
     render () {
       return (
+        <div class="container" id="form">
+          <div class="row main">
+            <div class="main-login main-center">
+    
+        <div className="container">
         <div className="ItemForm">
           <h1>The Black Smith Post</h1>
           <form>
@@ -74,13 +79,9 @@ class ItemForm extends React.Component {
         </div>
         <div className="form-group">
         <label><h5>Description:</h5></label>
-          <input className="form-control"
-            name="description"
-            type="string"
-            value={this.state.description}
-            onChange={e => this.change(e)} />
+        <textarea className="form-control" name="description" type="string" value={this.state.description} onChange={e => this.change(e)} rows="4"></textarea>
         </div>
-        <div className="form-group">
+        <div className="input" >
         <label><h5>Price:</h5></label>
           <input className="form-control"
             name="cost"
@@ -89,13 +90,16 @@ class ItemForm extends React.Component {
             onChange={e => this.change(e)} />
         </div>
         <div className="form-group">
-        <label><h5>Condition:</h5></label>
-        <input className="form-control"
-            name="condition"
-            type="string"
-            value={this.state.condition}
-            onChange={e => this.change(e)} />
+          <label><h5>Condition:</h5></label>
+            <select className="form-control" name="condition" value={this.state.condition} onChange={e => this.change(e)}>
+              <option></option>
+              <option>Pristine</option>
+              <option>Good</option>
+              <option>Fair</option>
+              <option>Terrible</option>
+            </select>
         </div>
+       
         <div className="form-group">
           <label><h5>Blacksmith:</h5></label>
           <input className="form-control"
@@ -121,13 +125,12 @@ class ItemForm extends React.Component {
             onChange={e => this.change(e)} />
         </div>
         <div className="form-group">
-        <label><h5>Image URL:</h5></label>
-          <input className="form-control"
-            name="image"
-            type="string"
-            value={this.state.image}
+          <label><h5>Image URL:</h5></label>
+          <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
             onChange={e => this.change(e)} />
+          <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
         </div>
+
         <h4>List thee item my lord:</h4>
         <button className="btn btn-primary btn-lg btn-block" onClick={() => this.onSubmit()}>List Item</button>
       </form>
@@ -135,6 +138,10 @@ class ItemForm extends React.Component {
 
 
         </div>
+        </div>
+          </div>
+      </div>
+    </div>
       );
     };
 

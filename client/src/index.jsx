@@ -6,6 +6,7 @@ import DeleteWeapon from './components/DeleteWeapon.jsx'
 import SingleItem from './components/SingleItem.jsx'
 import ViewItems from './components/ViewItems.jsx'
 import Login from './components/Login.jsx'
+import LandingPage from './components/LandingPage.jsx'
 
 
 class App extends React.Component {
@@ -15,7 +16,7 @@ class App extends React.Component {
     this.state = {
       items:[],
       deleteitem:'',
-      viewState:'ItemForm',
+      viewState:'LandingPage',
       isLoading:false,
     }
   }
@@ -27,6 +28,10 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => this.setState({ items: data, isloading:false}));
   }
+  
+   goHome(){
+    this.setState({viewState:'LandingPage'});
+  } 
 
   buyItem(){
     this.setState({viewState:'ViewItems'});
@@ -41,9 +46,10 @@ class App extends React.Component {
 
   render () {
     return (
-      <div className="container">
-
-        <nav className="navbar navbar-expand navbar-light bg-light">
+      <div>
+      <div>
+ 
+        <nav className="navbar navbar-expand navbar-dark bg-dark fixed-top">
         <a className="navbar-brand" href="#"></a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -52,22 +58,26 @@ class App extends React.Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <button className="btn btn-outline-primary btn-lg" onClick={() => this.buyItem()}>Browse</button>
+              <button className="btn btn-link" onClick={() => this.goHome()}>Home</button>
+            </li>
+            <li className="nav-item active">
+              <button className="btn btn-link" onClick={() => this.buyItem()}>Browse</button>
             </li>
             <li className="nav-item">
-              <button className="btn btn-outline-primary btn-lg" onClick={() => this.sellItem()}>Sell</button>
+              <button className="btn btn-link " onClick={() => this.sellItem()}>Sell</button>
             </li>
             <li className="nav-item">
-              <button className="btn btn-outline-info btn-lg" onClick={() => this.login()}>Login</button>
+              <button className="btn btn-link" onClick={() => this.login()}>Login</button>
             </li>
           </ul>
         </div>
         </nav>
-
+        {this.state.viewState === 'LandingPage' && <LandingPage />}
         {this.state.viewState === 'ItemForm' && <ItemForm />}
         {this.state.viewState === 'ViewItems' && <ViewItems items={this.state.items} />}
         {this.state.viewState === 'Login' && <Login />}
         <Footer />
+      </div>
       </div>
     );
   };

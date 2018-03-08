@@ -1,0 +1,38 @@
+.jumbotron {
+   background-image: url(Images/fire.jpg);
+  background-color: inherit;
+  background-position: center right;
+  background-size: cover;
+  width: 100%;
+  height: 95vh;
+}
+
+.jumbotron h3 {
+  font-size: 8vh;
+  margin-top:400px;
+  margin-left:50px;
+  color: #F0EEEE;
+  font-family: 'Courier new';
+  font-weight: 300;
+}
+
+.jumbotron h4 {
+  color: white;
+  margin-left: 50px;
+  font-family: 'Courier new';
+  font-weight: 300;
+}
+
+.jumbotron .btn {
+  margin-left: 50px;
+  margin-top: 15px;
+}
+
+.btn-link {
+  color: white;
+}
+
+#form {
+  width: 50%;
+  margin-top:20px;
+}

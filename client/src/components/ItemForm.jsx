@@ -75,17 +75,28 @@ class ItemForm extends React.Component {
                       name="name"
                       type="string"
                       value={this.state.name}
-                      onChange={e => this.change(e)} 
+                      onChange={e => this.change(e)}
                       placeholder="Name of your product..."/>
                   </div>
                   <div className="form-group">
+                    <label>Category</label>
+                      <select className="form-control"
+                        name="category"
+                        value={this.state.category}
+                        onChange={e => this.change(e)}>
+                          <option>Select one...</option>
+                          <option>Weapon</option>
+                          <option>Armor</option>
+                      </select>
+                  </div>
+                  <div className="form-group">
                     <label>Description</label>
-                      <textarea className="form-control" 
-                      name="description" 
-                      type="string" 
-                      value={this.state.description} 
-                      onChange={e => this.change(e)} 
-                      rows="4" 
+                      <textarea className="form-control"
+                      name="description"
+                      type="string"
+                      value={this.state.description}
+                      onChange={e => this.change(e)}
+                      rows="4"
                       placeholder="Describe what you are selling...">
                       </textarea>
                   </div>
@@ -96,14 +107,14 @@ class ItemForm extends React.Component {
                         name="cost"
                         type="number"
                         value={this.state.cost}
-                        onChange={e => this.change(e)} 
+                        onChange={e => this.change(e)}
                         placeholder="Ex. 12.99"/>
                     </div>
                     <div className="form-group col-md-6">
                       <label>Condition</label>
-                        <select className="form-control" 
-                        name="condition" 
-                        value={this.state.condition} 
+                        <select className="form-control"
+                        name="condition"
+                        value={this.state.condition}
                         onChange={e => this.change(e)}>
                           <option>Select one...</option>
                           <option>Pristine</option>

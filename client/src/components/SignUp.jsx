@@ -13,22 +13,33 @@ class SignUp extends React.Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  //   console.log('new message for handle submit');
+  //   // fetch('/login',
+  //   // {
+  //   //   headers: {
+  //   //     Accept: 'application/json',
+  //   //     'Content-Type': 'application/json'
+  //   //   },
+  //   //   method: 'POST',
+  //   //   body: JSON.stringify(this.state)
+  //   // });
+  //   $.post('/login', this.state, (one, that) => {
+  //     // console.log(one);
+  //     // console.log('done');
+  //   });
+  // }
+
   handleSubmit(e) {
     e.preventDefault();
     console.log('in handleSubmit');
-    fetch('/login',
-    {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(this.state)
-    });
+    var newUser = {username: this.state.email, password: this.state.password};
+    $.post('/login', newUser, () =>
+      console.log('user ' + newUser + ' created'));
   }
 
   handleEmailChange(e) {
-    console.log('handleEmail called')
     this.setState({email: e.target.value});
   }
 

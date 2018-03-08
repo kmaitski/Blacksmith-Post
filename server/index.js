@@ -42,7 +42,7 @@ require('./../config/passport.js')(passport);
 
 app.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/',
-  failureRedirect: '/signup',
+  failureRedirect: '/',
   failureFlash: true
 }));
 
@@ -51,6 +51,11 @@ app.post('/login', passport.authenticate('local-login', {
   failureRedirect: '/',
   failureFlash: true
 }));
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
 
 //request to view all items of type
 app.get('/api/items', function (req, res) {

@@ -14,6 +14,7 @@ class App extends React.Component {
     super(props)
 
     this.state = {
+      isLoggedIn: false,
       items:[],
       deleteitem:'',
       viewState:'LandingPage',
@@ -28,18 +29,23 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => this.setState({ items: data, isloading:false}));
   }
-  
+
    goHome(){
     this.setState({viewState:'LandingPage'});
-  } 
+  }
 
   buyItem(){
     this.setState({viewState:'ViewItems'});
   }
 
-  sellItem(){
-    this.setState({viewState:'ItemForm'});
+  sellItem(){ //redirect to login if not logged in when clicking sell
+    if (this.state.isLoggedIn) {
+      this.setState({viewState:'ItemForm'});
+    } else {
+      this.setState({viewState:'Login'})
+    }
   }
+
   login(){
     this.setState({viewState:'Login'});
   }
@@ -48,7 +54,7 @@ class App extends React.Component {
     return (
       <div>
       <div>
- 
+
         <nav className="navbar navbar-expand navbar-dark bg-dark fixed-top">
         <a className="navbar-brand" href="#"></a>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,20 +74,25 @@ class App extends React.Component {
             </li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
+            {this.state.isLoggedIn === false &&
             <li className="nav-item">
               <button className="btn btn-link" onClick={() => this.login()}>Login</button>
             </li>
+            }
+            {this.state.isLoggedIn === true &&
             <li className="nav-item">
               <button className="btn btn-link" onClick={() => this.logout()}>Logout</button>
             </li>
+            }
             </ul>
-        
+
         </div>
         </nav>
         {this.state.viewState === 'LandingPage' && <LandingPage />}
         {this.state.viewState === 'ItemForm' && <ItemForm />}
+        {/* conditional rendering of buttons based on this.state.isLoggedIn */}
         {this.state.viewState === 'ViewItems' && <ViewItems items={this.state.items} />}
-        {this.state.viewState === 'Login' && <SignUp />}
+        {this.state.viewState === 'Login' && this.state.isLoggedIn === false && <SignUp />}
         <Footer />
       </div>
       </div>

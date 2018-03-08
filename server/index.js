@@ -20,7 +20,7 @@ app.listen(process.env.PORT || 3000, function () {
 });
 
 app.use(session({
-  secret: 'Is Will Smith a blacksmith?',
+  secret: 'Is Will Smith a blacksmith?', //omfg lol
   saveUninitialized: true,
   resave: true
 }));

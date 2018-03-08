@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -15,15 +16,9 @@ class SignUp extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     console.log('in handleSubmit');
-    fetch('/signup',
-    {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(this.state)
-    });
+    var newUser = {username: this.state.email, password: this.state.password};
+    $.post('/signup', newUser, () =>
+      console.log('user ' + newUser + ' created'));
   }
 
   handleEmailChange(e) {

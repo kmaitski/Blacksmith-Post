@@ -96,7 +96,7 @@ class ItemForm extends React.Component {
               <option>Terrible</option>
             </select>
         </div>
-       
+
         <div className="form-group">
           <label><h5>Blacksmith:</h5></label>
           <input className="form-control"
@@ -128,7 +128,7 @@ class ItemForm extends React.Component {
           <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
         </div>
 
-        
+
         <button className="btn btn-dark btn-lg btn-block" onClick={() => this.onSubmit()}>List thee item my lord</button>
       </form>
 
@@ -137,7 +137,7 @@ class ItemForm extends React.Component {
        </div>
         </div>
           </div>
-     
+
       );
     };
 

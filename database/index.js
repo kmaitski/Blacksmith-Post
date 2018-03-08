@@ -14,6 +14,7 @@ db.once('open', function () {
 var itemSchema = mongoose.Schema({
   name: String,
   description: String,
+  category: String,
   cost: Number,
   email: String,
   condition: String,
@@ -24,6 +25,15 @@ var itemSchema = mongoose.Schema({
   subclass: String,
   active: Boolean
 });
+
+const userSchema = mongoose.Schema({
+  local: {
+    username: String,
+    password: String
+  }
+});
+
+const User = mongoose.model('User', userSchema);
 
 
 
@@ -36,6 +46,7 @@ var createItem = function (data) {
     new item({
       name: data.name || "greatHelm",
       description: data.description || "from the swamp of mordor",
+      category: data.category || "weapon",
       cost: data.cost || 999999,
       email: data.email || "gandalf@hotmail.com",
       condition: data.condition || "strong like bull",
@@ -80,3 +91,4 @@ module.exports.deleteItem = deleteItem;
 module.exports.allItems = allItems;
 module.exports.createItem = createItem;
 module.exports.findItem = findItem;
+module.exports.User = User;

@@ -21,6 +21,8 @@ class ItemForm extends React.Component {
       material:'',
       image:'',
     };
+    this.change = this.change.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
   }
 
@@ -33,31 +35,34 @@ class ItemForm extends React.Component {
 
   onSubmit() {
 //stores data on submission to send via ajax call
-
+    
     var itemData = {
       name: this.state.name,
       description:this.state.description,
       category: this.state.category,
       cost: this.state.cost,
-      email:this.state.email,
       condition:this.state.condition,
-      blacksmith:this.state.blacksmith,
       material:this.state.material,
       image:this.state.image,
     }
+    if (itemData.name && itemData.description && itemData.category && itemData.cost && itemData.condition && itemData.material) {
 
-    $.ajax({
-      url: '/api/itemForm',
- //     dataType: 'json',
-      type: 'POST',
-      data: itemData,
-      success: function(data) {
-          alert("your post is now live")
-      },
-      error: function(err){
-        console.log('errror in ajax', err);
-      }
-    });
+      $.ajax({
+        url: '/api/itemForm',
+   //     dataType: 'json',
+        type: 'POST',
+        data: itemData,
+        success: function(data) {
+            alert("your post is now live")
+        },
+        error: function(err){
+          console.log('errror in ajax', err);
+        }
+      });
+    } else { 
+      alert("Please complete the items in red");
+      return false;
+    }
 
   };
 
@@ -162,12 +167,15 @@ class ItemForm extends React.Component {
                         </select>
                     </div>
                   <div className="form-group col-md-6">
-                    <label>Image URL</label>
+                    {this.state.image &&
+                    <label className="text-success">Image</label>}
+                    {!this.state.image &&
+                    <label className="text-danger">Image</label>}
                       <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
                       onChange={e => this.change(e)} />
                         <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
                   </div>
-                  <button className="btn btn-dark btn-lg btn-block" onClick={() => this.onSubmit()}>List thee item my lord</button>
+                  <button className="btn btn-dark btn-lg btn-block" onClick={this.onSubmit}>List thee item my lord</button>
                 </form>
               </div>
             </div>

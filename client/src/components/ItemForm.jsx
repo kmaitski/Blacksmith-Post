@@ -12,6 +12,7 @@ class ItemForm extends React.Component {
     this.state = {
       class:'',
       name: '',
+      category: '',
       description:'',
       cost: '',
       email:'',
@@ -36,6 +37,7 @@ class ItemForm extends React.Component {
     var itemData = {
       name: this.state.name,
       description:this.state.description,
+      category: this.state.category,
       cost: this.state.cost,
       email:this.state.email,
       condition:this.state.condition,

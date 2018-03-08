@@ -66,10 +66,16 @@ class App extends React.Component {
             <li className="nav-item">
               <button className="btn btn-link " onClick={() => this.sellItem()}>Sell</button>
             </li>
+            </ul>
+            <ul className="nav navbar-nav navbar-right">
             <li className="nav-item">
               <button className="btn btn-link" onClick={() => this.login()}>Login</button>
             </li>
-          </ul>
+            <li className="nav-item">
+              <button className="btn btn-link" onClick={() => this.logout()}>Logout</button>
+            </li>
+            </ul>
+        
         </div>
         </nav>
         {this.state.viewState === 'LandingPage' && <LandingPage />}

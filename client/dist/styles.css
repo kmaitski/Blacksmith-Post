@@ -35,6 +35,13 @@
 #form {
   width: 50%;
   margin-top:100px;
-  margin-bottom: 100px;
+  margin-bottom: 100px;	
+  border: solid gray;
+  padding:10px ;
+  background: #F7F7F7;
   
+}
+
+.ItemForm h1 {
+  text-align: center
 }

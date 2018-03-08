@@ -128,8 +128,8 @@ class ItemForm extends React.Component {
           <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
         </div>
 
-        <h4>List thee item my lord:</h4>
-        <button className="btn btn-dark btn-lg btn-block" onClick={() => this.onSubmit()}>List Item</button>
+        
+        <button className="btn btn-dark btn-lg btn-block" onClick={() => this.onSubmit()}>List thee item my lord</button>
       </form>
 
 

@@ -40,7 +40,6 @@ class App extends React.Component {
   stripeTokenHandler(token) {
     console.log(token);
     console.log('credit card success!');
-    debugger;
     $.ajax({
       url: '/charge',
       type: 'POST',

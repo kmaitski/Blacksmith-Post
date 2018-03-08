@@ -25,6 +25,15 @@ var itemSchema = mongoose.Schema({
   active: Boolean
 });
 
+const userSchema = mongoose.Schema({
+  local: {
+    username: String,
+    password: String
+  }
+});
+
+const User = mongoose.model('User', userSchema);
+
 
 
 
@@ -80,3 +89,4 @@ module.exports.deleteItem = deleteItem;
 module.exports.allItems = allItems;
 module.exports.createItem = createItem;
 module.exports.findItem = findItem;
+module.exports.User = User;

@@ -16,7 +16,7 @@ const SingleItem = ({item}) => (
 
 )
 
-window.SingleItem = SingleItem
+export default SingleItem;
 
 
 

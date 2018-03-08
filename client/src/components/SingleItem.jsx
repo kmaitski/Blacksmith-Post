@@ -20,8 +20,8 @@ class SingleItem extends React.Component {
               <p className="card-text">{this.props.item.description}</p>
               <h6>{this.props.item.email}</h6>
               <p className="card-price">Asking price: ${this.props.item.cost}</p>
-              <button name={this.props.itemID} onClick={this.props.renderwindow}>Buy Now</button>
               <div id={this.props.itemID}></div>
+              <button className="btn btn-dark btn-sm btn-block" name={this.props.itemID} onClick={this.props.renderwindow}>Buy Now</button>
             </div>
           </div>
         }

@@ -57,7 +57,7 @@ class PaymentForm extends React.Component {
            <label>Card</label>
            <div id="card-element"></div>
            <div id="card-errors" role="alert"></div>
-           <button>Submit</button>
+           <button className="btn btn-dark btn-sm" >Submit</button>
          </form>
          )
   }

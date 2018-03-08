@@ -13,6 +13,7 @@ class ItemForm extends React.Component {
       class:'',
       name: '',
       category: '',
+      subcategory: '',
       description:'',
       cost: '',
       email:'',
@@ -40,12 +41,13 @@ class ItemForm extends React.Component {
       name: this.state.name,
       description:this.state.description,
       category: this.state.category,
+      subcategory: this.state.subcategory,
       cost: this.state.cost,
       condition:this.state.condition,
       material:this.state.material,
       image:this.state.image,
     }
-    if (itemData.name && itemData.description && itemData.category && itemData.cost && itemData.condition && itemData.material) {
+    if (itemData.name && itemData.description && itemData.category && itemData.subcategory && itemData.cost && itemData.condition && itemData.material) {
 
       $.ajax({
         url: '/api/itemForm',
@@ -59,9 +61,9 @@ class ItemForm extends React.Component {
           console.log('errror in ajax', err);
         }
       });
-    } else { 
+    } else {
       alert("Please complete the items in red");
-      
+
     }
 
   };
@@ -70,12 +72,10 @@ class ItemForm extends React.Component {
     render () {
       return (
         <div id="formBack">
-        
           <div className="container" id="form">
             <div className="ItemForm">
-
-                <h1>The Black Smith Post</h1>
-                <form >
+                <h1>The Blacksmith Post</h1>
+                <form>
                   <div className="form-groups">
                     {this.state.name &&
                     <label className="text-success">Item Name</label>}
@@ -88,7 +88,7 @@ class ItemForm extends React.Component {
                       onChange={e => this.change(e)}
                       placeholder="Name of your product..."/>
                   </div>
-                  
+
                   <div className="form-group">
                     {this.state.category &&
                     <label className="text-success">Category</label>}
@@ -102,6 +102,32 @@ class ItemForm extends React.Component {
                         <option>Weapon</option>
                         <option>Armor</option>
                       </select>
+                    {this.state.category === "Weapon" &&
+                      <select className="form-control"
+                       name="subcategory"
+                       value={this.state.subcategory}
+                       onChange={e => this.change(e)}
+                       >
+                         <option className="text-danger">Select weapon type</option>
+                         <option>Sword</option>
+                         <option>Spear</option>
+                         <option>Axe</option>
+                         <option>Other</option>
+                      </select>
+                    }
+                    {this.state.category === "Armor" &&
+                      <select className="form-control"
+                       name="subcategory"
+                       value={this.state.subcategory}
+                       onChange={e => this.change(e)}
+                       >
+                         <option className="text-danger">Select armor type</option>
+                         <option>Helmet</option>
+                         <option>Suit</option>
+                         <option>Shield</option>
+                         <option>Other</option>
+                      </select>
+                    }
                   </div>
                   <div className="form-group">
                     {this.state.description &&
@@ -116,7 +142,7 @@ class ItemForm extends React.Component {
                       rows="4"
                       placeholder="Describe what you are selling...">
                       </textarea>
-                  
+
                   </div>
                   <div className="form-row">
                     <div className="input col-md-6">
@@ -180,7 +206,7 @@ class ItemForm extends React.Component {
               </div>
             </div>
           </div>
-          
+
         );
       };
   };

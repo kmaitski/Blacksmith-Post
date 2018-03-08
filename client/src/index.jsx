@@ -23,6 +23,7 @@ class App extends React.Component {
     }
 
     this.buyItem = this.buyItem.bind(this);
+    this.sellItem = this.sellItem.bind(this);
     this.stripeTokenHandler = this.stripeTokenHandler.bind(this);
   }
 
@@ -107,7 +108,7 @@ class App extends React.Component {
           </div>
         </nav>
         <div style={{paddingTop: "51px"}}>
-          {this.state.viewState === 'LandingPage' && <LandingPage buttonclick={this.buyItem} />}
+          {this.state.viewState === 'LandingPage' && <LandingPage buyclick={this.buyItem} sellclick={this.sellItem}/>}
           {this.state.viewState === 'ItemForm' && <ItemForm />}
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
           {this.state.viewState === 'ViewItems' && <ViewItems renderwindow={this.renderWindow} items={this.state.items} />}

@@ -11,9 +11,10 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": [
         "run-script",
-        "start-dev"
+        "start-dev",
       ],
-      "port": 9229
+      "port": 9229,
+      "console": "integratedTerminal"
     },
     {
       "type": "node",

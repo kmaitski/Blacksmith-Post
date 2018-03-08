@@ -40,6 +40,27 @@ app.get('/signup', (req, res) => {
   res.render('signup.ejs', {message: req.flash('signupMessage')});
 });
 
+app.post('/charge', function(req, res) {
+    console.log(req.body.id);
+    stripe.charges.create({
+      amount: .09,
+      currency: "usd",
+      source: req.body.id,
+      description: "Charge for anon user"
+    }, function(err, charge) {
+      if(err){
+        console.error(err);
+        res.end()
+      } else {
+        console.log('Charged successfully')
+        res.writeHead(200);
+        res.end(charge);
+      }
+    }
+  )
+});
+
+
 app.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/',
   failureRedirect: '/signup',

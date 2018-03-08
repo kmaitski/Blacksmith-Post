@@ -1,13 +1,13 @@
 import React from 'react';
 import {render} from 'react-dom';
-import ItemForm from './components/ItemForm.jsx'
-import Footer from './components/Footer.jsx'
-import DeleteWeapon from './components/DeleteWeapon.jsx'
-import SingleItem from './components/SingleItem.jsx'
-import ViewItems from './components/ViewItems.jsx'
-import Login from './components/Login.jsx'
-import LandingPage from './components/LandingPage.jsx'
-
+import ItemForm from './components/ItemForm.jsx';
+import Footer from './components/Footer.jsx';
+import DeleteWeapon from './components/DeleteWeapon.jsx';
+import SingleItem from './components/SingleItem.jsx';
+import ViewItems from './components/ViewItems.jsx';
+import Login from './components/Login.jsx';
+import LandingPage from './components/LandingPage.jsx';
+import SignUp from './components/SignUp.jsx';
 
 class App extends React.Component {
   constructor(props){
@@ -81,7 +81,7 @@ class App extends React.Component {
         {this.state.viewState === 'LandingPage' && <LandingPage />}
         {this.state.viewState === 'ItemForm' && <ItemForm />}
         {this.state.viewState === 'ViewItems' && <ViewItems items={this.state.items} />}
-        {this.state.viewState === 'Login' && <Login />}
+        {this.state.viewState === 'Login' && <SignUp />}
         <Footer />
       </div>
       </div>

@@ -39,6 +39,7 @@ class SignUp extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+          <h1>Please Sign Up</h1>
           <label>Enter your email here</label>
           <input
             type='text'

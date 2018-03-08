@@ -39,9 +39,7 @@ app.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/',
   failureRedirect: '/signup',
   failureFlash: true
-}), (req, res) => {
-  console.log(1);
-})
+}))
 
 //request to view all items of type
 app.get('/api/items', function (req, res) {

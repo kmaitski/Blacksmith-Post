@@ -1,7 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
 
-
 //single card to display item listing
 class SingleItem extends React.Component {
   constructor(props) {
@@ -30,6 +29,3 @@ render() {
 }
 
 export default SingleItem;
-
-
-

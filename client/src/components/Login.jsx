@@ -1,5 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
+import PaymentForm from "./PaymentForm.jsx"
 
 
 class Login extends Component {

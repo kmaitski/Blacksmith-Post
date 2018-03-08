@@ -2,12 +2,16 @@ var express = require('express');
 var bodyParser = require('body-parser');
 const session = require('express-session');
 var database = require('../database/index.js');
+var config = require('./config.js')
 const passport = require('passport');
 const flash = require('connect-flash');
 const sendMail = require('../config/mailconfig');
 
 var app = express();
 
+var stripe = require("stripe")(
+  config.api
+);
 //to view data in body of api calls
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

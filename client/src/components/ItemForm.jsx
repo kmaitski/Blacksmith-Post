@@ -4,6 +4,7 @@ import {Component} from 'react';
 import $ from 'jquery';
 
 
+
 class ItemForm extends React.Component {
   constructor(props) {
     super(props);
@@ -64,93 +65,76 @@ class ItemForm extends React.Component {
     render () {
       return (
         <div className="container">
-        <div className="container" id="form">
-        <div className="ItemForm">
-          <h1>The Black Smith Post</h1>
-          <form>
-          <div className="form-group">
-          <label><h5>Item's Name:</h5></label>
-          <input className="form-control"
-            name="name"
-            type="string"
-            value={this.state.name}
-            onChange={e => this.change(e)} />
-        </div>
-        <div className="form-group">
-        <label><h5>Description:</h5></label>
-        <textarea className="form-control" name="description" type="string" value={this.state.description} onChange={e => this.change(e)} rows="4"></textarea>
-        </div>
-        <div className="input" >
-        <div className="form-group">
-          <label><h5>Category:</h5></label>
-            <select className="form-control" name="category" value={this.state.category} onChange={e => this.change(e)}>
-              <option>Weapon</option>
-              <option>Armor</option>
-            </select>
-        </div>
-        <label><h5>Price:</h5></label>
-          <input className="form-control"
-            name="cost"
-            type="number"
-            value={this.state.cost}
-            onChange={e => this.change(e)} />
-        </div>
-        <div className="form-group">
-          <label><h5>Condition:</h5></label>
-            <select className="form-control" name="condition" value={this.state.condition} onChange={e => this.change(e)}>
-              <option></option>
-              <option>Pristine</option>
-              <option>Good</option>
-              <option>Fair</option>
-              <option>Terrible</option>
-            </select>
-        </div>
-
-        <div className="form-group">
-          <label><h5>Blacksmith:</h5></label>
-          <input className="form-control"
-            name="blacksmith"
-            type="string"
-            value={this.state.blacksmith}
-            onChange={e => this.change(e)} />
-        </div>
-        <div className="form-group">
-        <label><h5>Material:</h5></label>
-          <input className="form-control"
-            name="material"
-            type="string"
-            value={this.state.material}
-            onChange={e => this.change(e)} />
+          <div className="container" id="form">
+            <div className="ItemForm">
+                <h1>The Black Smith Post</h1>
+                <form>
+                  <div className="form-groups">
+                    <label >Item Name</label>
+                      <input className="form-control"
+                      name="name"
+                      type="string"
+                      value={this.state.name}
+                      onChange={e => this.change(e)} 
+                      placeholder="Name of your product..."/>
+                  </div>
+                  <div className="form-group">
+                    <label>Description</label>
+                      <textarea className="form-control" 
+                      name="description" 
+                      type="string" 
+                      value={this.state.description} 
+                      onChange={e => this.change(e)} 
+                      rows="4" 
+                      placeholder="Describe what you are selling...">
+                      </textarea>
+                  </div>
+                  <div className="form-row">
+                    <div className="input col-md-6">
+                      <label>Price</label>
+                        <input className="form-control"
+                        name="cost"
+                        type="number"
+                        value={this.state.cost}
+                        onChange={e => this.change(e)} 
+                        placeholder="Ex. 12.99"/>
+                    </div>
+                    <div className="form-group col-md-6">
+                      <label>Condition</label>
+                        <select className="form-control" 
+                        name="condition" 
+                        value={this.state.condition} 
+                        onChange={e => this.change(e)}>
+                          <option>Select one...</option>
+                          <option>Pristine</option>
+                          <option>Good</option>
+                          <option>Fair</option>
+                          <option>Terrible</option>
+                        </select>
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label>Material</label>
+                      <input className="form-control"
+                      name="material"
+                      type="string"
+                      value={this.state.material}
+                      onChange={e => this.change(e)} />
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label>Image URL</label>
+                      <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
+                      onChange={e => this.change(e)} />
+                        <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
+                  </div>
+                  <button className="btn btn-dark btn-lg btn-block" onClick={() => this.onSubmit()}>List thee item my lord</button>
+                </form>
+              </div>
             </div>
-        <div className="form-group">
-        <label><h5>Seller Email:</h5></label>
-          <input className="form-control"
-            name="email"
-            type="string"
-            value={this.state.email}
-            onChange={e => this.change(e)} />
-        </div>
-        <div className="form-group">
-          <label><h5>Image URL:</h5></label>
-          <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
-            onChange={e => this.change(e)} />
-          <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
-        </div>
-
-
-        <button className="btn btn-dark btn-lg btn-block" onClick={() => this.onSubmit()}>List thee item my lord</button>
-      </form>
-
-
-
-       </div>
-        </div>
           </div>
-
-      );
-    };
-
-};
+        );
+      };
+  };
 
 
 

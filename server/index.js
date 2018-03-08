@@ -36,9 +36,9 @@ app.use(flash());
 
 require('./../config/passport.js')(passport);
 
-app.get('/signup', (req, res) => {
-  res.render('signup.ejs', {message: req.flash('signupMessage')});
-});
+// app.get('/signup', (req, res) => {
+//   res.render('signup.ejs', {message: req.flash('signupMessage')});
+// });
 
 app.post('/charge', function(req, res) {
     console.log(req.body.id);
@@ -63,13 +63,23 @@ app.post('/charge', function(req, res) {
 
 app.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/',
-  failureRedirect: '/signup',
+  failureRedirect: '/',
   failureFlash: true
-}))
+}));
+
+app.post('/login', passport.authenticate('local-login', {
+  successRedirect: '/',
+  failureRedirect: '/',
+  failureFlash: true
+}));
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
 
 //request to view all items of type
 app.get('/api/items', function (req, res) {
-  debugger;
  database.allItems(function (err, data){
   if (err){
     res.sendStatus(500 +"cant find item");

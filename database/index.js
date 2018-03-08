@@ -85,6 +85,8 @@ item.findOne({'name':data.name}).exec(callback);
 
 }
 
+// exports.findAll 
+
 
 
 module.exports.deleteItem = deleteItem;

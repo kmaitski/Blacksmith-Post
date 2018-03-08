@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "start": "webpack -d | node --inspect server/index.js",
+    "postinstall": "webpack -d",
+    "start": "node --inspect server/index.js",
     "start-dev": "nodemon --inspect server/index.js"
   },
   "repository": {
@@ -18,15 +19,14 @@
     "url": "https://github.com/Goliath-Solutions/blacksmithpost/issues"
   },
   "homepage": "https://github.com/Goliath-Solutions/blacksmithpost#readme",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.23.0",
-    "webpack": "^2.2.1"
-  },
-  "dependencies": {
     "body-parser": "^1.17.2",
+    "webpack": "^2.2.1",
     "connect-flash": "^0.1.1",
     "ejs": "^2.5.7",
     "express": "^4.15.0",

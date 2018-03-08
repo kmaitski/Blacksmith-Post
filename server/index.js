@@ -4,6 +4,7 @@ const session = require('express-session');
 var database = require('../database/index.js');
 const passport = require('passport');
 const flash = require('connect-flash');
+const sendMail = require('../config/mailconfig');
 
 var app = express();
 
@@ -68,3 +69,7 @@ app.post('/api/deleteItem', function (req, res){
   res.sendStatus(200);
 });
 
+app.post('/buy', function(req, res) {
+  var thing = sendMail;
+  res.end();
+})

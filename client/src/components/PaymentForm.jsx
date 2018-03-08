@@ -4,9 +4,7 @@ var stripe = Stripe('pk_test_0xIQ5EzwgXmNg8mcccN854lq');
 var elements = stripe.elements();
 var style = {
   base: {
-    border: '1px solid gray',
     color: '#32325d',
-    lineHeight: '18px',
     fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
     fontSmoothing: 'antialiased',
     fontSize: '16px',
@@ -59,7 +57,7 @@ class PaymentForm extends React.Component {
            <label>Card</label>
            <div id="card-element"></div>
            <div id="card-errors" role="alert"></div>
-           <button>Submit</button>
+           <button className="btn btn-dark btn-sm" >Submit</button>
          </form>
          )
   }

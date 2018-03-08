@@ -1,5 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
+import $ from 'jquery';
 import ItemForm from './components/ItemForm.jsx'
 import Footer from './components/Footer.jsx'
 import DeleteWeapon from './components/DeleteWeapon.jsx'
@@ -41,6 +42,17 @@ class App extends React.Component {
   stripeTokenHandler(token) {
     console.log(token);
     console.log('credit card success!');
+    $.ajax({
+      url: '/charge',
+      type: 'POST',
+      data: token,
+      success: function(data) {
+        console.log("Charge successs! ", data)
+      },
+      error: function(err){
+        console.log('errror in ajax', err);
+      }
+    });
   }
 
   renderWindow(e) {

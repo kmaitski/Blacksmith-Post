@@ -1,14 +1,32 @@
 import React from 'react';
 import {Component} from 'react';
+import PaymentForm from "./PaymentForm.jsx"
 
 //single card to display item listing
 class SingleItem extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      paymentForm: false
+    }
+    this.renderWindow = this.renderWindow.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
+
+  renderWindow(e) {
+    e.preventDefault();
+    this.setState({
+      paymentForm: true
+    })
+  }
+
+  cancel() {
+    this.setState({
+      paymentForm: false
+    })
+  }
+
   render() {
-    console.log(this.props.filter)
-    console.log(this.props.item.category)
     return (
   // {item.category === filter &&
       <div>
@@ -20,8 +38,8 @@ class SingleItem extends React.Component {
               <p className="card-text">{this.props.item.description}</p>
               <h6>{this.props.item.email}</h6>
               <p className="card-price">Asking price: ${this.props.item.cost}</p>
-              <div id={this.props.itemID}></div>
-              <button className="btn btn-dark btn-sm btn-block" name={this.props.itemID} onClick={this.props.renderwindow}>Buy Now</button>
+              {this.state.paymentForm && <PaymentForm cancel={this.cancel} stripeTokenHandler={this.props.stripetokenhandler} />}
+              {!this.state.paymentForm && <button className="btn btn-dark btn-sm btn-block" onClick={this.renderWindow}>Buy Now</button>}
             </div>
           </div>
         }

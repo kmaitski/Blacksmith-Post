@@ -36,10 +36,10 @@ class ViewItems extends React.Component {
           {this.state.items.map((item) =>
 
           <SingleItem
+          stripetokenhandler={this.props.stripetokenhandler}
           item={item}
           key={item._id}
           itemID={item._id}
-          renderwindow={this.props.renderwindow}
           filter={this.state.category} />
           )}
         </div>

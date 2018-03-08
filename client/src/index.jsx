@@ -8,7 +8,6 @@ import SingleItem from './components/SingleItem.jsx'
 import ViewItems from './components/ViewItems.jsx'
 import Login from './components/Login.jsx'
 import LandingPage from './components/LandingPage.jsx'
-import PaymentForm from "./components/PaymentForm.jsx"
 import SignUp from './components/SignUp.jsx';
 
 class App extends React.Component {
@@ -23,7 +22,6 @@ class App extends React.Component {
       isLoading:false,
     }
 
-    this.renderWindow = this.renderWindow.bind(this)
     this.stripeTokenHandler = this.stripeTokenHandler.bind(this)
   }
 
@@ -55,11 +53,6 @@ class App extends React.Component {
     });
   }
 
-  renderWindow(e) {
-    e.preventDefault();
-    console.log(e.target.name)
-    ReactDOM.render( <PaymentForm stripeTokenHandler={this.stripeTokenHandler}/>, document.getElementById(e.target.name))
-  }
 
   buyItem(){
     this.setState({viewState:'ViewItems'});
@@ -115,7 +108,7 @@ class App extends React.Component {
         {this.state.viewState === 'LandingPage' && <LandingPage />}
         {this.state.viewState === 'ItemForm' && <ItemForm />}
         {/* conditional rendering of buttons based on this.state.isLoggedIn */}
-        {this.state.viewState === 'ViewItems' && <ViewItems renderwindow={this.renderWindow} items={this.state.items} />}
+        {this.state.viewState === 'ViewItems' && <ViewItems stripetokenhandler={this.stripeTokenHandler} items={this.state.items} />}
         {this.state.viewState === 'Login' && this.state.isLoggedIn === false && <SignUp />}
         <Footer />
       </div>

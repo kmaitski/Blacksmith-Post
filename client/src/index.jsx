@@ -103,7 +103,7 @@ class App extends React.Component {
         {this.state.viewState === 'LandingPage' && <LandingPage />}
         {this.state.viewState === 'ItemForm' && <ItemForm />}
         {/* conditional rendering of buttons based on this.state.isLoggedIn */}
-        {this.state.viewState === 'ViewItems' && <ViewItems items={this.state.items} />}
+        {this.state.viewState === 'ViewItems' && <ViewItems renderwindow={this.renderWindow} items={this.state.items} />}
         {this.state.viewState === 'Login' && this.state.isLoggedIn === false && <SignUp />}
         <Footer />
       </div>

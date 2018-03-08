@@ -1,14 +1,15 @@
 
 import React from 'react';
 import {Component} from 'react';
-
+import SingleItem from './SingleItem.jsx'
 
 //map through items in state and display as a card deck
-var ViewItems = ({items}) => (
+var ViewItems = (props) => (
 
   <div className = "card-deck">
-    {items.map((item) =>
-    <window.SingleItem
+    {props.items.map((item) =>
+    <SingleItem
+    renderWindow={props.renderWindow}
     item={item}
     key={item._id} />
 

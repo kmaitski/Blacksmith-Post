@@ -7,6 +7,7 @@ import SingleItem from './components/SingleItem.jsx'
 import ViewItems from './components/ViewItems.jsx'
 import Login from './components/Login.jsx'
 import LandingPage from './components/LandingPage.jsx'
+import PaymentForm from "./components/PaymentForm.jsx"
 
 class App extends React.Component {
   constructor(props){
@@ -19,7 +20,8 @@ class App extends React.Component {
       isLoading:false,
     }
 
-    this.stripeTokenHandler =  this.stripeTokenHandler.bind(this)
+    this.renderWindow = this.renderWindow.bind(this)
+    this.stripeTokenHandler = this.stripeTokenHandler.bind(this)
   }
 
     componentDidMount(){
@@ -29,14 +31,19 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => this.setState({ items: data, isloading:false}));
   }
-  
+
    goHome(){
     this.setState({viewState:'LandingPage'});
-  } 
+  }
 
   stripeTokenHandler(token) {
     console.log(token);
     console.log('credit card success!');
+  }
+
+  renderWindow(e) {
+    e.preventDefault();
+    ReactDOM.render( <PaymentForm stripeTokenHandler={this.stripeTokenHandler}/>, document.getElementById('popup-container'))
   }
 
   buyItem(){
@@ -53,44 +60,35 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
-      <div>
- 
-        <nav className="navbar navbar-expand navbar-dark bg-dark fixed-top">
-        <a className="navbar-brand" href="#"></a>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
+      <div className="container">
+        <nav className="navbar navbar-expand navbar-light bg-light">
+          <a className="navbar-brand" href="#"></a>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <button className="btn btn-link" onClick={() => this.goHome()}>Home</button>
-            </li>
-            <li className="nav-item active">
-              <button className="btn btn-link" onClick={() => this.buyItem()}>Browse</button>
-            </li>
-            <li className="nav-item">
-              <button className="btn btn-link " onClick={() => this.sellItem()}>Sell</button>
-            </li>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <button className="btn btn-link" onClick={() => this.goHome()}>Home</button>
+              </li>
+              <li className="nav-item active">
+                <button className="btn btn-outline-primary btn-lg" onClick={() => this.buyItem()}>Browse</button>
+              </li>
+              <li className="nav-item">
+                <button className="btn btn-outline-primary btn-lg" onClick={() => this.sellItem()}>Sell</button>
+              </li>
+              <li className="nav-item">
+                <button className="btn btn-outline-info btn-lg" onClick={() => this.login()}>Login</button>
+              </li>
             </ul>
-            <ul className="nav navbar-nav navbar-right">
-            <li className="nav-item">
-              <button className="btn btn-link" onClick={() => this.login()}>Login</button>
-            </li>
-            <li className="nav-item">
-              <button className="btn btn-link" onClick={() => this.logout()}>Logout</button>
-            </li>
-            </ul>
-        
-        </div>
+          </div>
         </nav>
         {this.state.viewState === 'LandingPage' && <LandingPage />}
         {this.state.viewState === 'ItemForm' && <ItemForm />}
-        {this.state.viewState === 'ViewItems' && <ViewItems items={this.state.items} />}
-        {this.state.viewState === 'Login' && <Login stripeTokenHandler={this.stripeTokenHandler}/>}
+        {this.state.viewState === 'ViewItems' && <ViewItems renderWindow={this.renderWindow} items={this.state.items} />}
+        {this.state.viewState === 'Login' && <Login/>}
         <Footer />
-      </div>
       </div>
     );
   };

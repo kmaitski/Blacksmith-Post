@@ -1,4 +1,7 @@
 import React from 'react';
+import Popup from 'react-popup';
+
+Popup.alert('Hello');
 
 var stripe = Stripe('pk_test_0xIQ5EzwgXmNg8mcccN854lq');
 var elements = stripe.elements();
@@ -37,7 +40,6 @@ class PaymentForm extends React.Component {
 
   componentDidMount() {
     card.mount('#card-element');
-
   }
 
 
@@ -55,14 +57,12 @@ class PaymentForm extends React.Component {
 
   render() {
     return(
-      <div>
-      <form action="/charge" method="post" id="payment-form" onSubmit={this.handleCreditCard}>
-        <label>Card</label>
-        <div id="card-element"></div>
-        <div id="card-errors" role="alert"></div>
-        <button>Submit</button>
-      </form>
-      </div>
+        <form action="/charge" method="post" id="payment-form" onSubmit={this.handleCreditCard}>
+          <label>Card</label>
+          <div id="card-element"></div>
+          <div id="card-errors" role="alert"></div>
+          <button>Submit</button>
+        </form>
     )
   }
 

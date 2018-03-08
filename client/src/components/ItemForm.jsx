@@ -33,9 +33,9 @@ class ItemForm extends React.Component {
     });
   }
 
-  onSubmit() {
+  onSubmit(event) {
 //stores data on submission to send via ajax call
-    
+    event.preventDefault();
     var itemData = {
       name: this.state.name,
       description:this.state.description,
@@ -61,7 +61,7 @@ class ItemForm extends React.Component {
       });
     } else { 
       alert("Please complete the items in red");
-      return false;
+      
     }
 
   };
@@ -116,7 +116,7 @@ class ItemForm extends React.Component {
                       rows="4"
                       placeholder="Describe what you are selling...">
                       </textarea>
-                  }
+                  
                   </div>
                   <div className="form-row">
                     <div className="input col-md-6">

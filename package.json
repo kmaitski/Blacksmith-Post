@@ -4,6 +4,7 @@
   "description": "blacksmithpost",
   "main": "index.js",
   "scripts": {
+    "postinstall": "webpack -d",
     "react-dev": "webpack -d --watch",
     "start": "node server/index.js",
     "start-dev": "nodemon --inspect server/index.js"

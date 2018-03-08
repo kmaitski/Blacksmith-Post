@@ -21,6 +21,8 @@ class ItemForm extends React.Component {
       material:'',
       image:'',
     };
+    this.change = this.change.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
 
   }
 
@@ -31,46 +33,54 @@ class ItemForm extends React.Component {
     });
   }
 
-  onSubmit() {
+  onSubmit(event) {
 //stores data on submission to send via ajax call
-
+    event.preventDefault();
     var itemData = {
       name: this.state.name,
       description:this.state.description,
       category: this.state.category,
       cost: this.state.cost,
-      email:this.state.email,
       condition:this.state.condition,
-      blacksmith:this.state.blacksmith,
       material:this.state.material,
       image:this.state.image,
     }
+    if (itemData.name && itemData.description && itemData.category && itemData.cost && itemData.condition && itemData.material) {
 
-    $.ajax({
-      url: '/api/itemForm',
- //     dataType: 'json',
-      type: 'POST',
-      data: itemData,
-      success: function(data) {
-          alert("your post is now live")
-      },
-      error: function(err){
-        console.log('errror in ajax', err);
-      }
-    });
+      $.ajax({
+        url: '/api/itemForm',
+   //     dataType: 'json',
+        type: 'POST',
+        data: itemData,
+        success: function(data) {
+            alert("your post is now live")
+        },
+        error: function(err){
+          console.log('errror in ajax', err);
+        }
+      });
+    } else { 
+      alert("Please complete the items in red");
+      
+    }
 
   };
 
 //form to collect data
     render () {
       return (
-        <div className="container">
+        <div id="formBack">
+        
           <div className="container" id="form">
             <div className="ItemForm">
+
                 <h1>The Black Smith Post</h1>
-                <form>
+                <form >
                   <div className="form-groups">
-                    <label >Item Name</label>
+                    {this.state.name &&
+                    <label className="text-success">Item Name</label>}
+                    {!this.state.name &&
+                    <label className="text-danger">Item Name</label>}
                       <input className="form-control"
                       name="name"
                       type="string"
@@ -78,19 +88,26 @@ class ItemForm extends React.Component {
                       onChange={e => this.change(e)}
                       placeholder="Name of your product..."/>
                   </div>
+                  
                   <div className="form-group">
-                    <label>Category</label>
+                    {this.state.category &&
+                    <label className="text-success">Category</label>}
+                    {!this.state.category &&
+                    <label className="text-danger">Category</label>}
                       <select className="form-control"
-                        name="category"
-                        value={this.state.category}
-                        onChange={e => this.change(e)}>
-                          <option>Select one...</option>
-                          <option>Weapon</option>
-                          <option>Armor</option>
+                      name="category"
+                      value={this.state.category}
+                      onChange={e => this.change(e)}>
+                        <option>Select one...</option>
+                        <option>Weapon</option>
+                        <option>Armor</option>
                       </select>
                   </div>
                   <div className="form-group">
-                    <label>Description</label>
+                    {this.state.description &&
+                    <label className="text-success">Description</label>}
+                    {!this.state.description &&
+                    <label className="text-danger">Description</label>}
                       <textarea className="form-control"
                       name="description"
                       type="string"
@@ -99,10 +116,14 @@ class ItemForm extends React.Component {
                       rows="4"
                       placeholder="Describe what you are selling...">
                       </textarea>
+                  
                   </div>
                   <div className="form-row">
                     <div className="input col-md-6">
-                      <label>Price</label>
+                      {this.state.cost &&
+                      <label className="text-success">Price</label>}
+                      {!this.state.cost &&
+                      <label className="text-danger">Price</label>}
                         <input className="form-control"
                         name="cost"
                         type="number"
@@ -111,7 +132,10 @@ class ItemForm extends React.Component {
                         placeholder="Ex. 12.99"/>
                     </div>
                     <div className="form-group col-md-6">
-                      <label>Condition</label>
+                      {this.state.condition &&
+                      <label className="text-success">Condition</label>}
+                      {!this.state.condition &&
+                      <label className="text-danger">Condition</label>}
                         <select className="form-control"
                         name="condition"
                         value={this.state.condition}
@@ -125,24 +149,38 @@ class ItemForm extends React.Component {
                     </div>
                   </div>
                   <div className="form-group">
-                    <label>Material</label>
-                      <input className="form-control"
-                      name="material"
-                      type="string"
-                      value={this.state.material}
-                      onChange={e => this.change(e)} />
-                  </div>
+                    {this.state.material &&
+                    <label className="text-success">Material</label>}
+                    {!this.state.material &&
+                    <label className="text-danger">Material</label>}
+                        <select className="form-control"
+                        name="material"
+                        value={this.state.material}
+                        onChange={e => this.change(e)}>
+                          <option>Select one...</option>
+                          <option>Iron</option>
+                          <option>Steel</option>
+                          <option>Leather</option>
+                          <option>Vibranium</option>
+                          <option>Paper</option>
+                          <option>Other</option>
+                        </select>
+                    </div>
                   <div className="form-group col-md-6">
-                    <label>Image URL</label>
+                    {this.state.image &&
+                    <label className="text-success">Image</label>}
+                    {!this.state.image &&
+                    <label className="text-danger">Image</label>}
                       <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
                       onChange={e => this.change(e)} />
                         <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
                   </div>
-                  <button className="btn btn-dark btn-lg btn-block" onClick={() => this.onSubmit()}>List thee item my lord</button>
+                  <button className="btn btn-dark btn-lg btn-block" onClick={this.onSubmit}>List thee item my lord</button>
                 </form>
               </div>
             </div>
           </div>
+          
         );
       };
   };

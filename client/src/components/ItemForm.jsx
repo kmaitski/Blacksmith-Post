@@ -45,6 +45,7 @@ class ItemForm extends React.Component {
       material:this.state.material,
       image:this.state.image,
     }
+    console.log(itemData.image);
     if (itemData.name && itemData.description && itemData.category && itemData.cost && itemData.condition && itemData.material) {
 
       $.ajax({

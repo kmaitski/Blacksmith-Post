@@ -15,6 +15,10 @@ var style = {
   invalid: {
     color: '#fa755a',
     iconColor: '#fa755a'
+  },
+  complete: {
+    color: '#5ebc01',
+    iconColor: '#6ddb00'
   }
 };
 var card = elements.create('card', {style: style});
@@ -32,12 +36,17 @@ class PaymentForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleCreditCard = this.handleCreditCard.bind(this);
+    this.cancel = this.cancel.bind(this);
   }
 
   componentDidMount() {
-     card.mount('#card-element');
+    card.mount('#card-element');
   }
 
+  cancel() {
+    card.unmount('#card-element');
+    this.props.cancel()
+  }
 
   handleCreditCard(e) {
     e.preventDefault();
@@ -53,11 +62,12 @@ class PaymentForm extends React.Component {
 
   render() {
     return(
-      <form action="/charge" method="post" id="payment-form" onSubmit={this.handleCreditCard}>
+      <form action="/charge" method="post" id="payment-form">
            <label>Card</label>
            <div id="card-element"></div>
            <div id="card-errors" role="alert"></div>
-           <button className="btn btn-dark btn-sm" >Submit</button>
+           <button onClick={this.handleCreditCard} className="btn btn-dark btn-sm" >Submit</button>
+           <button onClick={this.cancel} className="btn btn-dark btn-sm" >Cancel</button>
          </form>
          )
   }

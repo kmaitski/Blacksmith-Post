@@ -1,12 +1,10 @@
 import React from 'react';
-import Popup from 'react-popup';
-
-Popup.alert('Hello');
 
 var stripe = Stripe('pk_test_0xIQ5EzwgXmNg8mcccN854lq');
 var elements = stripe.elements();
 var style = {
   base: {
+    border: '1px solid gray',
     color: '#32325d',
     lineHeight: '18px',
     fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
@@ -39,7 +37,7 @@ class PaymentForm extends React.Component {
   }
 
   componentDidMount() {
-    card.mount('#card-element');
+     card.mount('#card-element');
   }
 
 
@@ -57,15 +55,14 @@ class PaymentForm extends React.Component {
 
   render() {
     return(
-        <form action="/charge" method="post" id="payment-form" onSubmit={this.handleCreditCard}>
-          <label>Card</label>
-          <div id="card-element"></div>
-          <div id="card-errors" role="alert"></div>
-          <button>Submit</button>
-        </form>
-    )
+      <form action="/charge" method="post" id="payment-form" onSubmit={this.handleCreditCard}>
+           <label>Card</label>
+           <div id="card-element"></div>
+           <div id="card-errors" role="alert"></div>
+           <button>Submit</button>
+         </form>
+         )
   }
 
 }
-
 export default PaymentForm;

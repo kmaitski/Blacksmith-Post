@@ -11,8 +11,8 @@ var ViewItems = (props) => (
     <SingleItem
     renderWindow={props.renderWindow}
     item={item}
+    itemID={item._id}
     key={item._id} />
-
     )}
 
   </div>

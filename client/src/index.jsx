@@ -43,7 +43,8 @@ class App extends React.Component {
 
   renderWindow(e) {
     e.preventDefault();
-    ReactDOM.render( <PaymentForm stripeTokenHandler={this.stripeTokenHandler}/>, document.getElementById('popup-container'))
+    console.log(e.target.name)
+    ReactDOM.render( <PaymentForm stripeTokenHandler={this.stripeTokenHandler}/>, document.getElementById(e.target.name))
   }
 
   buyItem(){

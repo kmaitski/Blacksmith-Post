@@ -53,12 +53,7 @@ class ItemForm extends React.Component {
       material:this.state.material,
       image:this.state.uploadedCloudinaryURL
     }
-<<<<<<< HEAD
     if (itemData.name && itemData.description && itemData.category && itemData.subcategory && itemData.cost && itemData.condition && itemData.material) {
-=======
-    console.log(itemData.image);
-    if (itemData.name && itemData.description && itemData.category && itemData.cost && itemData.condition && itemData.material) {
->>>>>>> 8b463af7b75b5e37d3870cc267e81acee9e18c46
 
       $.ajax({
         url: '/api/itemForm',

@@ -71,7 +71,7 @@ var allItems = function(callback) {
       callback(null, data);
 
     }
-  }).limit(20)
+  }).limit(200)
 };
 
 

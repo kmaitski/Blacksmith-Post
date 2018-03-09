@@ -6,6 +6,7 @@ var config = require('./config.js')
 const passport = require('passport');
 const flash = require('connect-flash');
 const sendMail = require('../config/mailconfig');
+const cloudinary = require('cloudinary');
 
 var app = express();
 
@@ -35,6 +36,12 @@ app.use(passport.session());
 app.use(flash());
 
 require('./../config/passport.js')(passport);
+
+// cloudinary.config({
+//   cloud_name: 'hdyuqy7w6',
+//   api_key: '687366632423641',
+//   api_secret: 'Dv87E7g1IsslPhHnmFwUKSu6fO0'
+// });
 
 // app.get('/signup', (req, res) => {
 //   res.render('signup.ejs', {message: req.flash('signupMessage')});
@@ -91,7 +98,14 @@ app.get('/api/items', function (req, res) {
 
 //request to add item to database
 app.post('/api/itemForm', function (req, res){
-    console.log(req.body +" this req body weapform");
+  // console.log('in server');
+  // let newItem = req.body;
+  // let filename = req.body.image.split('\\')[2];
+  // // console.log(filename);
+  // cloudinary.uploader.upload(filename, result => {
+  //   console.log(result);
+  // })
+  // console.log(req.body);
   database.createItem(req.body);
     res.sendStatus(200);
 

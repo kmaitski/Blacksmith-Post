@@ -26,6 +26,7 @@ class App extends React.Component {
       isLoading:false,
     }
 
+    this.itemBought = this.itemBought.bind(this);
     this.closeLogin = this.closeLogin.bind(this);
     this.buyItem = this.buyItem.bind(this);
     this.sellItem = this.sellItem.bind(this);
@@ -42,6 +43,23 @@ class App extends React.Component {
 
    goHome(){
     this.setState({viewState:'LandingPage'});
+  }
+
+  itemBought(item) {
+    $.ajax({
+      url: '/api/deleteItem',
+      type: 'POST',
+      data: item,
+      success: function(data) {
+        console.log("Item removed from database! ", data)
+      },
+      error: function(err){
+        console.log('errror in ajax', err);
+      }
+    });
+    fetch('/api/items')
+      .then(response => response.json())
+      .then(data => this.setState({ items: data, isloading:false}));
   }
 
   stripeTokenHandler(token) {
@@ -120,7 +138,7 @@ class App extends React.Component {
           {this.state.viewState === 'LandingPage' && <LandingPage buyclick={this.buyItem} sellclick={this.sellItem}/>}
           {this.state.viewState === 'ItemForm' && <ItemForm />}
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
-          {this.state.viewState === 'ViewItems' && <ViewItems stripe={this.stripeTokenHandler} renderwindow={this.renderWindow} items={this.state.items} />}
+          {this.state.viewState === 'ViewItems' && <ViewItems itembought={this.itemBought} stripe={this.stripeTokenHandler} items={this.state.items} />}
           {this.state.isLoggedIn === false && <LoginModal modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}
           {this.state.viewState === 'upload' && <ImageUploader />}
           <Footer />

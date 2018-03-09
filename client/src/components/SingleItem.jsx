@@ -1,5 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
+import Receipt from "./Receipt.jsx"
 import PaymentForm from "./PaymentForm.jsx"
 import ReactDOM from 'react-dom';
 
@@ -19,10 +20,14 @@ class SingleItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      paymentFormOpen: false
+      paymentFormOpen: false,
+      showReceipt: false,
+      itemBought: false
     }
     this.pay = this.pay.bind(this);
+    this.renderSuccess = this.renderSuccess.bind(this);
     this.closePayment = this.closePayment.bind(this);
+    this.closeReceipt = this.closeReceipt.bind(this);
   }
 
   pay() {
@@ -34,6 +39,21 @@ class SingleItem extends React.Component {
   closePayment() {
     this.setState({
       paymentFormOpen: false
+    })
+  }
+
+  closeReceipt() {
+    this.setState({
+      showReceipt: false
+    })
+  }
+
+  renderSuccess() {
+    this.props.itembought(this.props.item);
+    this.setState({
+      paymentFormOpen: false,
+      itemBought: true,
+      showReceipt: true
     })
   }
 
@@ -53,9 +73,19 @@ class SingleItem extends React.Component {
               {this.state.paymentFormOpen &&
               <PaymentForm
                 modalIsOpen={this.state.paymentFormOpen}
+                success={this.renderSuccess}
                 close={this.closePayment}
                 stripe={this.props.stripe} />}
-              {!this.state.paymentFormOpen && <button className="btn btn-dark btn-sm btn-block" onClick={this.pay}>Buy Now</button>}
+              {this.state.showReceipt &&
+              <Receipt
+                modalIsOpen={this.state.showReceipt}
+                itemname={this.props.item.name}
+                price={this.props.item.cost}
+                image={this.props.item.image}
+                owner={this.props.item.blacksmith}
+                close={this.closeReceipt} />}
+              {!this.state.paymentFormOpen && !this.state.itemBought && <button className="btn btn-dark btn-sm btn-block" onClick={this.pay}>Buy Now</button>}
+              {this.state.itemBought && <button className="btn btn-red btn-sm btn-block" disabled>Item purchased</button>}
             </div>
           </div>
         }

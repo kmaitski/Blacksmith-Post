@@ -55,10 +55,6 @@ class PaymentForm extends React.Component {
     this.cancel = this.cancel.bind(this);
   }
 
-  componentDidMount() {
-    // card.mount('#card-element');
-  }
-
   cancel() {
     card.unmount('#card-element');
     this.setState({modalIsOpen: false});
@@ -68,12 +64,15 @@ class PaymentForm extends React.Component {
   handleCreditCard(e) {
     e.preventDefault();
     var stripehandler = this.props.stripe
+    var cancel = this.cancel
+    var success = this.props.success
     stripe.createToken(card).then((result) => {
       if (result.error) {
         var errorElement = document.getElementById('card-errors');
         errorElement.textContent = result.error.message;
       } else {
         stripehandler(result.token);
+        success();
       }
     });
   }

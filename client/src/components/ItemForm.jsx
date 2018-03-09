@@ -53,8 +53,9 @@ class ItemForm extends React.Component {
 
 
   onSubmit(event) {
-    console.log(1);
-//stores data on submission to send via ajax call
+    var toggle = this.toggle;
+    var fetch = this.props.fetch;
+
     event.preventDefault();
     var itemData = {
       name: this.state.name,
@@ -66,21 +67,21 @@ class ItemForm extends React.Component {
       material:this.state.material,
       image:this.state.uploadedCloudinaryURL
     }
-   
+
 
       $.ajax({
         url: '/api/itemForm',
-   //     dataType: 'json',
         type: 'POST',
         data: itemData,
         success: function(data) {
-            alert("your post is now live")
+          toggle();
+          fetch();
         },
         error: function(err){
           console.log('errror in ajax', err);
         }
       });
-    
+
 
   };
 
@@ -110,7 +111,7 @@ class ItemForm extends React.Component {
 //form to collect data
     render () {
       const { name, description, category, subcategory, cost, condition, material } = this.state;
-      const buttonEnabled = name.length > 0 && description.length > 0 && category.length > 0 && subcategory.length > 0 
+      const buttonEnabled = name.length > 0 && description.length > 0 && category.length > 0 && subcategory.length > 0
                             && cost.length > 0 && condition.length > 0 && material.length > 0;
       return (
         <div id="formBack">
@@ -265,11 +266,11 @@ class ItemForm extends React.Component {
 
                   <div>
                     {!buttonEnabled &&
-                    <div>  
+                    <div>
                     <Button className="btn btn-dark btn-lg btn-block" onClick={this.toggle} disabled>List thee item my lord</Button>
                       <FormText color="muted" style={{textAlign:'center'}}>Please complete all fields before submitting</FormText></div>}
-                    {buttonEnabled && 
-                    <Button className="btn btn-dark btn-lg btn-block" onClick={this.toggle}>List thee item my lord</Button>}  
+                    {buttonEnabled &&
+                    <Button className="btn btn-dark btn-lg btn-block" onClick={this.toggle}>List thee item my lord</Button>}
                       <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>Confirmation</ModalHeader>
                           <ModalBody>
@@ -286,7 +287,7 @@ class ItemForm extends React.Component {
                           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                         </ModalFooter>
                       </Modal>
-                    
+
                   </div>
                 </form>
               </div>

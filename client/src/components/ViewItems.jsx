@@ -10,7 +10,7 @@ class ViewItems extends React.Component {
     super(props);
     this.state = {
       items: this.props.items,
-      category: undefined,
+      category: 'Filter by Category',
     }
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }

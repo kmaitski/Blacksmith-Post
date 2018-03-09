@@ -1,6 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+
+import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, InputGroup, InputGroupAddon, Modal, ModalHeader, ModalBody, ModalFooter, Media } from 'reactstrap';
+
+
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 const CLOUDINARY_UPLOAD_PRESET = 'vdivzjz5';
@@ -8,9 +12,10 @@ const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dwid55cj4/upload'
 
 
 
+
 class ItemForm extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       class:'',
@@ -19,17 +24,23 @@ class ItemForm extends React.Component {
       subcategory: '',
       description:'',
       cost: '',
-      email:'',
       condition:'',
-      blacksmith:'',
       material:'',
       image:'',
       uploadedFile: {},
-      uploadedCloudinaryURL: ''
+      uploadedCloudinaryURL: '',
+      modal: false
     };
+    
     this.change = this.change.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.toggle = this.toggle.bind(this);
     this.onImageDrop = this.onImageDrop.bind(this);
+  }
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    });
   }
 
 //function that holds state based upon input data collected in form before submission
@@ -38,6 +49,9 @@ class ItemForm extends React.Component {
       [e.target.name]: e.target.value
     });
   }
+
+  
+  
 
   onSubmit(event) {
     console.log(1);
@@ -73,6 +87,8 @@ class ItemForm extends React.Component {
     }
 
   };
+  
+   
 
   onImageDrop(files) {
     this.setState({
@@ -97,10 +113,24 @@ class ItemForm extends React.Component {
 
 //form to collect data
     render () {
+
       return (
         <div id="formBack">
           <div className="container" id="form">
             <div className="ItemForm">
+
+              <h1>The Black Smith Post</h1>
+                <form >
+
+                  <div className="form-groups">
+                    <label>Item Name</label>
+                      <input className="form-control"
+                      name="name"
+                      type="string"
+                      value={this.state.name}
+                      onChange={e => this.change(e)}
+                      placeholder="Name of your product..."
+
 
                 <h1>The Black Smith Post</h1>
                 <form accept="image/gif,image/jpeg">
@@ -116,10 +146,18 @@ class ItemForm extends React.Component {
                         value={this.state.name}
                         onChange={e => this.change(e)}
                         placeholder="Name of your product..."
+
                       />
                   </div>
 
                   <div className="form-group">
+
+                    <label>Category</label>
+                      <select className="form-control"
+                      name="category"
+                      value={this.state.category}
+                      onChange={e => this.change(e)}>
+
                     {this.state.category &&
                     <label className="text-success">Category</label>}
                     {!this.state.category &&
@@ -130,6 +168,7 @@ class ItemForm extends React.Component {
                         value={this.state.category}
                         onChange={e => this.change(e)}
                       >
+
                         <option>Select one...</option>
                         <option>Weapon</option>
                         <option>Armor</option>
@@ -161,7 +200,19 @@ class ItemForm extends React.Component {
                       </select>
                     }
                   </div>
+
                   <div className="form-group">
+
+                    <label>Description</label>
+                      <textarea className="form-control"
+                      name="description"
+                      type="string"
+                      value={this.state.description}
+                      onChange={e => this.change(e)}
+                      rows="4"
+                      placeholder="Describe what you are selling...">
+                      </textarea>
+
                     {this.state.description &&
                     <label className="text-success">Description</label>}
                     {!this.state.description &&
@@ -175,9 +226,23 @@ class ItemForm extends React.Component {
                         rows="4"
                         placeholder="Describe what you are selling..."
                       />
+
                   </div>
+
                   <div className="form-row">
                     <div className="input col-md-6">
+
+                      <label>Price</label>
+                      <InputGroup>
+                        <InputGroupAddon addonType="prepend">$</InputGroupAddon>
+                        <input className="form-control"
+                        name="cost"
+                        type="number"
+                        value={this.state.cost}
+                        onChange={e => this.change(e)}
+                        placeholder="Ex. 12.99"/>
+                      </InputGroup>
+
                       {this.state.cost &&
                       <label className="text-success">Price</label>}
                       {!this.state.cost &&
@@ -190,8 +255,17 @@ class ItemForm extends React.Component {
                           onChange={e => this.change(e)}
                           placeholder="Ex. 12.99"
                         />
+
                     </div>
+
                     <div className="form-group col-md-6">
+
+                      <label>Condition</label>
+                        <select className="form-control"
+                        name="condition"
+                        value={this.state.condition}
+                        onChange={e => this.change(e)}>
+
                       {this.state.condition &&
                       <label className="text-success">Condition</label>}
                       {!this.state.condition &&
@@ -202,6 +276,7 @@ class ItemForm extends React.Component {
                           value={this.state.condition}
                           onChange={e => this.change(e)}
                         >
+
                           <option>Select one...</option>
                           <option>Pristine</option>
                           <option>Good</option>
@@ -210,7 +285,30 @@ class ItemForm extends React.Component {
                         </select>
                     </div>
                   </div>
+
                   <div className="form-group">
+
+                    <label>Material</label>
+                      <select className="form-control"
+                      name="material"
+                      value={this.state.material}
+                      onChange={e => this.change(e)}>
+                        <option>Select one...</option>
+                        <option>Iron</option>
+                        <option>Steel</option>
+                        <option>Leather</option>
+                        <option>Vibranium</option>
+                        <option>Paper</option>
+                        <option>Other</option>
+                      </select>
+                  </div>
+
+                  <div className="form-group col-md-6">
+                    <label>Image</label>
+                      <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
+                      onChange={e => this.change(e)} />
+                        <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
+
                     {this.state.material &&
                     <label className="text-success">Material</label>}
                     {!this.state.material &&
@@ -250,12 +348,36 @@ class ItemForm extends React.Component {
                           <p>{this.state.uploadedFile.name} has been submited. Thank you</p>
                         </div>}
                       </div>
+
                   </div>
-                  <button className="btn btn-dark btn-lg btn-block" onClick={this.onSubmit}>List thee item my lord</button>
+
+                  <div>         
+                    <Button className="btn btn-dark btn-lg btn-block" onClick={this.toggle}>List thee item my lord</Button>
+                      <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <ModalHeader toggle={this.toggle}>Confirmation</ModalHeader>
+                          <ModalBody>
+                            <ul>Item name: {this.state.name}</ul>
+                            <ul>Category: {this.state.category}</ul>
+                            <ul>Description: {this.state.description}</ul>
+                            <ul>Price: {this.state.cost}</ul>
+                            <ul>Condition: {this.state.condition}</ul>
+                            <ul>Material: {this.state.material}</ul>
+                            <Media object data-src={this.state.image} alt="Generic placeholder image" />
+                          </ModalBody>
+                        <ModalFooter>
+                          <Button color="primary" onClick={this.onSubmit}>Forge sumbmission</Button>{' '}
+                          <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                        </ModalFooter>
+                      </Modal>
+                  </div>
                 </form>
               </div>
             </div>
           </div>
+
+        
+
+
 
         );
       };

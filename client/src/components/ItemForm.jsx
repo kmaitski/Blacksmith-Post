@@ -29,13 +29,14 @@ class ItemForm extends React.Component {
       image:'',
       uploadedFile: {},
       uploadedCloudinaryURL: '',
-      modal: false
+      modal: false,
     };
 
     this.change = this.change.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
     this.onImageDrop = this.onImageDrop.bind(this);
+
   }
   toggle() {
     this.setState({
@@ -49,8 +50,6 @@ class ItemForm extends React.Component {
       [e.target.name]: e.target.value
     });
   }
-
-
 
 
   onSubmit(event) {
@@ -113,7 +112,9 @@ class ItemForm extends React.Component {
 
 //form to collect data
     render () {
-
+      const { name, description, category, subcategory, cost, condition, material } = this.state;
+      const buttonEnabled = name.length > 0 && description.length > 0 && category.length > 0 && subcategory.length > 0 
+                            && cost.length > 0 && condition.length > 0 && material.length > 0;
       return (
         <div id="formBack">
           <div className="container" id="form">
@@ -266,7 +267,12 @@ class ItemForm extends React.Component {
                   </div>
 
                   <div>
-                    <Button className="btn btn-dark btn-lg btn-block" onClick={this.toggle}>List thee item my lord</Button>
+                    {!buttonEnabled &&
+                    <div>  
+                    <button className="btn btn-dark btn-lg btn-block" onClick={this.toggle} disabled>List thee item my lord</button>
+                      <FormText color="muted" style={{textAlign:'center'}}>Please complete all fields before submitting</FormText></div>}
+                    {buttonEnabled && 
+                    <button className="btn btn-dark btn-lg btn-block" onClick={this.toggle}>List thee item my lord</button>}  
                       <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>Confirmation</ModalHeader>
                           <ModalBody>
@@ -283,6 +289,7 @@ class ItemForm extends React.Component {
                           <Button color="secondary" onClick={this.toggle}>Cancel</Button>
                         </ModalFooter>
                       </Modal>
+                    
                   </div>
                 </form>
               </div>

@@ -10,12 +10,14 @@ import Login from './components/Login.jsx'
 import LandingPage from './components/LandingPage.jsx'
 import SignUp from './components/SignUp.jsx';
 import ImageUploader from './components/ImageUploader.jsx';
+import LoginModal from './components/LoginModal.jsx';
 
 class App extends React.Component {
   constructor(props){
     super(props)
 
     this.state = {
+      loginModalOpen: false,
       isLoggedIn: false,
       items:[],
       deleteitem:'',
@@ -23,6 +25,7 @@ class App extends React.Component {
       isLoading:false,
     }
 
+    this.closeLogin = this.closeLogin.bind(this);
     this.buyItem = this.buyItem.bind(this);
     this.sellItem = this.sellItem.bind(this);
     this.stripeTokenHandler = this.stripeTokenHandler.bind(this);
@@ -56,6 +59,9 @@ class App extends React.Component {
     });
   }
 
+  closeLogin() {
+    this.setState({loginModalOpen: false});
+  }
 
   buyItem(){
     this.setState({viewState:'ViewItems'});
@@ -70,7 +76,8 @@ class App extends React.Component {
   }
 
   login(){
-    this.setState({viewState:'Login'});
+    this.setState({loginModalOpen: true});
+    // this.setState({viewState:'Login'});
   }
 
   render () {
@@ -113,7 +120,7 @@ class App extends React.Component {
           {this.state.viewState === 'ItemForm' && <ItemForm />}
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
           {this.state.viewState === 'ViewItems' && <ViewItems renderwindow={this.renderWindow} items={this.state.items} />}
-          {this.state.viewState === 'Login' && this.state.isLoggedIn === false && <SignUp />}
+          {this.state.isLoggedIn === false && <LoginModal modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}
           {this.state.viewState === 'upload' && <ImageUploader />}
           <Footer />
         </div>

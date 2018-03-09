@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "webpack -d",
-    "react-dev": "webpack -d --watch",
-    "postinstall": "webpack -d",
     "start": "node --inspect server/index.js",
+    "react-dev": "webpack -d --watch",
     "start-dev": "nodemon --inspect server/index.js"
   },
   "repository": {
@@ -41,7 +40,9 @@
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.9",
+    "react-modal": "^3.3.1",
     "react-popup": "^0.9.2",
+    "reactstrap": "^4.8.0",
     "stripe": "^5.5.0",
     "superagent": "^3.8.2",
     "webpack": "^2.2.1"

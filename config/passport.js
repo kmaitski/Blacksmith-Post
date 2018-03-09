@@ -21,7 +21,7 @@ module.exports = passport => {
     process.nextTick(() => {
       User.findOne({'local.username': username}, (err, user) => {
         if (err) return cb(err);
-        if (user) return(null, false, console.log('signupMessage', 'Email already taken'));
+        if (user) return cb(null, false, req.flash('signupMessage', 'Email already taken'));
         else {
           let newUser = new User();
           newUser.local.username = username;
@@ -29,7 +29,7 @@ module.exports = passport => {
           newUser.save(err => {
             if (err) console.log('hit err in newuser save', err);
             console.log(newUser);
-            return cb(null, newUser);
+            return cb(null, newUser, req.flash('User', newUser));
           });
         }
       });
@@ -45,10 +45,10 @@ module.exports = passport => {
     process.nextTick(() => {
       User.findOne({'local.username': username}, (err, user) => {
         if (err) return cb(err);
-        if (!user) return cb(null, false, console.log('loginMessage', 'no user found'));
-        if (user.local.password !== password) return cb(null, false, console.log('loginMessage', 'passwords do not match'));
+        if (!user) return cb(null, false, req.flash('loginMessage', 'no user found'));
+        if (user.local.password !== password) return cb(null, false, req.flash('loginMessage', 'passwords do not match'));
         console.log('login success', user);
-        return cb(null, user);
+        return cb(null, user, req.flash('User', user));
       });
     });
   }));

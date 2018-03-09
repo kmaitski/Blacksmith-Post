@@ -67,17 +67,34 @@ app.post('/charge', function(req, res) {
   )
 });
 
+app.get('/signupS', function(req, res) {
+  res.send(req.flash('User'))
+});
+
+app.get('/signupF', function(req, res) {
+  res.send({message: req.flash('signupMessage')})
+});
 
 app.post('/signup', passport.authenticate('local-signup', {
-  successRedirect: '/',
-  failureRedirect: '/',
-  failureFlash: true
+  successRedirect: '/signupS',
+  failureRedirect: '/signupF',
+  failureFlash: true,
+  successFlash: true
 }));
 
+app.get('/loginS', function(req, res) {
+  res.send(req.flash('User'))
+});
+
+app.get('/loginF', function(req, res) {
+  res.send({message: req.flash('loginMessage')})
+});
+
 app.post('/login', passport.authenticate('local-login', {
-  successRedirect: '/',
-  failureRedirect: '/',
-  failureFlash: true
+  successRedirect: '/loginS',
+  failureRedirect: '/loginF',
+  failureFlash: true,
+  successFlash: true
 }));
 
 app.get('/logout', function(req, res) {

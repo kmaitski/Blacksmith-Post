@@ -31,7 +31,7 @@
     "cloudinary": "^1.10.0",
     "connect-flash": "^0.1.1",
     "ejs": "^2.5.7",
-    "express": "^4.15.0",
+    "express": "^4.16.2",
     "express-session": "^1.15.6",
     "jquery": "^3.3.1",
     "mongoose": "^4.8.6",
@@ -41,7 +41,9 @@
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
+    "react-dropzone": "^4.2.9",
     "react-popup": "^0.9.2",
-    "stripe": "^5.5.0"
+    "stripe": "^5.5.0",
+    "superagent": "^3.8.2"
   }
 }

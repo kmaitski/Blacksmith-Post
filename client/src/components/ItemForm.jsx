@@ -74,8 +74,9 @@ class ItemForm extends React.Component {
         <div id="formBack">
           <div className="container" id="form">
             <div className="ItemForm">
-                <h1>The Blacksmith Post</h1>
-                <form>
+
+                <h1>The Black Smith Post</h1>
+                <form accept="image/gif,image/jpeg">
                   <div className="form-groups">
                     {this.state.name &&
                     <label className="text-success">Item Name</label>}
@@ -197,8 +198,14 @@ class ItemForm extends React.Component {
                     <label className="text-success">Image</label>}
                     {!this.state.image &&
                     <label className="text-danger">Image</label>}
-                      <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
-                      onChange={e => this.change(e)} />
+                      <input
+                        className="form-control-file"
+                        name="image"
+                        type="file"
+                        aria-describedby="fileHelp"
+                        value={this.state.image}
+                        onChange={e => this.change(e)}
+                      />
                         <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
                   </div>
                   <button className="btn btn-dark btn-lg btn-block" onClick={this.onSubmit}>List thee item my lord</button>

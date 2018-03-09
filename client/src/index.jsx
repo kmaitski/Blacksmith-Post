@@ -12,6 +12,7 @@ import SignUp from './components/SignUp.jsx';
 import ImageUploader from './components/ImageUploader.jsx';
 import LoginModal from './components/LoginModal.jsx';
 
+
 class App extends React.Component {
   constructor(props){
     super(props)

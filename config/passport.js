@@ -46,8 +46,8 @@ module.exports = passport => {
       User.findOne({'local.username': username}, (err, user) => {
         if (err) return cb(err);
         if (!user) return cb(null, false, console.log('loginMessage', 'no user found'));
-        if (user.password !== password) return cb(null, false, console.log('loginMessage', 'passwords do not match'));
-        console.log(user);
+        if (user.local.password !== password) return cb(null, false, console.log('loginMessage', 'passwords do not match'));
+        console.log('login success', user);
         return cb(null, user);
       });
     });

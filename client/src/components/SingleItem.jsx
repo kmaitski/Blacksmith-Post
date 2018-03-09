@@ -1,28 +1,28 @@
 import React from 'react';
 import {Component} from 'react';
 import PaymentForm from "./PaymentForm.jsx"
+import ReactDOM from 'react-dom';
 
 //single card to display item listing
 class SingleItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      paymentForm: false
+      paymentFormOpen: false
     }
-    this.renderWindow = this.renderWindow.bind(this);
-    this.cancel = this.cancel.bind(this);
+    this.pay = this.pay.bind(this);
+    this.closePayment = this.closePayment.bind(this);
   }
 
-  renderWindow(e) {
-    e.preventDefault();
+  pay() {
     this.setState({
-      paymentForm: true
+      paymentFormOpen: true
     })
   }
 
-  cancel() {
+  closePayment() {
     this.setState({
-      paymentForm: false
+      paymentFormOpen: false
     })
   }
 
@@ -38,8 +38,12 @@ class SingleItem extends React.Component {
               <p className="card-text">{this.props.item.description}</p>
               <h6>{this.props.item.email}</h6>
               <p className="card-price">Asking price: ${this.props.item.cost}</p>
-              {this.state.paymentForm && <PaymentForm cancel={this.cancel} stripeTokenHandler={this.props.stripetokenhandler} />}
-              {!this.state.paymentForm && <button className="btn btn-dark btn-sm btn-block" onClick={this.renderWindow}>Buy Now</button>}
+              {this.state.paymentFormOpen &&
+              <PaymentForm
+                modalIsOpen={this.state.paymentFormOpen}
+                close={this.closePayment}
+                stripeTokenHandler={this.props.stripetokenhandler} />}
+              {!this.state.paymentFormOpen && <button className="btn btn-dark btn-sm btn-block" onClick={this.pay}>Buy Now</button>}
             </div>
           </div>
         }

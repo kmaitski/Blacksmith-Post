@@ -98,12 +98,14 @@ app.get('/api/items', function (req, res) {
 
 //request to add item to database
 app.post('/api/itemForm', function (req, res){
-  let newItem = req.body;
-  let filename = req.body.image.split('\\')[2];
-  // console.log(filename);
-  cloudinary.uploader.upload(filename, result => {
-    console.log(result);
-  })
+  // console.log('in server');
+  // let newItem = req.body;
+  // let filename = req.body.image.split('\\')[2];
+  // // console.log(filename);
+  // cloudinary.uploader.upload(filename, result => {
+  //   console.log(result);
+  // })
+  console.log(req.body);
   database.createItem(req.body);
     res.sendStatus(200);
 

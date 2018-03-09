@@ -53,7 +53,12 @@ class ItemForm extends React.Component {
       material:this.state.material,
       image:this.state.uploadedCloudinaryURL
     }
+<<<<<<< HEAD
     if (itemData.name && itemData.description && itemData.category && itemData.subcategory && itemData.cost && itemData.condition && itemData.material) {
+=======
+    console.log(itemData.image);
+    if (itemData.name && itemData.description && itemData.category && itemData.cost && itemData.condition && itemData.material) {
+>>>>>>> 8b463af7b75b5e37d3870cc267e81acee9e18c46
 
       $.ajax({
         url: '/api/itemForm',
@@ -166,15 +171,15 @@ class ItemForm extends React.Component {
                     <label className="text-success">Description</label>}
                     {!this.state.description &&
                     <label className="text-danger">Description</label>}
-                      <textarea className="form-control"
-                      name="description"
-                      type="string"
-                      value={this.state.description}
-                      onChange={e => this.change(e)}
-                      rows="4"
-                      placeholder="Describe what you are selling...">
-                      </textarea>
-
+                      <textarea
+                        className="form-control"
+                        name="description"
+                        type="string"
+                        value={this.state.description}
+                        onChange={e => this.change(e)}
+                        rows="4"
+                        placeholder="Describe what you are selling..."
+                      />
                   </div>
                   <div className="form-row">
                     <div className="input col-md-6">

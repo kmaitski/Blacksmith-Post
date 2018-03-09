@@ -4,6 +4,17 @@ import PaymentForm from "./PaymentForm.jsx"
 import ReactDOM from 'react-dom';
 
 //single card to display item listing
+var filterFunc = function(userCat, userSubcat, itemCat, itemSubcat) {
+  if (userCat === 'Filter by Category') {
+    return true;
+  } else if (userCat === itemCat && userSubcat === 'Choose Subcategory') {
+    return true;
+  } else if (userCat === itemCat && userSubcat === itemSubcat) {
+    return true;
+  } else {
+    return false;
+  }
+};
 class SingleItem extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +41,8 @@ class SingleItem extends React.Component {
     return (
   // {item.category === filter &&
       <div>
-        {(this.props.filter === this.props.item.category || this.props.filter == ('Filter by Category')) &&
+        {/* {(this.props.filter === this.props.item.category || this.props.filter == ('Filter by Category')) && */}
+        {filterFunc(this.props.filter, this.props.subfilter, this.props.item.category, this.props.item.subcategory) &&
           <div className="card" style={{flex: 1, minWidth:300, maxWidth:400}}>
             <img className="card-img-top" src={this.props.item.image} alt="Card image cap" />
             <div className="card-body">

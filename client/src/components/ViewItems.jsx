@@ -11,6 +11,7 @@ class ViewItems extends React.Component {
     this.state = {
       items: this.props.items,
       category: 'Filter by Category',
+      subcategory: 'Choose Subcategory'
     }
     this.handleCategoryChange = this.handleCategoryChange.bind(this);
   }
@@ -19,6 +20,7 @@ class ViewItems extends React.Component {
       [e.target.name]: e.target.value
     });
   }
+
   render() {
     return (
       <div style={{paddingTop: "10px"}}>
@@ -31,6 +33,32 @@ class ViewItems extends React.Component {
               <option>Weapon</option>
               <option>Armor</option>
             </select>
+            {this.state.category === "Weapon" &&
+                      <select className="form-control"
+                       name="subcategory"
+                       value={this.state.subcategory}
+                       onChange={e => this.handleCategoryChange(e)}
+                       >
+                         <option className="text-danger">Select weapon type</option>
+                         <option>Sword</option>
+                         <option>Spear</option>
+                         <option>Axe</option>
+                         <option>Other</option>
+                      </select>
+                    }
+                    {this.state.category === "Armor" &&
+                      <select className="form-control"
+                       name="subcategory"
+                       value={this.state.subcategory}
+                       onChange={e => this.handleCategoryChange(e)}
+                       >
+                         <option className="text-danger">Select armor type</option>
+                         <option>Helmet</option>
+                         <option>Suit</option>
+                         <option>Shield</option>
+                         <option>Other</option>
+                      </select>
+                    }
         </div>
         <div className = "card-deck">
           {this.state.items.map((item) =>
@@ -40,7 +68,8 @@ class ViewItems extends React.Component {
           item={item}
           key={item._id}
           itemID={item._id}
-          filter={this.state.category} />
+          filter={this.state.category}
+          subfilter={this.state.subcategory} />
           )}
         </div>
       </div>

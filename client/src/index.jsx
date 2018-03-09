@@ -25,7 +25,7 @@ class App extends React.Component {
       viewState:'LandingPage',
       isLoading:false,
     }
-
+    this.fetch = this.fetch.bind(this);
     this.itemBought = this.itemBought.bind(this);
     this.closeLogin = this.closeLogin.bind(this);
     this.buyItem = this.buyItem.bind(this);
@@ -39,6 +39,17 @@ class App extends React.Component {
     fetch('/api/items')
     .then(response => response.json())
     .then(data => this.setState({ items: data, isloading:false}));
+  }
+
+
+  fetch() {
+    this.setState({
+      isLoading: true,
+      viewState: 'LandingPage'});
+    fetch('/api/items')
+    .then(response => response.json())
+    .then(data => this.setState({ items: data, isloading:false}));
+
   }
 
    goHome(){
@@ -136,7 +147,7 @@ class App extends React.Component {
         </nav>
         <div style={{paddingTop: "51px"}}>
           {this.state.viewState === 'LandingPage' && <LandingPage buyclick={this.buyItem} sellclick={this.sellItem}/>}
-          {this.state.viewState === 'ItemForm' && <ItemForm />}
+          {this.state.viewState === 'ItemForm' && <ItemForm fetch={this.fetch} />}
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
           {this.state.viewState === 'ViewItems' && <ViewItems itembought={this.itemBought} stripe={this.stripeTokenHandler} items={this.state.items} />}
           {this.state.isLoggedIn === false && <LoginModal modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}

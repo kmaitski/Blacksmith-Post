@@ -49,9 +49,9 @@ class LoginModal extends React.Component {
       // .done(() => {
       //   console.log('hit done in loginsubmit')
       // })
-      .fail(() => {
-        console.log('hit err in loginsubmit')
-      })
+      // .fail(() => {
+      //   console.log('hit err in loginsubmit')
+      // })
   }
 
   handleSignUpSubmit(e) {

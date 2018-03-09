@@ -31,7 +31,7 @@ class ItemForm extends React.Component {
       uploadedCloudinaryURL: '',
       modal: false
     };
-    
+
     this.change = this.change.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -50,8 +50,8 @@ class ItemForm extends React.Component {
     });
   }
 
-  
-  
+
+
 
   onSubmit(event) {
     console.log(1);
@@ -87,8 +87,8 @@ class ItemForm extends React.Component {
     }
 
   };
-  
-   
+
+
 
   onImageDrop(files) {
     this.setState({
@@ -119,7 +119,7 @@ class ItemForm extends React.Component {
           <div className="container" id="form">
             <div className="ItemForm">
 
-              
+
 
 
                 <h1>The Black Smith Post</h1>
@@ -177,7 +177,7 @@ class ItemForm extends React.Component {
                       </select>
                     }
                   </div>
-                  
+
 
                   <div className="form-group">
 
@@ -246,7 +246,7 @@ class ItemForm extends React.Component {
                       onChange={e => this.change(e)} />
                         <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
 
-      
+
                       <div>
                         <Dropzone
                           multiple={false}
@@ -265,7 +265,7 @@ class ItemForm extends React.Component {
 
                   </div>
 
-                  <div>         
+                  <div>
                     <Button className="btn btn-dark btn-lg btn-block" onClick={this.toggle}>List thee item my lord</Button>
                       <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>Confirmation</ModalHeader>
@@ -289,7 +289,7 @@ class ItemForm extends React.Component {
             </div>
           </div>
 
-        
+
 
 
 

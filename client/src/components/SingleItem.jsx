@@ -1,28 +1,39 @@
 import React from 'react';
 import {Component} from 'react';
 import PaymentForm from "./PaymentForm.jsx"
+import ReactDOM from 'react-dom';
 
 //single card to display item listing
+var filterFunc = function(userCat, userSubcat, itemCat, itemSubcat) {
+  if (userCat === 'Filter by Category') {
+    return true;
+  } else if (userCat === itemCat && userSubcat === 'Choose Subcategory') {
+    return true;
+  } else if (userCat === itemCat && userSubcat === itemSubcat) {
+    return true;
+  } else {
+    return false;
+  }
+};
 class SingleItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      paymentForm: false
+      paymentFormOpen: false
     }
-    this.renderWindow = this.renderWindow.bind(this);
-    this.cancel = this.cancel.bind(this);
+    this.pay = this.pay.bind(this);
+    this.closePayment = this.closePayment.bind(this);
   }
 
-  renderWindow(e) {
-    e.preventDefault();
+  pay() {
     this.setState({
-      paymentForm: true
+      paymentFormOpen: true
     })
   }
 
-  cancel() {
+  closePayment() {
     this.setState({
-      paymentForm: false
+      paymentFormOpen: false
     })
   }
 
@@ -30,7 +41,8 @@ class SingleItem extends React.Component {
     return (
   // {item.category === filter &&
       <div>
-        {(this.props.filter === this.props.item.category || this.props.filter == ('Filter by Category')) &&
+        {/* {(this.props.filter === this.props.item.category || this.props.filter == ('Filter by Category')) && */}
+        {filterFunc(this.props.filter, this.props.subfilter, this.props.item.category, this.props.item.subcategory) &&
           <div className="card" style={{flex: 1, minWidth:300, maxWidth:400}}>
             <img className="card-img-top" src={this.props.item.image} alt="Card image cap" />
             <div className="card-body">
@@ -38,8 +50,12 @@ class SingleItem extends React.Component {
               <p className="card-text">{this.props.item.description}</p>
               <h6>{this.props.item.email}</h6>
               <p className="card-price">Asking price: ${this.props.item.cost}</p>
-              {this.state.paymentForm && <PaymentForm cancel={this.cancel} stripeTokenHandler={this.props.stripetokenhandler} />}
-              {!this.state.paymentForm && <button className="btn btn-dark btn-sm btn-block" onClick={this.renderWindow}>Buy Now</button>}
+              {this.state.paymentFormOpen &&
+              <PaymentForm
+                modalIsOpen={this.state.paymentFormOpen}
+                close={this.closePayment}
+                stripeTokenHandler={this.props.stripetokenhandler} />}
+              {!this.state.paymentFormOpen && <button className="btn btn-dark btn-sm btn-block" onClick={this.pay}>Buy Now</button>}
             </div>
           </div>
         }

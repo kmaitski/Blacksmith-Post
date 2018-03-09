@@ -1,4 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
+// import Stripe from 'stripe';
 
 var stripe = Stripe('pk_test_0xIQ5EzwgXmNg8mcccN854lq');
 var elements = stripe.elements();
@@ -19,6 +22,14 @@ var style = {
   complete: {
     color: '#5ebc01',
     iconColor: '#6ddb00'
+  },
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
   }
 };
 var card = elements.create('card', {style: style});
@@ -35,17 +46,23 @@ var form = document.getElementById('payment-form');
 class PaymentForm extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      modalIsOpen: false,
+    };
+
     this.handleCreditCard = this.handleCreditCard.bind(this);
     this.cancel = this.cancel.bind(this);
   }
 
   componentDidMount() {
-    card.mount('#card-element');
+    // card.mount('#card-element');
   }
 
   cancel() {
     card.unmount('#card-element');
-    this.props.cancel()
+    this.setState({modalIsOpen: false});
+    this.props.close();
   }
 
   handleCreditCard(e) {
@@ -60,15 +77,38 @@ class PaymentForm extends React.Component {
     });
   }
 
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  afterOpenModal() {
+    // this.subtitle.style.color = '#f00';
+    card.mount('#card-element');
+    // references are now sync'd and can be accessed.
+
+  }
+
   render() {
     return(
-      <form action="/charge" method="post" id="payment-form">
-           <label>Card</label>
-           <div id="card-element"></div>
-           <div id="card-errors" role="alert"></div>
-           <button onClick={this.handleCreditCard} className="btn btn-dark btn-sm" >Submit</button>
-           <button onClick={this.cancel} className="btn btn-dark btn-sm" >Cancel</button>
-         </form>
+      <div>
+        <Modal
+          isOpen={this.props.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.cancel}
+          style={style}
+          ariaHideApp={false}
+          contentLabel="Payment Modal"
+          >
+          <h2>____________Enter Payment Info____________</h2>
+            <form action="/charge" method="post" id="payment-form">
+               <label>Card</label>
+               <div id="card-element"></div>
+               <div id="card-errors" role="alert"></div>
+               <button onClick={this.handleCreditCard} className="btn btn-dark btn-sm" >Submit</button>
+               <button onClick={this.cancel} className="btn btn-dark btn-sm" >Cancel</button>
+            </form>
+        </Modal>
+      </div>
          )
   }
 

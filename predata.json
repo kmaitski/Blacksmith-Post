@@ -2,6 +2,7 @@
   {
     "name" : "Broad Sword",
     "description" : "If it's semi-historical/realistic game, then it's the iconic zweihander or the broad Sword type. Works more or less like a clumsier bastard (you can only use it 2 handed), may have reach benefits. ",
+    "category": "Weapon",
     "cost" : 531,
     "email" : "gandalf@hotmail.com",
     "condition" : "good",
@@ -16,6 +17,7 @@
   {
     "name" : "Greek Corinthian Helmet",
     "description" : "Going back to classic Greek style, the Greek Corinthian Helmet is truly a sight to behold.",
+    "category": "Armor",
     "cost" : 155,
     "email" : "squire@hotmail.com",
     "condition" : "old",
@@ -30,6 +32,7 @@
   {
     "name" : "Phoenix Spear",
     "description" : "a spear forged from the ashes of a phoenix",
+    "category": "Weapon",
     "cost" : 999999,
     "email" : "BrightOrangeSam@hotmail.com",
     "condition" : "New",
@@ -44,6 +47,7 @@
   {
     "name" : "Newb Sword",
     "description" : "test sword",
+    "category": "Weapon",
     "cost" : 7,
     "email" : "squire@hotmail.com",
     "condition" : "old",
@@ -58,6 +62,7 @@
   {
     "name" : "Dark Iron Breastplate",
     "description" : "classic dark iron breastplate",
+    "category": "Armor",
     "cost" : 999999,
     "email" : "tinydwarfguy@hotmail.com",
     "condition" : "New",
@@ -72,6 +77,7 @@
   {
     "name" : "Full Light Iron Suit",
     "description" : "Paladin armor style gear fully functional, only wore once in battle",
+    "category": "Armor",
     "cost" : 1450,
     "email" : "knightman@hotmail.com",
     "condition" : "slightly worn",
@@ -86,6 +92,7 @@
   {
     "name" : "Phoenix Spear",
     "description" : "a spear forged from the ashes of a phoenix",
+    "category": "Weapon",
     "cost" : 999999,
     "email" : "BrightOrangeSam@hotmail.com",
     "condition" : "New",
@@ -100,6 +107,7 @@
   {
     "name" : "Oblivion axe",
     "description" : "An axe to decimate your enemies",
+    "category": "Weapon",
     "cost" : 4532,
     "email" : "darkLordJeff@hotmail.com",
     "condition" : "worn",
@@ -114,6 +122,7 @@
   {
     "name" : "Roman Breast Plate",
     "description" : "Roman style breastplate made in 1705",
+    "category": "Armor",
     "cost" : 7,
     "email" : "sirMaxxy@hotmail.com",
     "condition" : "old",
@@ -128,8 +137,9 @@
   {
     "name" : "The_Dark_Dragon_Blade",
     "description" : "from the swamp of Darkness",
+    "category": "Weapon",
     "cost" : 999999,
-    "email" : "Dragonboi@hotmail.com",
+    "email" : "moxie@moxman.com",
     "condition" : "Like New",
     "blacksmith" : "hatori hanzo",
     "material" : "dragonsteel",

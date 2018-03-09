@@ -15,6 +15,7 @@ var itemSchema = mongoose.Schema({
   name: String,
   description: String,
   category: String,
+  subcategory: String,
   cost: Number,
   email: String,
   condition: String,
@@ -47,6 +48,7 @@ var createItem = function (data) {
       name: data.name || "greatHelm",
       description: data.description || "from the swamp of mordor",
       category: data.category || "weapon",
+      subcategory: data.subcategory || "sword",
       cost: data.cost || 999999,
       email: data.email || "gandalf@hotmail.com",
       condition: data.condition || "strong like bull",
@@ -69,7 +71,7 @@ var allItems = function(callback) {
       callback(null, data);
 
     }
-  }).limit(20)
+  }).limit(200)
 };
 
 
@@ -85,7 +87,7 @@ item.findOne({'name':data.name}).exec(callback);
 
 }
 
-// exports.findAll 
+// exports.findAll
 
 
 

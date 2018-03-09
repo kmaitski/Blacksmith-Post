@@ -74,7 +74,6 @@ class App extends React.Component {
   }
 
   stripeTokenHandler(data) {
-    console.log(token);
     console.log('credit card success!');
     $.ajax({
       url: '/charge',

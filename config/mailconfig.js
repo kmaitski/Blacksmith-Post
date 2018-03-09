@@ -24,6 +24,6 @@ var send = function() {transporter.sendMail(mailOptions, function(error, info){
 })
 };
 
-module.exports.send = send;
+module.exports.transporter = transporter;
 
 

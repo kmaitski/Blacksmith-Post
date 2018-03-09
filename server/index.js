@@ -5,13 +5,15 @@ var database = require('../database/index.js');
 var config = require('./config.js')
 const passport = require('passport');
 const flash = require('connect-flash');
-const sendMail = require('../config/mailconfig');
+const transporter = require('../config/mailconfig');
 const cloudinary = require('cloudinary');
+var nodemailer = require('nodemailer');
+
 
 var app = express();
 
 var stripe = require("stripe")(
-  config.api
+  config.config
 );
 //to view data in body of api calls
 app.use(bodyParser.json());
@@ -49,17 +51,29 @@ require('./../config/passport.js')(passport);
 
 app.post('/charge', function(req, res) {
     stripe.charges.create({
-      amount: .09,
+      amount: req.body.cost * 100,
       currency: "usd",
-      source: req.body.id,
+      source: req.body.token.id,
       description: "Charge for anon user"
     }, function(err, charge) {
       if(err){
         console.error(err);
         res.end()
       } else {
+        transporter.transporter.sendMail({
+          from: 'blacksmithpostroanl@gmail.com',
+          to: req.body.seller,
+          subject: 'Your item sold on Blacksmith Post!',
+          text: 'Great smithing! Your item ' + req.body.item + ' sold for $' + req.body.cost + ' on Blacksmith Post!'
+        }, function(error, info){
+          if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+})
         res.writeHead(200);
-        res.end(charge);
+        res.end();
       }
     }
   )
@@ -132,8 +146,3 @@ app.post('/api/deleteItem', function (req, res){
   database.deleteItem(req.body);
   res.sendStatus(200);
 });
-
-app.post('/buy', function(req, res) {
-  var thing = sendMail;
-  res.end();
-})

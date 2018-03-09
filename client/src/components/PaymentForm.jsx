@@ -74,7 +74,7 @@ class PaymentForm extends React.Component {
         var errorElement = document.getElementById('card-errors');
         errorElement.textContent = result.error.message;
       } else {
-        stripehandler({token: result.token, seller:seller, item: item, cost: cost);
+        stripehandler({token: result.token, seller:seller, item: item, cost: cost});
         success();
       }
     });

@@ -66,7 +66,7 @@ class ItemForm extends React.Component {
       material:this.state.material,
       image:this.state.uploadedCloudinaryURL
     }
-    if (itemData.name && itemData.description && itemData.category && itemData.subcategory && itemData.cost && itemData.condition && itemData.material) {
+   
 
       $.ajax({
         url: '/api/itemForm',
@@ -80,10 +80,7 @@ class ItemForm extends React.Component {
           console.log('errror in ajax', err);
         }
       });
-    } else {
-      alert("Please complete the items in red");
-
-    }
+    
 
   };
 
@@ -269,10 +266,10 @@ class ItemForm extends React.Component {
                   <div>
                     {!buttonEnabled &&
                     <div>  
-                    <button className="btn btn-dark btn-lg btn-block" onClick={this.toggle} disabled>List thee item my lord</button>
+                    <Button className="btn btn-dark btn-lg btn-block" onClick={this.toggle} disabled>List thee item my lord</Button>
                       <FormText color="muted" style={{textAlign:'center'}}>Please complete all fields before submitting</FormText></div>}
                     {buttonEnabled && 
-                    <button className="btn btn-dark btn-lg btn-block" onClick={this.toggle}>List thee item my lord</button>}  
+                    <Button className="btn btn-dark btn-lg btn-block" onClick={this.toggle}>List thee item my lord</Button>}  
                       <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>Confirmation</ModalHeader>
                           <ModalBody>

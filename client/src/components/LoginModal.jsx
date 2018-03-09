@@ -44,22 +44,18 @@ class LoginModal extends React.Component {
     e.preventDefault();
     console.log('in handleSubmit');
     var newUser = {username: this.state.email, password: this.state.password};
-    $.post('/login', newUser, () =>
-      console.log('user ' + newUser + 'logged in'))
-      // .done(() => {
-      //   console.log('hit done in loginsubmit')
-      // })
-      // .fail(() => {
-      //   console.log('hit err in loginsubmit')
-      // })
+    $.post('/login', newUser, function(data) {
+      console.log(data);
+    })
   }
 
   handleSignUpSubmit(e) {
     e.preventDefault();
     console.log('in handleSubmit');
     var newUser = {username: this.state.email, password: this.state.password};
-    $.post('/signup', newUser, () =>
-      console.log('user ' + newUser + ' created'));
+    $.post('/signup', newUser, function(data) {
+      console.log(data);
+    })
   }
 
   handleEmailChange(e) {

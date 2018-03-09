@@ -9,6 +9,7 @@ import ViewItems from './components/ViewItems.jsx'
 import Login from './components/Login.jsx'
 import LandingPage from './components/LandingPage.jsx'
 import SignUp from './components/SignUp.jsx';
+import ImageUploader from './components/ImageUploader.jsx';
 
 class App extends React.Component {
   constructor(props){
@@ -18,7 +19,7 @@ class App extends React.Component {
       isLoggedIn: false,
       items:[],
       deleteitem:'',
-      viewState:'LandingPage',
+      viewState:'upload',
       isLoading:false,
     }
 
@@ -111,6 +112,7 @@ class App extends React.Component {
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
           {this.state.viewState === 'ViewItems' && <ViewItems renderwindow={this.renderWindow} items={this.state.items} />}
           {this.state.viewState === 'Login' && this.state.isLoggedIn === false && <SignUp />}
+          {this.state.viewState === 'upload' && <ImageUploader />}
           <Footer />
         </div>
       </div>

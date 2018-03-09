@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Component} from 'react';
 import $ from 'jquery';
+import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, InputGroup, InputGroupAddon, Modal, ModalHeader, ModalBody, ModalFooter, Media } from 'reactstrap';
+
 
 
 
 class ItemForm extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
       class:'',
@@ -15,15 +17,20 @@ class ItemForm extends React.Component {
       category: '',
       description:'',
       cost: '',
-      email:'',
       condition:'',
-      blacksmith:'',
       material:'',
       image:'',
+      modal: false
     };
     this.change = this.change.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.toggle = this.toggle.bind(this);
 
+  }
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    });
   }
 
 //function that holds state based upon input data collected in form before submission
@@ -32,6 +39,9 @@ class ItemForm extends React.Component {
       [e.target.name]: e.target.value
     });
   }
+
+  
+  
 
   onSubmit(event) {
 //stores data on submission to send via ajax call
@@ -65,35 +75,32 @@ class ItemForm extends React.Component {
     }
 
   };
+  
+   
 
 //form to collect data
     render () {
+
       return (
         <div id="formBack">
-        
           <div className="container" id="form">
             <div className="ItemForm">
-
-                <h1>The Black Smith Post</h1>
+              <h1>The Black Smith Post</h1>
                 <form >
+
                   <div className="form-groups">
-                    {this.state.name &&
-                    <label className="text-success">Item Name</label>}
-                    {!this.state.name &&
-                    <label className="text-danger">Item Name</label>}
+                    <label>Item Name</label>
                       <input className="form-control"
                       name="name"
                       type="string"
                       value={this.state.name}
                       onChange={e => this.change(e)}
-                      placeholder="Name of your product..."/>
+                      placeholder="Name of your product..."
+                      />
                   </div>
                   
                   <div className="form-group">
-                    {this.state.category &&
-                    <label className="text-success">Category</label>}
-                    {!this.state.category &&
-                    <label className="text-danger">Category</label>}
+                    <label>Category</label>
                       <select className="form-control"
                       name="category"
                       value={this.state.category}
@@ -103,11 +110,9 @@ class ItemForm extends React.Component {
                         <option>Armor</option>
                       </select>
                   </div>
+
                   <div className="form-group">
-                    {this.state.description &&
-                    <label className="text-success">Description</label>}
-                    {!this.state.description &&
-                    <label className="text-danger">Description</label>}
+                    <label>Description</label>
                       <textarea className="form-control"
                       name="description"
                       type="string"
@@ -116,26 +121,24 @@ class ItemForm extends React.Component {
                       rows="4"
                       placeholder="Describe what you are selling...">
                       </textarea>
-                  
                   </div>
+
                   <div className="form-row">
                     <div className="input col-md-6">
-                      {this.state.cost &&
-                      <label className="text-success">Price</label>}
-                      {!this.state.cost &&
-                      <label className="text-danger">Price</label>}
+                      <label>Price</label>
+                      <InputGroup>
+                        <InputGroupAddon addonType="prepend">$</InputGroupAddon>
                         <input className="form-control"
                         name="cost"
                         type="number"
                         value={this.state.cost}
                         onChange={e => this.change(e)}
                         placeholder="Ex. 12.99"/>
+                      </InputGroup>
                     </div>
+
                     <div className="form-group col-md-6">
-                      {this.state.condition &&
-                      <label className="text-success">Condition</label>}
-                      {!this.state.condition &&
-                      <label className="text-danger">Condition</label>}
+                      <label>Condition</label>
                         <select className="form-control"
                         name="condition"
                         value={this.state.condition}
@@ -148,39 +151,54 @@ class ItemForm extends React.Component {
                         </select>
                     </div>
                   </div>
+
                   <div className="form-group">
-                    {this.state.material &&
-                    <label className="text-success">Material</label>}
-                    {!this.state.material &&
-                    <label className="text-danger">Material</label>}
-                        <select className="form-control"
-                        name="material"
-                        value={this.state.material}
-                        onChange={e => this.change(e)}>
-                          <option>Select one...</option>
-                          <option>Iron</option>
-                          <option>Steel</option>
-                          <option>Leather</option>
-                          <option>Vibranium</option>
-                          <option>Paper</option>
-                          <option>Other</option>
-                        </select>
-                    </div>
+                    <label>Material</label>
+                      <select className="form-control"
+                      name="material"
+                      value={this.state.material}
+                      onChange={e => this.change(e)}>
+                        <option>Select one...</option>
+                        <option>Iron</option>
+                        <option>Steel</option>
+                        <option>Leather</option>
+                        <option>Vibranium</option>
+                        <option>Paper</option>
+                        <option>Other</option>
+                      </select>
+                  </div>
+
                   <div className="form-group col-md-6">
-                    {this.state.image &&
-                    <label className="text-success">Image</label>}
-                    {!this.state.image &&
-                    <label className="text-danger">Image</label>}
+                    <label>Image</label>
                       <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
                       onChange={e => this.change(e)} />
                         <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
                   </div>
-                  <button className="btn btn-dark btn-lg btn-block" onClick={this.onSubmit}>List thee item my lord</button>
+
+                  <div>         
+                    <Button className="btn btn-dark btn-lg btn-block" onClick={this.toggle}>List thee item my lord</Button>
+                      <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                        <ModalHeader toggle={this.toggle}>Confirmation</ModalHeader>
+                          <ModalBody>
+                            <ul>Item name: {this.state.name}</ul>
+                            <ul>Category: {this.state.category}</ul>
+                            <ul>Description: {this.state.description}</ul>
+                            <ul>Price: {this.state.cost}</ul>
+                            <ul>Condition: {this.state.condition}</ul>
+                            <ul>Material: {this.state.material}</ul>
+                            <Media object data-src={this.state.image} alt="Generic placeholder image" />
+                          </ModalBody>
+                        <ModalFooter>
+                          <Button color="primary" onClick={this.onSubmit}>Forge sumbmission</Button>{' '}
+                          <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                        </ModalFooter>
+                      </Modal>
+                  </div>
                 </form>
               </div>
             </div>
           </div>
-          
+        
         );
       };
   };

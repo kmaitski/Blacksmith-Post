@@ -64,6 +64,9 @@ class PaymentForm extends React.Component {
   handleCreditCard(e) {
     e.preventDefault();
     var stripehandler = this.props.stripe
+    var seller = this.props.seller
+    var item = this.props.item
+    var cost = this.props.cost
     var cancel = this.cancel
     var success = this.props.success
     stripe.createToken(card).then((result) => {
@@ -71,7 +74,7 @@ class PaymentForm extends React.Component {
         var errorElement = document.getElementById('card-errors');
         errorElement.textContent = result.error.message;
       } else {
-        stripehandler(result.token);
+        stripehandler({token: result.token, seller:seller, item: item, cost: cost);
         success();
       }
     });
@@ -101,6 +104,8 @@ class PaymentForm extends React.Component {
           >
           <h2>____________Enter Payment Info____________</h2>
             <form action="/charge" method="post" id="payment-form">
+               <p>You are buying: {this.props.item}</p>
+               <p> Price: ${this.props.cost} </p>
                <label>Card</label>
                <div id="card-element"></div>
                <div id="card-errors" role="alert"></div>

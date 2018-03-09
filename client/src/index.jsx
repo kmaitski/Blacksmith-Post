@@ -73,13 +73,13 @@ class App extends React.Component {
       .then(data => this.setState({ items: data, isloading:false}));
   }
 
-  stripeTokenHandler(token) {
+  stripeTokenHandler(data) {
     console.log(token);
     console.log('credit card success!');
     $.ajax({
       url: '/charge',
       type: 'POST',
-      data: token,
+      data: data,
       success: function(data) {
         console.log("Charge successs! ", data)
       },

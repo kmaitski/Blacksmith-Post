@@ -48,7 +48,6 @@ require('./../config/passport.js')(passport);
 // });
 
 app.post('/charge', function(req, res) {
-    console.log(req.body.id);
     stripe.charges.create({
       amount: .09,
       currency: "usd",
@@ -59,7 +58,6 @@ app.post('/charge', function(req, res) {
         console.error(err);
         res.end()
       } else {
-        console.log('Charged successfully')
         res.writeHead(200);
         res.end(charge);
       }

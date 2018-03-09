@@ -19,7 +19,7 @@ class App extends React.Component {
       isLoggedIn: false,
       items:[],
       deleteitem:'',
-      viewState:'upload',
+      viewState:'LandingPage',
       isLoading:false,
     }
 

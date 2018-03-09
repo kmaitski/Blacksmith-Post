@@ -119,26 +119,13 @@ class ItemForm extends React.Component {
           <div className="container" id="form">
             <div className="ItemForm">
 
-              <h1>The Black Smith Post</h1>
-                <form >
-
-                  <div className="form-groups">
-                    <label>Item Name</label>
-                      <input className="form-control"
-                      name="name"
-                      type="string"
-                      value={this.state.name}
-                      onChange={e => this.change(e)}
-                      placeholder="Name of your product..."
+              
 
 
                 <h1>The Black Smith Post</h1>
                 <form accept="image/gif,image/jpeg">
                   <div className="form-groups">
-                    {this.state.name &&
-                    <label className="text-success">Item Name</label>}
-                    {!this.state.name &&
-                    <label className="text-danger">Item Name</label>}
+                    <label>Item Name</label>
                       <input
                         className="form-control"
                         name="name"
@@ -151,17 +138,7 @@ class ItemForm extends React.Component {
                   </div>
 
                   <div className="form-group">
-
                     <label>Category</label>
-                      <select className="form-control"
-                      name="category"
-                      value={this.state.category}
-                      onChange={e => this.change(e)}>
-
-                    {this.state.category &&
-                    <label className="text-success">Category</label>}
-                    {!this.state.category &&
-                    <label className="text-danger">Category</label>}
                       <select
                         className="form-control"
                         name="category"
@@ -200,6 +177,7 @@ class ItemForm extends React.Component {
                       </select>
                     }
                   </div>
+                  
 
                   <div className="form-group">
 
@@ -212,21 +190,6 @@ class ItemForm extends React.Component {
                       rows="4"
                       placeholder="Describe what you are selling...">
                       </textarea>
-
-                    {this.state.description &&
-                    <label className="text-success">Description</label>}
-                    {!this.state.description &&
-                    <label className="text-danger">Description</label>}
-                      <textarea
-                        className="form-control"
-                        name="description"
-                        type="string"
-                        value={this.state.description}
-                        onChange={e => this.change(e)}
-                        rows="4"
-                        placeholder="Describe what you are selling..."
-                      />
-
                   </div>
 
                   <div className="form-row">
@@ -242,20 +205,6 @@ class ItemForm extends React.Component {
                         onChange={e => this.change(e)}
                         placeholder="Ex. 12.99"/>
                       </InputGroup>
-
-                      {this.state.cost &&
-                      <label className="text-success">Price</label>}
-                      {!this.state.cost &&
-                      <label className="text-danger">Price</label>}
-                        <input
-                          className="form-control"
-                          name="cost"
-                          type="number"
-                          value={this.state.cost}
-                          onChange={e => this.change(e)}
-                          placeholder="Ex. 12.99"
-                        />
-
                     </div>
 
                     <div className="form-group col-md-6">
@@ -265,18 +214,6 @@ class ItemForm extends React.Component {
                         name="condition"
                         value={this.state.condition}
                         onChange={e => this.change(e)}>
-
-                      {this.state.condition &&
-                      <label className="text-success">Condition</label>}
-                      {!this.state.condition &&
-                      <label className="text-danger">Condition</label>}
-                        <select
-                          className="form-control"
-                          name="condition"
-                          value={this.state.condition}
-                          onChange={e => this.change(e)}
-                        >
-
                           <option>Select one...</option>
                           <option>Pristine</option>
                           <option>Good</option>
@@ -303,36 +240,13 @@ class ItemForm extends React.Component {
                       </select>
                   </div>
 
-                  <div className="form-group col-md-6">
+                  <div className="form-group col-md-6 FileUpload">
                     <label>Image</label>
                       <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
                       onChange={e => this.change(e)} />
                         <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
 
-                    {this.state.material &&
-                    <label className="text-success">Material</label>}
-                    {!this.state.material &&
-                    <label className="text-danger">Material</label>}
-                        <select
-                          className="form-control"
-                          name="material"
-                          value={this.state.material}
-                          onChange={e => this.change(e)}
-                        >
-                          <option>Select one...</option>
-                          <option>Iron</option>
-                          <option>Steel</option>
-                          <option>Leather</option>
-                          <option>Vibranium</option>
-                          <option>Paper</option>
-                          <option>Other</option>
-                        </select>
-                    </div>
-                  <div className="form-group col-md-6 FileUpload">
-                    {this.state.image &&
-                    <label className="text-success">Image</label>}
-                    {!this.state.image &&
-                    <label className="text-danger">Image</label>}
+      
                       <div>
                         <Dropzone
                           multiple={false}

@@ -120,7 +120,7 @@ class App extends React.Component {
           {this.state.viewState === 'LandingPage' && <LandingPage buyclick={this.buyItem} sellclick={this.sellItem}/>}
           {this.state.viewState === 'ItemForm' && <ItemForm />}
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
-          {this.state.viewState === 'ViewItems' && <ViewItems renderwindow={this.renderWindow} items={this.state.items} />}
+          {this.state.viewState === 'ViewItems' && <ViewItems stripe={this.stripeTokenHandler} renderwindow={this.renderWindow} items={this.state.items} />}
           {this.state.isLoggedIn === false && <LoginModal modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}
           {this.state.viewState === 'upload' && <ImageUploader />}
           <Footer />

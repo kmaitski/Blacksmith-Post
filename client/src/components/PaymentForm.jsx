@@ -67,12 +67,13 @@ class PaymentForm extends React.Component {
 
   handleCreditCard(e) {
     e.preventDefault();
+    var stripehandler = this.props.stripe
     stripe.createToken(card).then((result) => {
       if (result.error) {
         var errorElement = document.getElementById('card-errors');
         errorElement.textContent = result.error.message;
       } else {
-        this.props.stripeTokenHandler(result.token);
+        stripehandler(result.token);
       }
     });
   }

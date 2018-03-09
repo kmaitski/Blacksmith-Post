@@ -54,7 +54,7 @@ class SingleItem extends React.Component {
               <PaymentForm
                 modalIsOpen={this.state.paymentFormOpen}
                 close={this.closePayment}
-                stripeTokenHandler={this.props.stripetokenhandler} />}
+                stripe={this.props.stripe} />}
               {!this.state.paymentFormOpen && <button className="btn btn-dark btn-sm btn-block" onClick={this.pay}>Buy Now</button>}
             </div>
           </div>

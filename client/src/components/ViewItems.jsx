@@ -64,6 +64,7 @@ class ViewItems extends React.Component {
           {this.state.items.map((item) =>
 
           <SingleItem
+          itembought={this.props.itembought}
           stripe={this.props.stripe}
           item={item}
           key={item._id}

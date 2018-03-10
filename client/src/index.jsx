@@ -34,6 +34,7 @@ class App extends React.Component {
     this.stripeTokenHandler = this.stripeTokenHandler.bind(this);
     this.handleNewSession = this.handleNewSession.bind(this);
     this.logout = this.logout.bind(this);
+    this.login = this.login.bind(this);
   }
 
     componentDidMount(){
@@ -165,7 +166,7 @@ class App extends React.Component {
           {this.state.viewState === 'LandingPage' && <LandingPage buyclick={this.buyItem} sellclick={this.sellItem}/>}
           {this.state.viewState === 'ItemForm' && <ItemForm fetch={this.fetch} />}
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
-          {this.state.viewState === 'ViewItems' && <ViewItems itembought={this.itemBought} stripe={this.stripeTokenHandler} items={this.state.items} />}
+          {this.state.viewState === 'ViewItems' && <ViewItems login={this.login} isLoggedIn={this.state.isLoggedIn} itembought={this.itemBought} stripe={this.stripeTokenHandler} items={this.state.items} />}
           {this.state.isLoggedIn === false && <LoginModal setCurrentUser={this.handleNewSession} modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}
           {this.state.viewState === 'upload' && <ImageUploader />}
           <Footer />

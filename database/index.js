@@ -36,6 +36,29 @@ const userSchema = mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+const transactionSchema = mongoose.Schema({
+  date: {type: Date, default: Date.now},
+  buyer: String,
+  seller: String,
+  item: String,
+  cost: Number
+})
+
+const Transaction = mongoose.model('Transaction', transactionSchema);
+
+var createTransaction = function(data, cb) {
+  new Transaction({
+    'date': data.date,
+    'buyer': data.buyer,
+    'seller': data.seller,
+    'item': data.item,
+    'cost': data.cost
+  }).save((err, newTrans) => {
+    if (err) { return cb(err) }
+    cb(null, newTrans)
+  })
+}
+
 var item = module.exports = mongoose.model('item', itemSchema);
 
 //create a item listing
@@ -92,3 +115,5 @@ module.exports.allItems = allItems;
 module.exports.createItem = createItem;
 module.exports.findItem = findItem;
 module.exports.User = User;
+module.exports.createTransaction = createTransaction;
+

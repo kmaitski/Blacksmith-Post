@@ -260,10 +260,10 @@ class ItemForm extends React.Component {
                                     {this.state.condition === "Fair" && <span className="badge badge-success">{this.state.condition}</span>}
                                     {this.state.condition === "Terrible" && <span className="badge badge-danger">{this.state.condition}</span>}
                                   </h5>
-                              <img className="card-img-top" src={this.state.image} alt="Card image cap" />
+                              <img className="card-img-top" src={this.state.uploadedCloudinaryURL} alt="Card image cap" />
                                 <ul className="list-group list-group-flush">
                                   <li className="list-group-item text-black">{this.state.description}</li>
-                                  <li className="list-group-item text-black">{this.state.email}</li>
+                                  <li className="list-group-item text-black">{this.props.user}</li>
                                   <li className="list-group-item text-black">Asking price: ${this.state.cost}</li>
                                 </ul>
                               </div>

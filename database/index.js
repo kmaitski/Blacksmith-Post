@@ -63,7 +63,7 @@ var item = module.exports = mongoose.model('item', itemSchema);
 
 //create a item listing
 var createItem = function (data, cb) {
-  console.log('create item func starting');
+  console.log('create item func starting', data);
   new item({
     name: data.name || 'greatHelm',
     description: data.description || 'from the swamp of mordor',
@@ -82,6 +82,26 @@ var createItem = function (data, cb) {
     cb(null, newItem);
   });
 };
+
+var getSells = function(data, cb) {
+  Transaction.find({seller: data}, function(err, info) {
+    if (err) console.log(err);
+    cb(info)
+  })
+}
+
+var getBuys = function(data, cb) {
+  Transaction.find({buyer: data}, function(err, info) {
+    if (err) console.log(err);
+    cb(info)
+  })
+}
+var getCurrentItems = function(data, cb) {
+  item.find({email: data}, function(err, info) {
+    if (err) console.log(err);
+    cb(info)
+  })
+}
 
 // find all weapons
 var allItems = function(callback) {
@@ -116,4 +136,7 @@ module.exports.createItem = createItem;
 module.exports.findItem = findItem;
 module.exports.User = User;
 module.exports.createTransaction = createTransaction;
+module.exports.getBuys = getBuys;
+module.exports.getCurrentItems = getCurrentItems;
+module.exports.getSells = getSells;
 

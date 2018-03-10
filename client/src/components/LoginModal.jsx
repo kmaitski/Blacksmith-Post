@@ -62,7 +62,7 @@ class LoginModal extends React.Component {
     e.preventDefault();
     console.log('in handleSubmit');
     var newUser = {username: this.state.email, password: this.state.password};
-    $.post('/signup', newUser, function(data) {
+    $.post('/signup', newUser, (data) => {
       console.log(data);
       if (data.message) {
         this.setState({errMsg: data.message[0]})

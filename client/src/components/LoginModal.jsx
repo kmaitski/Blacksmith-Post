@@ -11,7 +11,8 @@ const customStyles = {
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    transform             : 'translate(-50%, -50%)',
+    width: '30%'
   }
 };
 
@@ -76,11 +77,12 @@ class LoginModal extends React.Component {
   }
 
   handleEmailChange(e) {
-    this.setState({email: e.target.value});
+    this.setState({email: e.target.value, errMsg:''});
+  
   }
 
   handlePasswordChange(e) {
-    this.setState({password: e.target.value});
+    this.setState({password: e.target.value, errMsg:''});
   }
 
   openModal() {
@@ -112,25 +114,37 @@ class LoginModal extends React.Component {
 {this.state.signUpView === false &&
 <div>
           <h2 ref={subtitle => this.subtitle = subtitle}></h2>
-          <button onClick={this.closeModal}>X</button>
+          <button style={{marginLeft:"90%"}} class="btn btn-secondary" onClick={this.closeModal}>X</button>
           <div>
         <form onSubmit={this.handleLoginSubmit}>
+          
           <h1>Login</h1>
-          <label>Enter your email here</label>
+          <div>
+          <label></label>
           <input
             type='text'
             onChange={this.handleEmailChange}
+            className="form-control"
+            placeholder="Email"
+          
           />
-          <label>Enter your password here</label>
+          </div>
+          <div>
+          <label></label>
           <input
             type='password'
             onChange={this.handlePasswordChange}
+            className="form-control"
+            placeholder="Password"
+            style={{marginBottom: '20px'}}
           />
-          <button type='submit'>Log in</button>
+          </div>
+          <div>
+          <button className="btn btn-info btn-lg btn-block" type='submit'>Log in</button>
           {this.state.errMsg &&
-            <h3 style={{color: 'red'}}>{this.state.errMsg}</h3>
+            <p style={{color: 'red'}}>{this.state.errMsg}</p>
           }
-          <div>No account? <button onClick={this.handleSignUpView} >Sign up</button></div>
+          <button className="btn btn-danger btn-lg btn-block" onClick={this.handleSignUpView} >Sign up</button></div>
         </form>
       </div>
       </div>
@@ -138,25 +152,30 @@ class LoginModal extends React.Component {
 {this.state.signUpView &&
   <div>
           <h2 ref={subtitle => this.subtitle = subtitle}></h2>
-          <button onClick={this.closeModal}>X</button>
+          <button style={{marginLeft:"90%"}} class="btn btn-secondary" onClick={this.closeModal}>X</button>
           <div>
         <form onSubmit={this.handleSignUpSubmit}>
           <h1>Sign up</h1>
-          <label>Enter your email here</label>
+          <label>Email</label>
           <input
             type='text'
+            className="form-control"
             onChange={this.handleEmailChange}
+            placeholder='Enter your email here...'
           />
-          <label>Enter your password here</label>
+          <label>Password</label>
           <input
             type='password'
+            className="form-control"
             onChange={this.handlePasswordChange}
+            placeholder='Create a new password...'
+            style={{marginBottom: '20px'}}
           />
-          <button type='submit'>Sign up</button>
+          <button className="btn btn-info btn-lg btn-block" type='submit'>Sign up</button>
           {this.state.errMsg &&
-            <h3 style={{color: 'red'}}>{this.state.errMsg}</h3>
+            <p style={{color: 'red'}}>{this.state.errMsg}</p>
           }
-          <div>Already have Account? <button onClick={this.handleSignUpView} >Log in</button></div>
+          <div>Already have Account? <button className="btn btn-danger btn-lg btn-block" onClick={this.handleSignUpView} >Log in</button></div>
         </form>
       </div>
       </div>

@@ -110,6 +110,7 @@ app.post('/login', passport.authenticate('local-login', {
 }));
 
 app.get('/logout', function(req, res) {
+  console.log('logout hit');
   req.logout();
   res.redirect('/');
 });

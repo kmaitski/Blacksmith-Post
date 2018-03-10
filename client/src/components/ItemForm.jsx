@@ -33,7 +33,7 @@ class ItemForm extends React.Component {
     this.change = this.change.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
-    // this.onImageDrop = this.onImageDrop.bind(this);
+    this.onImageDrop = this.onImageDrop.bind(this);
 
   }
   toggle() {
@@ -63,7 +63,7 @@ class ItemForm extends React.Component {
       cost: this.state.cost,
       condition:this.state.condition,
       material:this.state.material,
-      // image:this.state.uploadedFile.preview
+      image:this.state.uploadedFile.preview
     }
 
 
@@ -79,43 +79,18 @@ class ItemForm extends React.Component {
           console.log('errror in ajax', err);
         }
       });
-
-
   };
 
-
-
-  // onImageDrop(files) {
-  //   this.setState({
-  //     uploadedFile: files[0],
-  //     dropZoneView: false
-  //   });
-  //   console.log(files[0]);
-  //   this.handleImageUpload(files[0]);
-  // }
-
-  onDrop(acceptedFile, rejectedFile) {
-    console.log("new func", acceptedFile);
+  onImageDrop(acceptedFile, rejectedFile) {
     const req = request.post('/api/cloudinaryUpload');
     req.attach('newfile', acceptedFile[0]);
-    console.log(req);
-    req.end(() => {
-      console.log('back in frontend');
-    });
-    // request.post('/api/cloudinaryUpload').attach(acceptedFile[0].name, acceptedFile[0]);
-  }
-
-  handleImageUpload(file) {
-    let upload = request.post(CLOUDINARY_UPLOAD_URL)
-                        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-                        .field('file', file);
-    upload.end((err, res) => {
-      if (err) console.log(err);
-      if (res.body.url !== '') {
-        this.setState({
-          uploadedCloudinaryURL: res.body.url
-        });
-      }
+    req.then(result => {
+      console.log(result);
+      this.setState({
+        dropZoneView: false,
+        uploadedFile: acceptedFile[0],
+        uploadedCloudinaryURL: result.body.secure_url
+      });
     });
   }
 
@@ -257,7 +232,7 @@ class ItemForm extends React.Component {
                         <Dropzone
                           multiple={false}
                           accept="image/*"
-                          onDrop={this.onDrop}
+                          onDrop={this.onImageDrop}
                           style={{width: "210%", border: "dashed"}}
                         >
                           <p style={{paddingLeft: "5%"}}>Drop an image or click to select a file to upload</p>

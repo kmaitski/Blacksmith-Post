@@ -50,14 +50,9 @@ cloudinary.config({
 });
 
 app.post('/api/cloudinaryUpload', upload.single('newfile'), (req, res) => {
-  // console.log(1);
-  // console.log(req.file);
-  // cloudinary.v2.uploader.upload(req.file.buffer.toString('base64'), (err, res) => {
-  //   console.log(res);
-  // })
-  cloudinary.uploader.upload_stream((result) => console.log(result))
-  .end(req.file.buffer);
-  res.end();
+  cloudinary.uploader.upload_stream((result) => {
+    res.status(200).send(result);
+  }).end(req.file.buffer);
 });
 
 app.post('/charge', function(req, res) {
@@ -163,15 +158,6 @@ app.get('/api/items', function (req, res) {
 
 //request to add item to database
 app.post('/api/itemForm', function (req, res) {
-  // console.log('in server');
-  // let newItem = req.body;
-  // let filename = req.body.image.split('\\')[2];
-  // // console.log(filename);
-  cloudinary.uploader.upload(req.body.image, result => {
-    console.log(result);
-  })
-  // console.log(req.body);
-  console.log(req.body);
   database.createItem(req.body, (err, newItem) => {
     if (err) {
       console.log(err);

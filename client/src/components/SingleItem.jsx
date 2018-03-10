@@ -67,21 +67,19 @@ class SingleItem extends React.Component {
       <div>
         {/* {(this.props.filter === this.props.item.category || this.props.filter == ('Filter by Category')) && */}
         {filterFunc(this.props.filter, this.props.subfilter, this.props.item.category, this.props.item.subcategory) &&
-          <div className="card text-center" style={{flex: 1, width: 360}}>
-            <img className="card-img-top" src={this.props.item.image} alt="Card image cap" />
+          <div className="card text-center bg-secondary mb-3" style={{flex: 1, width: 375, height: 700}}>
             <div className="card-body">
-              <div className="card-header">
-                <h5 className="card-title">{this.props.item.name + ' '}
+                <h5 className="card-title text-white">{this.props.item.name + ' '}
                   {this.props.item.condition === "Pristine" && <span className="badge badge-primary">{this.props.item.condition}</span>}
                   {this.props.item.condition === "Good" && <span className="badge badge-info">{this.props.item.condition}</span>}
                   {this.props.item.condition === "Fair" && <span className="badge badge-success">{this.props.item.condition}</span>}
                   {this.props.item.condition === "Terrible" && <span className="badge badge-danger">{this.props.item.condition}</span>}
                 </h5>
-              </div>
+            <img className="card-img-top" src={this.props.item.image} alt="Card image cap" />
               <ul className="list-group list-group-flush">
-                <li className="list-group-item">{this.props.item.description}</li>
-                <li className="list-group-item">{this.props.item.email}</li>
-                <li className="list-group-item">Asking price: ${this.props.item.cost}</li>
+                <li className="list-group-item text-black">{this.props.item.description}</li>
+                <li className="list-group-item text-black">{this.props.item.email}</li>
+                <li className="list-group-item text-black">Asking price: ${this.props.item.cost}</li>
               </ul>
               {this.state.paymentFormOpen &&
               <PaymentForm

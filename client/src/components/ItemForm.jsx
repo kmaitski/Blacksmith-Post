@@ -228,7 +228,7 @@ class ItemForm extends React.Component {
                   <div className="form-group col-md-6 FileUpload">
 
                       <div>
-                        {this.state.dropZoneView ? 
+                        {this.state.dropZoneView ?
                         <Dropzone
                           multiple={false}
                           accept="image/*"
@@ -252,14 +252,22 @@ class ItemForm extends React.Component {
                       <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>Confirmation</ModalHeader>
                           <ModalBody>
-                          <img className="img-thumbnail" src={this.state.uploadedCloudinaryURL} alt="Loading image..." />
-                            <ul>Item name: {this.state.name}</ul>
-                            <ul>Category: {this.state.category}</ul>
-                            <ul>Description: {this.state.description}</ul>
-                            <ul>Price: {this.state.cost}</ul>
-                            <ul>Condition: {this.state.condition}</ul>
-                            <ul>Material: {this.state.material}</ul>
-                            
+                            <div className="card text-center bg-secondary mb-3" style={{flex: 1, width: 375, height: 700}}>
+                              <div className="card-body">
+                                  <h5 className="card-title text-white"><strong>{this.state.name + ' '}</strong>
+                                    {this.state.condition === "Pristine" && <span className="badge badge-primary">{this.state.condition}</span>}
+                                    {this.state.condition === "Good" && <span className="badge badge-info">{this.state.condition}</span>}
+                                    {this.state.condition === "Fair" && <span className="badge badge-success">{this.state.condition}</span>}
+                                    {this.state.condition === "Terrible" && <span className="badge badge-danger">{this.state.condition}</span>}
+                                  </h5>
+                              <img className="card-img-top" src={this.state.uploadedCloudinaryURL} alt="Card image cap" />
+                                <ul className="list-group list-group-flush">
+                                  <li className="list-group-item text-black">{this.state.description}</li>
+                                  <li className="list-group-item text-black">{this.props.user}</li>
+                                  <li className="list-group-item text-black">Asking price: ${this.state.cost}</li>
+                                </ul>
+                              </div>
+                            </div>
                           </ModalBody>
                         <ModalFooter>
                           <Button color="primary" onClick={this.onSubmit}>Forge sumbmission</Button>{' '}

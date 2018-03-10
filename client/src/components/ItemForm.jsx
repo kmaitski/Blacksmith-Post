@@ -64,7 +64,7 @@ class ItemForm extends React.Component {
       cost: this.state.cost,
       condition:this.state.condition,
       material:this.state.material,
-      image:this.state.uploadedCloudinaryURL
+      image:this.state.uploadedFile.preview
     }
 
 
@@ -80,31 +80,18 @@ class ItemForm extends React.Component {
           console.log('errror in ajax', err);
         }
       });
-
-
   };
 
-
-
-  onImageDrop(files) {
-    this.setState({
-      uploadedFile: files[0],
-      dropZoneView: false
-    });
-    this.handleImageUpload(files[0]);
-  }
-
-  handleImageUpload(file) {
-    let upload = request.post(CLOUDINARY_UPLOAD_URL)
-                        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-                        .field('file', file);
-    upload.end((err, res) => {
-      if (err) console.log(err);
-      if (res.body.url !== '') {
-        this.setState({
-          uploadedCloudinaryURL: res.body.url
-        });
-      }
+  onImageDrop(acceptedFile, rejectedFile) {
+    const req = request.post('/api/cloudinaryUpload');
+    req.attach('newfile', acceptedFile[0]);
+    req.then(result => {
+      console.log(result);
+      this.setState({
+        dropZoneView: false,
+        uploadedFile: acceptedFile[0],
+        uploadedCloudinaryURL: result.body.secure_url
+      });
     });
   }
 
@@ -240,11 +227,6 @@ class ItemForm extends React.Component {
                   </div>
 
                   <div className="form-group col-md-6 FileUpload">
-                    <label>Image</label>
-                      <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
-                      onChange={e => this.change(e)} />
-                        <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
-
 
                       <div>
                         {this.state.dropZoneView ?
@@ -256,7 +238,7 @@ class ItemForm extends React.Component {
                         >
                           <p style={{paddingLeft: "5%"}}>Drop an image or click to select a file to upload</p>
                         </Dropzone> :
-                        <p>{this.state.uploadedFile.name} has been submited. Thank you</p>}
+                        <p>{this.state.uploadedFile.name} has been submitted. Thank you</p>}
                       </div>
 
                   </div>
@@ -271,13 +253,22 @@ class ItemForm extends React.Component {
                       <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>Confirmation</ModalHeader>
                           <ModalBody>
-                            <ul>Item name: {this.state.name}</ul>
-                            <ul>Category: {this.state.category}</ul>
-                            <ul>Description: {this.state.description}</ul>
-                            <ul>Price: {this.state.cost}</ul>
-                            <ul>Condition: {this.state.condition}</ul>
-                            <ul>Material: {this.state.material}</ul>
-                            <Media object data-src={this.state.image} alt="Generic placeholder image" />
+                            <div className="card text-center bg-secondary mb-3" style={{flex: 1, width: 375, height: 700}}>
+                              <div className="card-body">
+                                  <h5 className="card-title text-white"><strong>{this.state.name + ' '}</strong>
+                                    {this.state.condition === "Pristine" && <span className="badge badge-primary">{this.state.condition}</span>}
+                                    {this.state.condition === "Good" && <span className="badge badge-info">{this.state.condition}</span>}
+                                    {this.state.condition === "Fair" && <span className="badge badge-success">{this.state.condition}</span>}
+                                    {this.state.condition === "Terrible" && <span className="badge badge-danger">{this.state.condition}</span>}
+                                  </h5>
+                              <img className="card-img-top" src={this.state.uploadedCloudinaryURL} alt="Card image cap" />
+                                <ul className="list-group list-group-flush">
+                                  <li className="list-group-item text-black">{this.state.description}</li>
+                                  <li className="list-group-item text-black">{this.props.user}</li>
+                                  <li className="list-group-item text-black">Asking price: ${this.state.cost}</li>
+                                </ul>
+                              </div>
+                            </div>
                           </ModalBody>
                         <ModalFooter>
                           <Button color="primary" onClick={this.onSubmit}>Forge sumbmission</Button>{' '}

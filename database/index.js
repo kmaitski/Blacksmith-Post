@@ -34,6 +34,8 @@ const userSchema = mongoose.Schema({
   }
 });
 
+
+
 const User = mongoose.model('User', userSchema);
 
 const transactionSchema = mongoose.Schema({
@@ -42,7 +44,7 @@ const transactionSchema = mongoose.Schema({
   seller: String,
   item: String,
   cost: Number
-})
+});
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
 
@@ -54,10 +56,10 @@ var createTransaction = function(data, cb) {
     'item': data.item,
     'cost': data.cost
   }).save((err, newTrans) => {
-    if (err) { return cb(err) }
-    cb(null, newTrans)
-  })
-}
+    if (err) { return cb(err); }
+    cb(null, newTrans);
+  });
+};
 
 var item = module.exports = mongoose.model('item', itemSchema);
 
@@ -70,10 +72,10 @@ var createItem = function (data, cb) {
     category: data.category || 'weapon',
     subcategory: data.subcategory || 'sword',
     cost: data.cost || 999999,
-    email: data.email || 'gandalf@hotmail.com',
-    condition: data.condition || 'strong like bull',
-    blacksmith: data.blacksmith || 'hatori hanzo',
-    material: data.material || 'dragonsteel',
+    email: data.email || 'gandalf8037052@hotmail.com',
+    condition: data.condition || 'Pristine',
+    blacksmith: data.blacksmith || 'Hattori Hanzo',
+    material: data.material || 'Dragonsteel',
     image: data.image || 'picture',
     class: data.class || 'weapon or armor',
     active: true

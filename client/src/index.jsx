@@ -187,7 +187,7 @@ class App extends React.Component {
           {this.state.viewState === 'UserPage' && <UserPage user={this.state.clickedUser} />}
           {this.state.viewState === 'MyPage' && <MyPage user={this.state.currentUser} />}
           {this.state.viewState === 'LandingPage' && <LandingPage buyclick={this.buyItem} sellclick={this.sellItem}/>}
-          {this.state.viewState === 'ItemForm' && <ItemForm username={this.state.currentUser.local.username} fetch={this.fetch} />}
+          {this.state.viewState === 'ItemForm' && <ItemForm user={this.state.currentUser.local.username} fetch={this.fetch} />}
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
           {this.state.viewState === 'ViewItems' && <ViewItems userClick={this.handleUserClick} login={this.login} isLoggedIn={this.state.isLoggedIn} itembought={this.itemBought} stripe={this.stripeTokenHandler} items={this.state.items} />}
           {this.state.isLoggedIn === false && <LoginModal setCurrentUser={this.handleNewSession} modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}

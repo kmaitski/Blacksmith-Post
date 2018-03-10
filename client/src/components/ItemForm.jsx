@@ -29,6 +29,7 @@ class ItemForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
     this.onImageDrop = this.onImageDrop.bind(this);
+    this.undoPictureUpload = this.undoPictureUpload.bind(this);
 
   }
   toggle() {
@@ -44,11 +45,9 @@ class ItemForm extends React.Component {
     });
   }
 
-
   onSubmit(event) {
     var toggle = this.toggle;
     var fetch = this.props.fetch;
-
     event.preventDefault();
     var itemData = {
       email: this.props.user,
@@ -61,20 +60,18 @@ class ItemForm extends React.Component {
       material:this.state.material,
       image:this.state.uploadedFile.preview
     }
-
-
-      $.ajax({
-        url: '/api/itemForm',
-        type: 'POST',
-        data: itemData,
-        success: function(data) {
-          toggle();
-          fetch();
-        },
-        error: function(err){
-          console.log('errror in ajax', err);
-        }
-      });
+    $.ajax({
+      url: '/api/itemForm',
+      type: 'POST',
+      data: itemData,
+      success: function(data) {
+        toggle();
+        fetch();
+      },
+      error: function(err){
+        console.log('errror in ajax', err);
+      }
+    });
   };
 
   onImageDrop(acceptedFile, rejectedFile) {
@@ -87,6 +84,12 @@ class ItemForm extends React.Component {
         uploadedFile: acceptedFile[0],
         uploadedCloudinaryURL: result.body.secure_url
       });
+    });
+  }
+
+  undoPictureUpload() {
+    this.setState({
+      dropZoneView: true
     });
   }
 
@@ -225,15 +228,20 @@ class ItemForm extends React.Component {
 
                       <div>
                         {this.state.dropZoneView ?
-                        <Dropzone
-                          multiple={false}
-                          accept="image/*"
-                          onDrop={this.onImageDrop}
-                          style={{width: "210%", border: "dashed"}}
-                        >
-                          <p style={{paddingLeft: "5%"}}>Drop an image or click to select a file to upload</p>
-                        </Dropzone> :
-                        <p>{this.state.uploadedFile.name} has been submitted. Thank you</p>}
+                        <div>
+                          <Dropzone
+                            multiple={false}
+                            accept="image/*"
+                            onDrop={this.onImageDrop}
+                            style={{width: "210%", border: "dashed"}}
+                          >
+                            <p style={{paddingLeft: "5%"}}>Drop an image or click to select a file to upload</p>
+                          </Dropzone>
+                        </div> :
+                        <div style={{width: "210%"}}>
+                          <p>{this.state.uploadedFile.name} has been submitted. Thank you</p>
+                          <button onClick={this.undoPictureUpload}>Undo picture upload</button>
+                        </div>}
                       </div>
 
                   </div>

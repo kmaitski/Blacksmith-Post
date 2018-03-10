@@ -163,7 +163,6 @@ app.post('/api/itemForm', function (req, res) {
 app.post('/api/deleteItem', function (req, res) {
   console.log(req.body.type + ' req body delete');
   database.deleteItem(req.body);
-  res.sendStatus(200);
 });
 
 app.post('/buy', function(req, res) {

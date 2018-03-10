@@ -78,10 +78,11 @@ class App extends React.Component {
 
   stripeTokenHandler(data) {
     console.log('credit card success!');
+    var user = this.state.currentUser
     $.ajax({
       url: '/charge',
       type: 'POST',
-      data: data,
+      data: {'data': data, 'user': user},
       success: function(data) {
         console.log("Charge successs! ", data)
       },

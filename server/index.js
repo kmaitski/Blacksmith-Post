@@ -161,11 +161,7 @@ app.post('/api/itemForm', function (req, res) {
 
 //api call to delete a item not in use but works
 app.post('/api/deleteItem', function (req, res) {
-  console.log(req.body.type + ' req body delete');
   database.deleteItem(req.body);
-});
-
-app.post('/buy', function(req, res) {
   var thing = sendMail;
   res.end();
 });

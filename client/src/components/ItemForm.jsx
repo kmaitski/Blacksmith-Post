@@ -239,11 +239,6 @@ class ItemForm extends React.Component {
                   </div>
 
                   <div className="form-group col-md-6 FileUpload">
-                    <label>Image</label>
-                      <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
-                      onChange={e => this.change(e)} />
-                        <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
-
 
                       <div>
                         {this.state.dropZoneView ? 

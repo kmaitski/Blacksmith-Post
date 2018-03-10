@@ -5,13 +5,15 @@ var database = require('../database/index.js');
 var config = require('./config.js')
 const passport = require('passport');
 const flash = require('connect-flash');
-const sendMail = require('../config/mailconfig');
+const transporter = require('../config/mailconfig');
 const cloudinary = require('cloudinary');
+var nodemailer = require('nodemailer');
+
 
 var app = express();
 
 var stripe = require("stripe")(
-  config.api
+  config.config
 );
 //to view data in body of api calls
 app.use(bodyParser.json());
@@ -48,20 +50,43 @@ require('./../config/passport.js')(passport);
 // });
 
 app.post('/charge', function(req, res) {
-    console.log(req.body.id);
     stripe.charges.create({
-      amount: .09,
+      amount: req.body.data.cost * 100,
       currency: "usd",
-      source: req.body.id,
+      source: req.body.data.token.id,
       description: "Charge for anon user"
     }, function(err, charge) {
       if(err){
         console.error(err);
         res.end()
       } else {
-        console.log('Charged successfully')
-        res.writeHead(200);
-        res.end(charge);
+        transporter.transporter.sendMail({
+          from: 'blacksmithpostroanl@gmail.com',
+          to: req.body.data.seller,
+          subject: 'Your item sold on Blacksmith Post!',
+          text: 'Great smithing! Your item ' + req.body.data.item + ' sold for $' + req.body.data.cost + ' on Blacksmith Post!'
+        }, function(error, info){
+          if (error) {
+            console.log(error);
+          } else {
+            console.log('Seller email sent: ' + info.response);
+          }
+        })
+        transporter.transporter.sendMail({
+          from: 'blacksmithpostroanl@gmail.com',
+          to: req.body.user.local.username,
+          subject: 'Your Blacksmith Post Purchase',
+          text: 'Thanks for your patronage, good fellow! ' + req.body.data.item + ' is yours for the fair price of $' + req.body.data.cost + '! Look for the smithy to get in touch with you soon for shipping details.'
+        }, function(error, info){
+          if (error) {
+            console.log(error);
+            res.end();
+          } else {
+            console.log('Buyer email sent: ' + info.response);
+            res.writeHead(200);
+            res.end();
+          }
+        })
       }
     }
   )
@@ -135,8 +160,3 @@ app.post('/api/deleteItem', function (req, res){
   database.deleteItem(req.body);
   res.sendStatus(200);
 });
-
-app.post('/buy', function(req, res) {
-  var thing = sendMail;
-  res.end();
-})

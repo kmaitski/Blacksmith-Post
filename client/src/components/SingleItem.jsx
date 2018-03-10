@@ -72,6 +72,9 @@ class SingleItem extends React.Component {
               <p className="card-price">Asking price: ${this.props.item.cost}</p>
               {this.state.paymentFormOpen &&
               <PaymentForm
+                seller={this.props.item.email}
+                item={this.props.item.name}
+                cost={this.props.item.cost}
                 modalIsOpen={this.state.paymentFormOpen}
                 success={this.renderSuccess}
                 close={this.closePayment}

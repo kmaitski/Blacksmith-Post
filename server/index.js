@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 const session = require('express-session');
 var database = require('../database/index.js');
-var config = require('./config.js')
+var config = require('./config.js');
 const passport = require('passport');
 const flash = require('connect-flash');
 const transporter = require('../config/mailconfig');
@@ -12,7 +12,7 @@ var nodemailer = require('nodemailer');
 
 var app = express();
 
-var stripe = require("stripe")(
+var stripe = require('stripe')(
   config.config
 );
 //to view data in body of api calls
@@ -50,54 +50,54 @@ require('./../config/passport.js')(passport);
 // });
 
 app.post('/charge', function(req, res) {
-    stripe.charges.create({
-      amount: req.body.data.cost * 100,
-      currency: "usd",
-      source: req.body.data.token.id,
-      description: "Charge for anon user"
-    }, function(err, charge) {
-      if(err){
-        console.error(err);
-        res.end()
-      } else {
-        transporter.transporter.sendMail({
-          from: 'blacksmithpostroanl@gmail.com',
-          to: req.body.data.seller,
-          subject: 'Your item sold on Blacksmith Post!',
-          text: 'Great smithing! Your item ' + req.body.data.item + ' sold for $' + req.body.data.cost + ' on Blacksmith Post!'
-        }, function(error, info){
-          if (error) {
-            console.log(error);
-          } else {
-            console.log('Seller email sent: ' + info.response);
-          }
-        })
-        transporter.transporter.sendMail({
-          from: 'blacksmithpostroanl@gmail.com',
-          to: req.body.user.local.username,
-          subject: 'Your Blacksmith Post Purchase',
-          text: 'Thanks for your patronage, good fellow! ' + req.body.data.item + ' is yours for the fair price of $' + req.body.data.cost + '! Look for the smithy to get in touch with you soon for shipping details.'
-        }, function(error, info){
-          if (error) {
-            console.log(error);
-            res.end();
-          } else {
-            console.log('Buyer email sent: ' + info.response);
-            res.writeHead(200);
-            res.end();
-          }
-        })
-      }
+  stripe.charges.create({
+    amount: req.body.data.cost * 100,
+    currency: 'usd',
+    source: req.body.data.token.id,
+    description: 'Charge for anon user'
+  }, function(err, charge) {
+    if (err) {
+      console.error(err);
+      res.end();
+    } else {
+      transporter.transporter.sendMail({
+        from: 'blacksmithpostroanl@gmail.com',
+        to: req.body.data.seller,
+        subject: 'Your item sold on Blacksmith Post!',
+        text: 'Great smithing! Your item ' + req.body.data.item + ' sold for $' + req.body.data.cost + ' on Blacksmith Post!'
+      }, function(error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Seller email sent: ' + info.response);
+        }
+      });
+      transporter.transporter.sendMail({
+        from: 'blacksmithpostroanl@gmail.com',
+        to: req.body.user.local.username,
+        subject: 'Your Blacksmith Post Purchase',
+        text: 'Thanks for your patronage, good fellow! ' + req.body.data.item + ' is yours for the fair price of $' + req.body.data.cost + '! Look for the smithy to get in touch with you soon for shipping details.'
+      }, function(error, info) {
+        if (error) {
+          console.log(error);
+          res.end();
+        } else {
+          console.log('Buyer email sent: ' + info.response);
+          res.writeHead(200);
+          res.end();
+        }
+      });
     }
-  )
+  }
+  );
 });
 
 app.get('/signupS', function(req, res) {
-  res.send(req.flash('User'))
+  res.send(req.flash('User'));
 });
 
 app.get('/signupF', function(req, res) {
-  res.send({message: req.flash('signupMessage')})
+  res.send({message: req.flash('signupMessage')});
 });
 
 app.post('/signup', passport.authenticate('local-signup', {
@@ -108,11 +108,11 @@ app.post('/signup', passport.authenticate('local-signup', {
 }));
 
 app.get('/loginS', function(req, res) {
-  res.send(req.flash('User'))
+  res.send(req.flash('User'));
 });
 
 app.get('/loginF', function(req, res) {
-  res.send({message: req.flash('loginMessage')})
+  res.send({message: req.flash('loginMessage')});
 });
 
 app.post('/login', passport.authenticate('local-login', {
@@ -130,17 +130,17 @@ app.get('/logout', function(req, res) {
 
 //request to view all items of type
 app.get('/api/items', function (req, res) {
- database.allItems(function (err, data){
-  if (err){
-    res.sendStatus(500 +"cant find item");
-  } else {
-    res.json(data)
-  }
- })
-})
+  database.allItems(function (err, data) {
+    if (err) {
+      res.sendStatus(500 + 'cant find item');
+    } else {
+      res.json(data);
+    }
+  });
+});
 
 //request to add item to database
-app.post('/api/itemForm', function (req, res){
+app.post('/api/itemForm', function (req, res) {
   // console.log('in server');
   // let newItem = req.body;
   // let filename = req.body.image.split('\\')[2];
@@ -149,14 +149,19 @@ app.post('/api/itemForm', function (req, res){
   //   console.log(result);
   // })
   // console.log(req.body);
-  database.createItem(req.body);
-    res.sendStatus(200);
-
-})
+  database.createItem(req.body, (err, newItem) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(404);
+    } else {
+      res.status(200).send(newItem);
+    }
+  });
+});
 
 //api call to delete a item not in use but works
-app.post('/api/deleteItem', function (req, res){
-  console.log(req.body.type +" req body delete")
+app.post('/api/deleteItem', function (req, res) {
   database.deleteItem(req.body);
-  res.sendStatus(200);
+  var thing = sendMail;
+  res.end();
 });

@@ -33,6 +33,7 @@ class App extends React.Component {
     this.sellItem = this.sellItem.bind(this);
     this.stripeTokenHandler = this.stripeTokenHandler.bind(this);
     this.handleNewSession = this.handleNewSession.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
     componentDidMount(){
@@ -115,6 +116,13 @@ class App extends React.Component {
   login(){
     this.setState({loginModalOpen: true});
     // this.setState({viewState:'Login'});
+  }
+  logout() {
+    $.get('/logout')
+    this.setState({
+      isLoggedIn: false,
+      currentUser: false
+    })
   }
 
   render () {

@@ -23,7 +23,8 @@ class LoginModal extends React.Component {
       modalIsOpen: false,
       signUpView: false,
       email:'',
-      password:''
+      password:'',
+      errMsg: ''
     };
 
     this.openModal = this.openModal.bind(this);
@@ -44,8 +45,16 @@ class LoginModal extends React.Component {
     e.preventDefault();
     console.log('in handleSubmit');
     var newUser = {username: this.state.email, password: this.state.password};
-    $.post('/login', newUser, function(data) {
+    $.post('/login', newUser, (data) => {
       console.log(data);
+      if (data.message) {
+        this.setState({errMsg: data.message[0]})
+      } else {
+        this.setState({modalIsOpen: false});
+        this.setState({errMsg: false});
+        this.props.setCurrentUser(data[0]);
+        this.props.close();
+      }
     })
   }
 
@@ -55,6 +64,14 @@ class LoginModal extends React.Component {
     var newUser = {username: this.state.email, password: this.state.password};
     $.post('/signup', newUser, function(data) {
       console.log(data);
+      if (data.message) {
+        this.setState({errMsg: data.message[0]})
+      } else {
+        this.setState({modalIsOpen: false});
+        this.setState({errMsg: false});
+        this.props.setCurrentUser(data[0]);
+        this.props.close();
+      }
     })
   }
 
@@ -110,6 +127,9 @@ class LoginModal extends React.Component {
             onChange={this.handlePasswordChange}
           />
           <button type='submit'>Log in</button>
+          {this.state.errMsg &&
+            <h3 style={{color: 'red'}}>{this.state.errMsg}</h3>
+          }
           <div>No account? <button onClick={this.handleSignUpView} >Sign up</button></div>
         </form>
       </div>
@@ -133,6 +153,9 @@ class LoginModal extends React.Component {
             onChange={this.handlePasswordChange}
           />
           <button type='submit'>Sign up</button>
+          {this.state.errMsg &&
+            <h3 style={{color: 'red'}}>{this.state.errMsg}</h3>
+          }
           <div>Already have Account? <button onClick={this.handleSignUpView} >Log in</button></div>
         </form>
       </div>

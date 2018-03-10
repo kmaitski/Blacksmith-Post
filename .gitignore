@@ -27,3 +27,5 @@ client/dist/bundle.js
 node_modules/
 bower_components/
 package-lock.json
+
+config/.cloudinary.js

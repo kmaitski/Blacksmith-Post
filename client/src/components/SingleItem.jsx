@@ -67,13 +67,20 @@ class SingleItem extends React.Component {
       <div>
         {/* {(this.props.filter === this.props.item.category || this.props.filter == ('Filter by Category')) && */}
         {filterFunc(this.props.filter, this.props.subfilter, this.props.item.category, this.props.item.subcategory) &&
-          <div className="card" style={{flex: 1, minWidth:300, maxWidth:400}}>
-            <img className="card-img-top" src={this.props.item.image} alt="Card image cap" />
+          <div className="card text-center bg-secondary mb-3" style={{flex: 1, width: 375, height: 700}}>
             <div className="card-body">
-              <h5 className="card-title">{this.props.item.name}</h5>
-              <p className="card-text">{this.props.item.description}</p>
-              <h6>{this.props.item.email}</h6>
-              <p className="card-price">Asking price: ${this.props.item.cost}</p>
+                <h5 className="card-title text-white"><strong>{this.props.item.name + ' '}</strong>
+                  {this.props.item.condition === "Pristine" && <span className="badge badge-primary">{this.props.item.condition}</span>}
+                  {this.props.item.condition === "Good" && <span className="badge badge-info">{this.props.item.condition}</span>}
+                  {this.props.item.condition === "Fair" && <span className="badge badge-success">{this.props.item.condition}</span>}
+                  {this.props.item.condition === "Terrible" && <span className="badge badge-danger">{this.props.item.condition}</span>}
+                </h5>
+            <img className="card-img-top" src={this.props.item.image} alt="Card image cap" />
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item text-black">{this.props.item.description}</li>
+                <li className="list-group-item text-black">{this.props.item.email}</li>
+                <li className="list-group-item text-black">Asking price: ${this.props.item.cost}</li>
+              </ul>
               {this.state.paymentFormOpen &&
               <PaymentForm
                 seller={this.props.item.email}

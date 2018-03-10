@@ -28,6 +28,7 @@ class SingleItem extends React.Component {
     this.renderSuccess = this.renderSuccess.bind(this);
     this.closePayment = this.closePayment.bind(this);
     this.closeReceipt = this.closeReceipt.bind(this);
+    this.handleEmailClick = this.handleEmailClick.bind(this);
   }
 
   pay() {
@@ -50,6 +51,10 @@ class SingleItem extends React.Component {
     this.setState({
       showReceipt: false
     })
+  }
+
+  handleEmailClick() {
+    this.props.userClick(this.props.item.email)
   }
 
   renderSuccess() {
@@ -78,7 +83,7 @@ class SingleItem extends React.Component {
             <img className="card-img-top" src={this.props.item.image} alt="Card image cap" />
               <ul className="list-group list-group-flush">
                 <li className="list-group-item text-black">{this.props.item.description}</li>
-                <li className="list-group-item text-black">{this.props.item.email}</li>
+                <li className="list-group-item text-black" onClick={this.handleEmailClick}>{this.props.item.email}</li>
                 <li className="list-group-item text-black">Asking price: ${this.props.item.cost}</li>
               </ul>
               {this.state.paymentFormOpen &&

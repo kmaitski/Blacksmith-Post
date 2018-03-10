@@ -145,6 +145,32 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
+app.get('/userSells', function(req, res) {
+  //res.setHeader('Content-Type', 'application/json')
+  database.getSells(req.query.username, (data) => {
+    if (data.length > 0) {
+      console.log(data);
+    res.json({sells: data})
+    }
+  })
+})
+app.get('/userBuys', function(req, res) {
+  database.getBuys(req.query.username, (data) => {
+    if (data.length > 0) {
+      console.log(data);
+    res.json({buys: data});
+    }
+  });
+})
+app.get('/userCurrentItems', function(req, res) {
+  database.getCurrentItems(req.query.username, (data) => {
+    if (data.length > 0) {
+      console.log(data);
+    res.json({currentItems: data});
+    }
+  })
+})
+
 //request to view all items of type
 app.get('/api/items', function (req, res) {
   database.allItems(function (err, data) {

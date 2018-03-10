@@ -69,7 +69,7 @@ class SingleItem extends React.Component {
         {filterFunc(this.props.filter, this.props.subfilter, this.props.item.category, this.props.item.subcategory) &&
           <div className="card text-center bg-secondary mb-3" style={{flex: 1, width: 375, height: 700}}>
             <div className="card-body">
-                <h5 className="card-title text-white">{this.props.item.name + ' '}
+                <h5 className="card-title text-white"><strong>{this.props.item.name + ' '}</strong>
                   {this.props.item.condition === "Pristine" && <span className="badge badge-primary">{this.props.item.condition}</span>}
                   {this.props.item.condition === "Good" && <span className="badge badge-info">{this.props.item.condition}</span>}
                   {this.props.item.condition === "Fair" && <span className="badge badge-success">{this.props.item.condition}</span>}

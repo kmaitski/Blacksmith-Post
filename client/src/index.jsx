@@ -120,7 +120,8 @@ class App extends React.Component {
     $.get('/logout')
     this.setState({
       isLoggedIn: false,
-      currentUser: false
+      currentUser: false,
+      viewState: 'LandingPage'
     })
   }
 

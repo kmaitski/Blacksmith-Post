@@ -8,9 +8,13 @@ const flash = require('connect-flash');
 const transporter = require('../config/mailconfig');
 const cloudinary = require('cloudinary');
 var nodemailer = require('nodemailer');
+const multer = require('multer');
+const storage = multer.memoryStorage();
+const upload = multer({storage: storage});
 
 
 var app = express();
+const router = express.Router();
 
 var stripe = require('stripe')(
   config.config
@@ -39,15 +43,17 @@ app.use(flash());
 
 require('./../config/passport.js')(passport);
 
-// cloudinary.config({
-//   cloud_name: 'hdyuqy7w6',
-//   api_key: '687366632423641',
-//   api_secret: 'Dv87E7g1IsslPhHnmFwUKSu6fO0'
-// });
+cloudinary.config({
+  cloud_name: 'dwid55cj4',
+  api_key: '836259835551637',
+  api_secret: 'PA6WTpAozAKJsBBucqC-xCztKXM'
+});
 
-// app.get('/signup', (req, res) => {
-//   res.render('signup.ejs', {message: req.flash('signupMessage')});
-// });
+app.post('/api/cloudinaryUpload', upload.single('newfile'), (req, res) => {
+  cloudinary.uploader.upload_stream((result) => {
+    res.status(200).send(result);
+  }).end(req.file.buffer);
+});
 
 app.post('/charge', function(req, res) {
   var currentTransaction = {
@@ -57,9 +63,9 @@ app.post('/charge', function(req, res) {
     'item': req.body.data.item,
     'cost': req.body.data.cost
   };
-  console.log('ct in server', currentTransaction)
+  console.log('ct in server', currentTransaction);
   database.createTransaction(currentTransaction, (err, newTrans) => {
-    if (err) { console.log(err) } else { res.send(newTrans) }
+    if (err) { console.log(err); } else { res.send(newTrans); }
   });
   stripe.charges.create({
     amount: req.body.data.cost * 100,
@@ -152,14 +158,6 @@ app.get('/api/items', function (req, res) {
 
 //request to add item to database
 app.post('/api/itemForm', function (req, res) {
-  // console.log('in server');
-  // let newItem = req.body;
-  // let filename = req.body.image.split('\\')[2];
-  // // console.log(filename);
-  // cloudinary.uploader.upload(filename, result => {
-  //   console.log(result);
-  // })
-  // console.log(req.body);
   database.createItem(req.body, (err, newItem) => {
     if (err) {
       console.log(err);

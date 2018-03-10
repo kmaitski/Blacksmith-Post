@@ -63,7 +63,7 @@ class ItemForm extends React.Component {
       cost: this.state.cost,
       condition:this.state.condition,
       material:this.state.material,
-      image:this.state.uploadedCloudinaryURL
+      image:this.state.uploadedFile.preview
     }
 
 
@@ -79,31 +79,18 @@ class ItemForm extends React.Component {
           console.log('errror in ajax', err);
         }
       });
-
-
   };
 
-
-
-  onImageDrop(files) {
-    this.setState({
-      uploadedFile: files[0],
-      dropZoneView: false
-    });
-    this.handleImageUpload(files[0]);
-  }
-
-  handleImageUpload(file) {
-    let upload = request.post(CLOUDINARY_UPLOAD_URL)
-                        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-                        .field('file', file);
-    upload.end((err, res) => {
-      if (err) console.log(err);
-      if (res.body.url !== '') {
-        this.setState({
-          uploadedCloudinaryURL: res.body.url
-        });
-      }
+  onImageDrop(acceptedFile, rejectedFile) {
+    const req = request.post('/api/cloudinaryUpload');
+    req.attach('newfile', acceptedFile[0]);
+    req.then(result => {
+      console.log(result);
+      this.setState({
+        dropZoneView: false,
+        uploadedFile: acceptedFile[0],
+        uploadedCloudinaryURL: result.body.secure_url
+      });
     });
   }
 
@@ -239,11 +226,6 @@ class ItemForm extends React.Component {
                   </div>
 
                   <div className="form-group col-md-6 FileUpload">
-                    <label>Image</label>
-                      <input className="form-control-file" name="image" type="file" aria-describedby="fileHelp" value={this.state.image}
-                      onChange={e => this.change(e)} />
-                        <small id="fileHelp" className="form-text text-muted">Upload an Image</small>
-
 
                       <div>
                         {this.state.dropZoneView ? 

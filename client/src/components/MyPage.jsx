@@ -8,7 +8,8 @@ class MyPage extends React.Component {
     this.state = {
       currentItems: [],
       soldItems: [],
-      boughtItems: []
+      boughtItems: [],
+      ratings: []
     }
 
   }
@@ -28,18 +29,37 @@ class MyPage extends React.Component {
 
   render() {
     return (
-      <div style={{paddingTop: "5%"}}>
-        <div className="container">{this.props.user.local.username}
-          <div className="container">
-          {this.state.currentItems &&
-            this.state.currentItems.map((item) => <div>Currently Listed: {item.name}</div>)
-          }
-          {this.state.soldItems &&
-            this.state.soldItems.map((item) => <div>Sold: {item.item}</div>)
-          }
-          {this.state.boughtItems &&
-            this.state.boughtItems.map((item) => <div>Bought: {item.item}</div>)
-          }
+       <div>
+        <div className="jumbotron">
+          <h1 className="display-4 text-white">{this.props.user}</h1>
+          <div className="card-deck">
+            <div className="card text-white bg-dark mb-3">
+              <h4 className="card-title">Currently Listed Items</h4>
+              {!this.state.currentItems.length && <div>None so far . . .</div>}
+              {this.state.currentItems &&
+                this.state.currentItems.map((item) => <div>{item.name}</div>)
+              }
+            </div>
+            <div className="card text-white text-center bg-dark mb-3">
+              <h4 className="card-title">Sold items</h4>
+              {!this.state.soldItems.length && <div>None so far . . .</div>}
+              {this.state.soldItems &&
+                this.state.soldItems.map((item) => <div>Sold: {item.item}</div>)
+              }
+            </div>
+            <div className="card text-white text-center bg-dark mb-3">
+              <h4 className="card-title">Purchased items</h4>
+              {!this.state.boughtItems.length && <div>None so far . . .</div>}
+              {this.state.boughtItems &&
+                this.state.boughtItems.map((item) => <div>Bought: {item.item}</div>)
+              }
+            </div>
+            <div className="card text-white text-center bg-dark mb-3">
+              <h4 className="card-title"> User Feedback</h4>
+              <p>Review</p>
+              <textarea className="user-feedback"></textarea>
+              {!this.state.ratings.length && <div>None so far . . .</div>}
+            </div>
           </div>
         </div>
       </div>

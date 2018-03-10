@@ -40,6 +40,7 @@ class App extends React.Component {
     this.login = this.login.bind(this);
     this.openMyPage = this.openMyPage.bind(this);
     this.handleUserClick = this.handleUserClick.bind(this);
+    this.submitReview = this.submitReview.bind(this);
   }
 
     componentDidMount(){
@@ -125,6 +126,25 @@ class App extends React.Component {
     window.scrollTo(0, 0);
   }
 
+  submitReview(blacksmith) {
+    if(this.state.isLoggedIn) {
+      let user = this.state.currentUser.local.username
+      let message = $('.user-feedback').val();
+      let rating = $('user-rating').val();
+      $.ajax({
+        url: '/userFeedback',
+        type: 'POST',
+        data: {'message': message, rating: rating, 'user': user, 'blacksmith': blacksmith},
+        success: function(data) {
+          console.log("Feedback submitted! ", data)
+        },
+        error: function(err){
+          console.log('errror in ajax', err);
+        }
+      });
+    }
+  }
+
   handleUserClick(e) {
     this.setState({
       viewState: 'UserPage',
@@ -186,7 +206,7 @@ class App extends React.Component {
           </div>
         </nav>
         <div style={{paddingTop: "51px"}}>
-          {this.state.viewState === 'UserPage' && <UserPage user={this.state.clickedUser} />}
+          {this.state.viewState === 'UserPage' && <UserPage feedback={this.submitReview} user={this.state.clickedUser} />}
           {this.state.viewState === 'MyPage' && <MyPage user={this.state.currentUser} />}
           {this.state.viewState === 'LandingPage' && <LandingPage buyclick={this.buyItem} sellclick={this.sellItem}/>}
           {this.state.viewState === 'ItemForm' && <ItemForm user={this.state.currentUser.local.username} fetch={this.fetch} />}

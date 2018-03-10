@@ -72,7 +72,7 @@ class SingleItem extends React.Component {
       <div>
         {/* {(this.props.filter === this.props.item.category || this.props.filter == ('Filter by Category')) && */}
         {filterFunc(this.props.filter, this.props.subfilter, this.props.item.category, this.props.item.subcategory) &&
-          <div className="card text-center bg-secondary mb-3" style={{flex: 1, width: 375, height: 700}}>
+          <div className="card text-center bg-secondary mb-3" style={{flex: 1, width: 375, height: 750}}>
             <div className="card-body">
                 <h5 className="card-title text-white"><strong>{this.props.item.name + ' '}</strong>
                   {this.props.item.condition === "Pristine" && <span className="badge badge-primary">{this.props.item.condition}</span>}
@@ -83,9 +83,12 @@ class SingleItem extends React.Component {
             <img className="card-img-top" src={this.props.item.image} alt="Card image cap" />
               <ul className="list-group list-group-flush">
                 <li className="list-group-item text-black">{this.props.item.description}</li>
-                <li className="list-group-item text-black" onClick={this.handleEmailClick}>{this.props.item.email}</li>
                 <li className="list-group-item text-black">Asking price: ${this.props.item.cost}</li>
+                <li className="list-group-item text-black">Blacksmith:</li>
               </ul>
+              <button className="btn btn-dark btn-sm btn-block" onClick={this.handleEmailClick}>
+                <img className="user-icon" src="/Images/user.png"></img> {this.props.item.email}
+              </button>
               {this.state.paymentFormOpen &&
               <PaymentForm
                 seller={this.props.item.email}

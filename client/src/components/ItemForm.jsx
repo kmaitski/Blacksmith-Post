@@ -30,6 +30,7 @@ class ItemForm extends React.Component {
       uploadedFile: {},
       uploadedCloudinaryURL: '',
       modal: false,
+      dropZoneView: true
     };
 
     this.change = this.change.bind(this);
@@ -89,7 +90,8 @@ class ItemForm extends React.Component {
 
   onImageDrop(files) {
     this.setState({
-      uploadedFile: files[0]
+      uploadedFile: files[0],
+      dropZoneView: false
     });
     this.handleImageUpload(files[0]);
   }
@@ -247,19 +249,16 @@ class ItemForm extends React.Component {
 
 
                       <div>
+                        {this.state.dropZoneView ? 
                         <Dropzone
                           multiple={false}
                           accept="image/*"
                           onDrop={this.onImageDrop}
+                          style={{width: "210%", border: "dashed"}}
                         >
-                          <p>Drop an image or click to select a file to upload</p>
-                        </Dropzone>
-                      </div>
-                      <div>
-                        {this.state.uploadedCloudinaryURL === '' ? null:
-                        <div>
-                          <p>{this.state.uploadedFile.name} has been submited. Thank you</p>
-                        </div>}
+                          <p style={{paddingLeft: "5%"}}>Drop an image or click to select a file to upload</p>
+                        </Dropzone> :
+                        <p>{this.state.uploadedFile.name} has been submited. Thank you</p>}
                       </div>
 
                   </div>

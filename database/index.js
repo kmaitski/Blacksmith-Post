@@ -44,7 +44,7 @@ const transactionSchema = mongoose.Schema({
   seller: String,
   item: String,
   cost: Number
-})
+});
 
 const Transaction = mongoose.model('Transaction', transactionSchema);
 
@@ -56,10 +56,10 @@ var createTransaction = function(data, cb) {
     'item': data.item,
     'cost': data.cost
   }).save((err, newTrans) => {
-    if (err) { return cb(err) }
-    cb(null, newTrans)
-  })
-}
+    if (err) { return cb(err); }
+    cb(null, newTrans);
+  });
+};
 
 var item = module.exports = mongoose.model('item', itemSchema);
 

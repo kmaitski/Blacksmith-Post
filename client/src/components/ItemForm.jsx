@@ -1,10 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
-
+import $ from 'jquery'
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, InputGroup, InputGroupAddon, Modal, ModalHeader, ModalBody, ModalFooter, Media } from 'reactstrap';
-
-
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 const CLOUDINARY_UPLOAD_PRESET = 'vdivzjz5';

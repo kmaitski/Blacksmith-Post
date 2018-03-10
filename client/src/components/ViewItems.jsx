@@ -64,6 +64,8 @@ class ViewItems extends React.Component {
           {this.state.items.map((item) =>
 
           <SingleItem
+          login={this.props.login}
+          isLoggedIn={this.props.isLoggedIn}
           itembought={this.props.itembought}
           stripe={this.props.stripe}
           item={item}

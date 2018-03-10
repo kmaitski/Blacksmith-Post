@@ -31,9 +31,13 @@ class SingleItem extends React.Component {
   }
 
   pay() {
-    this.setState({
-      paymentFormOpen: true
-    })
+    if (this.props.isLoggedIn) {
+      this.setState({
+        paymentFormOpen: true
+      })
+    } else {
+      this.props.login()
+    }
   }
 
   closePayment() {

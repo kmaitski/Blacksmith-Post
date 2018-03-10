@@ -50,6 +50,17 @@ require('./../config/passport.js')(passport);
 // });
 
 app.post('/charge', function(req, res) {
+  var currentTransaction = {
+    'date': new Date,
+    'buyer': req.body.user.local.username,
+    'seller': req.body.data.seller,
+    'item': req.body.data.item,
+    'cost': req.body.data.cost
+  };
+  console.log('ct in server', currentTransaction)
+  database.createTransaction(currentTransaction, (err, newTrans) => {
+    if (err) { console.log(err) } else { res.send(newTrans) }
+  });
   stripe.charges.create({
     amount: req.body.data.cost * 100,
     currency: 'usd',
@@ -162,6 +173,5 @@ app.post('/api/itemForm', function (req, res) {
 //api call to delete a item not in use but works
 app.post('/api/deleteItem', function (req, res) {
   database.deleteItem(req.body);
-  var thing = sendMail;
   res.end();
 });

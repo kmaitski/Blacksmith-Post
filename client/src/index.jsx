@@ -50,6 +50,10 @@ class App extends React.Component {
     .then(data => this.setState({ items: data, isloading:false}));
   }
 
+  componentDidUpdate() {
+    window.scrollTo(0 ,0);
+  }
+
 
   fetch() {
     this.setState({

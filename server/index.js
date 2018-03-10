@@ -45,10 +45,6 @@ require('./../config/passport.js')(passport);
 //   api_secret: 'Dv87E7g1IsslPhHnmFwUKSu6fO0'
 // });
 
-// app.get('/signup', (req, res) => {
-//   res.render('signup.ejs', {message: req.flash('signupMessage')});
-// });
-
 app.post('/charge', function(req, res) {
   var currentTransaction = {
     'date': new Date,

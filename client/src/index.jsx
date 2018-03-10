@@ -12,6 +12,7 @@ import SignUp from './components/SignUp.jsx';
 import ImageUploader from './components/ImageUploader.jsx';
 import LoginModal from './components/LoginModal.jsx';
 import MyPage from './components/MyPage.jsx';
+import UserPage from './components/UserPage.jsx';
 
 
 class App extends React.Component {
@@ -25,7 +26,8 @@ class App extends React.Component {
       deleteitem:'',
       viewState:'LandingPage',
       isLoading:false,
-      currentUser: false
+      currentUser: false,
+      clickedUser: false
     }
     this.fetch = this.fetch.bind(this);
     this.itemBought = this.itemBought.bind(this);
@@ -37,6 +39,7 @@ class App extends React.Component {
     this.logout = this.logout.bind(this);
     this.login = this.login.bind(this);
     this.openMyPage = this.openMyPage.bind(this);
+    this.handleUserClick = this.handleUserClick.bind(this);
   }
 
     componentDidMount(){
@@ -120,6 +123,13 @@ class App extends React.Component {
      }
   }
 
+  handleUserClick(e) {
+    this.setState({
+      viewState: 'UserPage',
+      clickedUser: e
+    })
+  }
+
   login(){
     this.setState({loginModalOpen: true});
   }
@@ -174,11 +184,12 @@ class App extends React.Component {
           </div>
         </nav>
         <div style={{paddingTop: "51px"}}>
+          {this.state.viewState === 'UserPage' && <UserPage user={this.state.clickedUser} />}
           {this.state.viewState === 'MyPage' && <MyPage user={this.state.currentUser} />}
           {this.state.viewState === 'LandingPage' && <LandingPage buyclick={this.buyItem} sellclick={this.sellItem}/>}
           {this.state.viewState === 'ItemForm' && <ItemForm username={this.state.currentUser.local.username} fetch={this.fetch} />}
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
-          {this.state.viewState === 'ViewItems' && <ViewItems login={this.login} isLoggedIn={this.state.isLoggedIn} itembought={this.itemBought} stripe={this.stripeTokenHandler} items={this.state.items} />}
+          {this.state.viewState === 'ViewItems' && <ViewItems userClick={this.handleUserClick} login={this.login} isLoggedIn={this.state.isLoggedIn} itembought={this.itemBought} stripe={this.stripeTokenHandler} items={this.state.items} />}
           {this.state.isLoggedIn === false && <LoginModal setCurrentUser={this.handleNewSession} modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}
           {this.state.viewState === 'upload' && <ImageUploader />}
           <Footer />

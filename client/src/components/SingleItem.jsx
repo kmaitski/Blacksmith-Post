@@ -28,6 +28,7 @@ class SingleItem extends React.Component {
     this.renderSuccess = this.renderSuccess.bind(this);
     this.closePayment = this.closePayment.bind(this);
     this.closeReceipt = this.closeReceipt.bind(this);
+    this.handleEmailClick = this.handleEmailClick.bind(this);
   }
 
   pay() {
@@ -52,6 +53,10 @@ class SingleItem extends React.Component {
     })
   }
 
+  handleEmailClick() {
+    this.props.userClick(this.props.item.email)
+  }
+
   renderSuccess() {
     this.props.itembought(this.props.item);
     this.setState({
@@ -72,7 +77,7 @@ class SingleItem extends React.Component {
             <div className="card-body">
               <h5 className="card-title">{this.props.item.name}</h5>
               <p className="card-text">{this.props.item.description}</p>
-              <h6>{this.props.item.email}</h6>
+              <h6 onClick={this.handleEmailClick}>{this.props.item.email}</h6>
               <p className="card-price">Asking price: ${this.props.item.cost}</p>
               {this.state.paymentFormOpen &&
               <PaymentForm

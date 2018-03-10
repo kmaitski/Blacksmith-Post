@@ -45,8 +45,8 @@ module.exports = passport => {
     process.nextTick(() => {
       User.findOne({'local.username': username}, (err, user) => {
         if (err) return cb(err);
-        if (!user) return cb(null, false, req.flash('loginMessage', 'no user found'));
-        if (user.local.password !== password) return cb(null, false, req.flash('loginMessage', 'passwords do not match'));
+        if (!user) return cb(null, false, req.flash('loginMessage', 'User not found'));
+        if (user.local.password !== password) return cb(null, false, req.flash('loginMessage', 'Incorrect Password'));
         console.log('login success', user);
         return cb(null, user, req.flash('User', user));
       });

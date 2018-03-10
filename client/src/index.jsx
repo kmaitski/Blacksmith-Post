@@ -24,6 +24,7 @@ class App extends React.Component {
       deleteitem:'',
       viewState:'LandingPage',
       isLoading:false,
+      currentUser: false
     }
     this.fetch = this.fetch.bind(this);
     this.itemBought = this.itemBought.bind(this);
@@ -31,6 +32,7 @@ class App extends React.Component {
     this.buyItem = this.buyItem.bind(this);
     this.sellItem = this.sellItem.bind(this);
     this.stripeTokenHandler = this.stripeTokenHandler.bind(this);
+    this.handleNewSession = this.handleNewSession.bind(this);
   }
 
     componentDidMount(){
@@ -87,6 +89,11 @@ class App extends React.Component {
         console.log('errror in ajax', err);
       }
     });
+  }
+
+  handleNewSession(user) {
+    this.setState({isLoggedIn: true})
+    this.setState({currentUser: user})
   }
 
   closeLogin() {
@@ -150,7 +157,7 @@ class App extends React.Component {
           {this.state.viewState === 'ItemForm' && <ItemForm fetch={this.fetch} />}
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
           {this.state.viewState === 'ViewItems' && <ViewItems itembought={this.itemBought} stripe={this.stripeTokenHandler} items={this.state.items} />}
-          {this.state.isLoggedIn === false && <LoginModal modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}
+          {this.state.isLoggedIn === false && <LoginModal setCurrentUser={this.handleNewSession} modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}
           {this.state.viewState === 'upload' && <ImageUploader />}
           <Footer />
         </div>

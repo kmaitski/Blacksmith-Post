@@ -106,7 +106,7 @@ class LoginModal extends React.Component {
           />
           <label>Enter your password here</label>
           <input
-            type='text'
+            type='password'
             onChange={this.handlePasswordChange}
           />
           <button type='submit'>Log in</button>
@@ -129,7 +129,7 @@ class LoginModal extends React.Component {
           />
           <label>Enter your password here</label>
           <input
-            type='text'
+            type='password'
             onChange={this.handlePasswordChange}
           />
           <button type='submit'>Sign up</button>

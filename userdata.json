@@ -1,0 +1,38 @@
+[
+  {
+    "local": {
+      "username": "johnnysmith66@smithsforge.org",
+      "password": "testpw"
+    },
+    "rating": [
+      {
+        "user": "moxie@moxman.com",
+        "rating": 5
+      }
+    ],
+    "feedback": [
+      {
+        "date": "2018-03-10 11:33:36.500",
+        "user": "moxie@moxman.com",
+        "message": "smooth transaction! would purchase from again!"
+      }]
+  },
+  {
+    "local": {
+      "username": "moxie@moxman.com",
+      "password": "testpw"
+    },
+    "rating": [
+      {
+        "user": "johnnysmith66@smithsforge.org",
+        "rating": 5
+      }
+    ],
+    "feedback": [
+      {
+        "date": "2018-03-10 11:33:36.500",
+        "user": "johnnysmith66@smithsforge.org",
+        "message": "friendly and quick!"
+      }]
+  }
+]

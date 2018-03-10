@@ -31,22 +31,6 @@
   },
 
   {
-    "name" : "Phoenix Spear",
-    "description" : "a spear forged from the ashes of a phoenix",
-    "category": "Weapon",
-    "subcategory": "Spear",
-    "cost" : 999999,
-    "email" : "johnnysmith66@smithsforge.org",
-    "condition" : "Good",
-    "blacksmith" : "Alarian",
-    "material" : "flame steel",
-    "image" : "https://vignette.wikia.nocookie.net/nier/images/a/a1/PhoenixSpearClean.png/revision/latest?cb=20170718134412",
-    "class" : "weapon",
-    "subclass" :"",
-    "active" : true
-  },
-
-  {
     "name" : "Newb Sword",
     "description" : "test sword",
     "category": "Weapon",

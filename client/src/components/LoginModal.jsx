@@ -39,7 +39,7 @@ class LoginModal extends React.Component {
   }
 
   handleSignUpView() {
-    this.setState({signUpView: !this.state.signUpView})
+    this.setState({signUpView: !this.state.signUpView, errMsg:''})
   }
 
   handleLoginSubmit(e) {

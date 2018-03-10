@@ -24,6 +24,7 @@ class App extends React.Component {
       deleteitem:'',
       viewState:'LandingPage',
       isLoading:false,
+      currentUser: false
     }
     this.fetch = this.fetch.bind(this);
     this.itemBought = this.itemBought.bind(this);
@@ -31,6 +32,8 @@ class App extends React.Component {
     this.buyItem = this.buyItem.bind(this);
     this.sellItem = this.sellItem.bind(this);
     this.stripeTokenHandler = this.stripeTokenHandler.bind(this);
+    this.handleNewSession = this.handleNewSession.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
     componentDidMount(){
@@ -89,6 +92,11 @@ class App extends React.Component {
     });
   }
 
+  handleNewSession(user) {
+    this.setState({isLoggedIn: true})
+    this.setState({currentUser: user})
+  }
+
   closeLogin() {
     this.setState({loginModalOpen: false});
   }
@@ -98,16 +106,24 @@ class App extends React.Component {
   }
 
   sellItem(){ //redirect to login if not logged in when clicking sell
-    // if (this.state.isLoggedIn) {
+     if (this.state.isLoggedIn) {
       this.setState({viewState:'ItemForm'});
-    // } else {
-    //   this.setState({viewState:'Login'})
-    // }
+     } else {
+       this.setState({loginModalOpen: true})
+     }
   }
 
   login(){
     this.setState({loginModalOpen: true});
     // this.setState({viewState:'Login'});
+  }
+  logout() {
+    $.get('/logout')
+    this.setState({
+      isLoggedIn: false,
+      currentUser: false,
+      viewState: 'LandingPage'
+    })
   }
 
   render () {
@@ -150,7 +166,7 @@ class App extends React.Component {
           {this.state.viewState === 'ItemForm' && <ItemForm fetch={this.fetch} />}
           {/* conditional rendering of buttons based on this.state.isLoggedIn */}
           {this.state.viewState === 'ViewItems' && <ViewItems itembought={this.itemBought} stripe={this.stripeTokenHandler} items={this.state.items} />}
-          {this.state.isLoggedIn === false && <LoginModal modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}
+          {this.state.isLoggedIn === false && <LoginModal setCurrentUser={this.handleNewSession} modalIsOpen={this.state.loginModalOpen} close={this.closeLogin} />}
           {this.state.viewState === 'upload' && <ImageUploader />}
           <Footer />
         </div>

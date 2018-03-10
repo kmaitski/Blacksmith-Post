@@ -39,9 +39,7 @@
   margin-top:100px;
   margin-bottom: 100px;
   background: #F7F7F7;
-  padding :20px;
-
-  
+  padding :20px; 
 }
 
 .ItemForm h1 {
@@ -49,3 +47,13 @@
  
   
 }
+ .aboutpic {
+   margin-top: 20px;
+   margin-left: auto;
+	margin-right: auto;
+	display: block;
+ }
+
+ .about-text {
+   text-align: center;
+ }

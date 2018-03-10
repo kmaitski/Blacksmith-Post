@@ -11,9 +11,10 @@ const Footer = () => (
 
                   <div className="col-md-4 col-lg-4">
                       <h5 className="text-uppercase mb-4 font-weight-bold">BlackSmithPost</h5>
-                      <p>A relic of the past may be a treasure of the future - Joe F</p>
+                      <p style={{textAlign:'justify'}}> Under a spreading chestnut-tree The village smithy stands; The smith, a mighty man is he, With large and sinewy hands; And the muscles of his brawny arms Are strong as iron bands.
+                      </p>
                       <p>
-                          Speak softly but carry a big Sword - Joe F </p>
+                          Speak softly but carry a big Sword - Joe Ford </p>
                   </div>
 
 

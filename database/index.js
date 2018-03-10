@@ -87,23 +87,23 @@ var createItem = function (data, cb) {
 
 var getSells = function(data, cb) {
   Transaction.find({seller: data}, function(err, info) {
-    if (err) console.log(err);
-    cb(info)
-  })
-}
+    if (err) { console.log(err); }
+    cb(info);
+  });
+};
 
 var getBuys = function(data, cb) {
   Transaction.find({buyer: data}, function(err, info) {
-    if (err) console.log(err);
-    cb(info)
-  })
-}
+    if (err) { console.log(err); }
+    cb(info);
+  });
+};
 var getCurrentItems = function(data, cb) {
   item.find({email: data}, function(err, info) {
-    if (err) console.log(err);
-    cb(info)
-  })
-}
+    if (err) { console.log(err); }
+    cb(info);
+  });
+};
 
 // find all weapons
 var allItems = function(callback) {

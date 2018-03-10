@@ -4,11 +4,6 @@ import $ from 'jquery'
 import { Form, FormGroup, Label, Input, FormFeedback, FormText, Button, InputGroup, InputGroupAddon, Modal, ModalHeader, ModalBody, ModalFooter, Media } from 'reactstrap';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
-const CLOUDINARY_UPLOAD_PRESET = 'vdivzjz5';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dwid55cj4/upload';
-
-
-
 
 class ItemForm extends React.Component {
   constructor(props, context) {

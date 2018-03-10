@@ -11,6 +11,7 @@ var nodemailer = require('nodemailer');
 const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({storage: storage});
+const settings = require('./../config/.cloudinary.js');
 
 
 var app = express();
@@ -43,11 +44,7 @@ app.use(flash());
 
 require('./../config/passport.js')(passport);
 
-cloudinary.config({
-  cloud_name: 'dwid55cj4',
-  api_key: '836259835551637',
-  api_secret: 'PA6WTpAozAKJsBBucqC-xCztKXM'
-});
+cloudinary.config(settings);
 
 app.post('/api/cloudinaryUpload', upload.single('newfile'), (req, res) => {
   cloudinary.uploader.upload_stream((result) => {
@@ -150,26 +147,26 @@ app.get('/userSells', function(req, res) {
   database.getSells(req.query.username, (data) => {
     if (data.length > 0) {
       console.log(data);
-    res.json({sells: data})
+      res.json({sells: data});
     }
-  })
-})
+  });
+});
 app.get('/userBuys', function(req, res) {
   database.getBuys(req.query.username, (data) => {
     if (data.length > 0) {
       console.log(data);
-    res.json({buys: data});
+      res.json({buys: data});
     }
   });
-})
+});
 app.get('/userCurrentItems', function(req, res) {
   database.getCurrentItems(req.query.username, (data) => {
     if (data.length > 0) {
       console.log(data);
-    res.json({currentItems: data});
+      res.json({currentItems: data});
     }
-  })
-})
+  });
+});
 
 //request to view all items of type
 app.get('/api/items', function (req, res) {

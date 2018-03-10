@@ -56,7 +56,7 @@ class ItemForm extends React.Component {
 
     event.preventDefault();
     var itemData = {
-      email: this.props.username,
+      email: this.props.user,
       name: this.state.name,
       description:this.state.description,
       category: this.state.category,

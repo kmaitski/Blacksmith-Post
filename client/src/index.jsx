@@ -49,8 +49,7 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => this.setState({ items: data, isloading:false}));
   }
-
-
+  
   fetch() {
     this.setState({
       isLoading: true,
@@ -63,6 +62,7 @@ class App extends React.Component {
 
    goHome(){
     this.setState({viewState:'LandingPage'});
+     window.scrollTo(0, 0);
   }
 
   itemBought(item) {
@@ -113,6 +113,7 @@ class App extends React.Component {
 
   buyItem(){
     this.setState({viewState:'ViewItems'});
+    window.scrollTo(0, 0);
   }
 
   sellItem(){ //redirect to login if not logged in when clicking sell
@@ -121,6 +122,7 @@ class App extends React.Component {
      } else {
        this.setState({loginModalOpen: true})
      }
+    window.scrollTo(0, 0);
   }
 
   handleUserClick(e) {

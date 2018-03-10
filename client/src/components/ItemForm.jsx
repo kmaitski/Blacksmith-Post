@@ -33,7 +33,7 @@ class ItemForm extends React.Component {
     this.change = this.change.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.toggle = this.toggle.bind(this);
-    this.onImageDrop = this.onImageDrop.bind(this);
+    // this.onImageDrop = this.onImageDrop.bind(this);
 
   }
   toggle() {
@@ -63,7 +63,7 @@ class ItemForm extends React.Component {
       cost: this.state.cost,
       condition:this.state.condition,
       material:this.state.material,
-      image:this.state.uploadedCloudinaryURL
+      // image:this.state.uploadedFile.preview
     }
 
 
@@ -85,12 +85,24 @@ class ItemForm extends React.Component {
 
 
 
-  onImageDrop(files) {
-    this.setState({
-      uploadedFile: files[0],
-      dropZoneView: false
+  // onImageDrop(files) {
+  //   this.setState({
+  //     uploadedFile: files[0],
+  //     dropZoneView: false
+  //   });
+  //   console.log(files[0]);
+  //   this.handleImageUpload(files[0]);
+  // }
+
+  onDrop(acceptedFile, rejectedFile) {
+    console.log("new func", acceptedFile);
+    const req = request.post('/api/cloudinaryUpload');
+    req.attach('newfile', acceptedFile[0]);
+    console.log(req);
+    req.end(() => {
+      console.log('back in frontend');
     });
-    this.handleImageUpload(files[0]);
+    // request.post('/api/cloudinaryUpload').attach(acceptedFile[0].name, acceptedFile[0]);
   }
 
   handleImageUpload(file) {
@@ -245,7 +257,7 @@ class ItemForm extends React.Component {
                         <Dropzone
                           multiple={false}
                           accept="image/*"
-                          onDrop={this.onImageDrop}
+                          onDrop={this.onDrop}
                           style={{width: "210%", border: "dashed"}}
                         >
                           <p style={{paddingLeft: "5%"}}>Drop an image or click to select a file to upload</p>

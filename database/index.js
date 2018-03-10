@@ -31,7 +31,20 @@ const userSchema = mongoose.Schema({
   local: {
     username: String,
     password: String
-  }
+  },
+  rating: [
+    {
+      user: String,
+      rating: Number
+    }
+  ],
+  feedback: [
+    {
+      date: {type: Date, default: Date.now},
+      user: String,
+      message: String
+    }
+  ]
 });
 
 
@@ -119,6 +132,23 @@ var allItems = function(callback) {
   }).limit(200);
 };
 
+var getFeedback = function(data, cb) {
+  User.findOne({'local.username': data}, 'rating feedback', function(err, info) {
+    if (err) {console.log(err);}
+    cb(info)
+  });
+};
+
+var addFeedback = function(data, cb) {
+  if (data.rating) {
+    User.findOneAndUpdate({'local.username': data.username}, {$push: {rating: data.rating}});
+    cb(data.username + ' updated with: ' + data.rating)
+  }
+  if (data.feedback) {
+    User.findOneAndUpdate({'local.username': data.username}, {$push: {feedback: data.feedback}});
+    cb(data.username + ' updated with: ' + data.feedback)
+  }
+};
 
 var deleteItem = function(data) {
   item.remove({name: data.name}).then(() =>
@@ -141,4 +171,5 @@ module.exports.createTransaction = createTransaction;
 module.exports.getBuys = getBuys;
 module.exports.getCurrentItems = getCurrentItems;
 module.exports.getSells = getSells;
-
+module.exports.getFeedback = getFeedback;
+module.exports.addFeedback = addFeedback;

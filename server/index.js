@@ -142,6 +142,18 @@ app.get('/logout', function(req, res) {
   res.redirect('/');
 });
 
+app.post('/userFeedback', function(req, res) {
+  database.addFeedback(req.query, (data) => {
+    console.log(data)
+  })
+})
+
+app.get('/userFeedback', function(req, res) {
+  database.getFeedback(req.query.username, (data) => {
+    console.log(data);
+  })
+})
+
 app.get('/userSells', function(req, res) {
   //res.setHeader('Content-Type', 'application/json')
   database.getSells(req.query.username, (data) => {
@@ -151,6 +163,7 @@ app.get('/userSells', function(req, res) {
     }
   });
 });
+
 app.get('/userBuys', function(req, res) {
   database.getBuys(req.query.username, (data) => {
     if (data.length > 0) {

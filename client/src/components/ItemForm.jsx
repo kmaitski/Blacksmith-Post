@@ -237,7 +237,7 @@ class ItemForm extends React.Component {
                         >
                           <p style={{paddingLeft: "5%"}}>Drop an image or click to select a file to upload</p>
                         </Dropzone> :
-                        <p>{this.state.uploadedFile.name} has been submited. Thank you</p>}
+                        <p>{this.state.uploadedFile.name} has been submitted. Thank you</p>}
                       </div>
 
                   </div>
@@ -252,13 +252,14 @@ class ItemForm extends React.Component {
                       <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                         <ModalHeader toggle={this.toggle}>Confirmation</ModalHeader>
                           <ModalBody>
+                          <img className="img-thumbnail" src={this.state.uploadedCloudinaryURL} alt="Loading image..." />
                             <ul>Item name: {this.state.name}</ul>
                             <ul>Category: {this.state.category}</ul>
                             <ul>Description: {this.state.description}</ul>
                             <ul>Price: {this.state.cost}</ul>
                             <ul>Condition: {this.state.condition}</ul>
                             <ul>Material: {this.state.material}</ul>
-                            <Media object data-src={this.state.image} alt="Generic placeholder image" />
+                            
                           </ModalBody>
                         <ModalFooter>
                           <Button color="primary" onClick={this.onSubmit}>Forge sumbmission</Button>{' '}

@@ -52,14 +52,14 @@ class UserPage extends React.Component {
               <h4 className="card-title">Sold items</h4>
               {!this.state.soldItems.length && <div>None so far . . .</div>}
               {this.state.soldItems &&
-                this.state.soldItems.map((item) => <div>Sold: {item.item}</div>)
+                this.state.soldItems.map((item) => <div>{item.item}</div>)
               }
             </div>
             <div className="card text-white text-center bg-dark mb-3">
               <h4 className="card-title">Purchased items</h4>
               {!this.state.boughtItems.length && <div>None so far . . .</div>}
               {this.state.boughtItems &&
-                this.state.boughtItems.map((item) => <div>Bought: {item.item}</div>)
+                this.state.boughtItems.map((item) => <div>{item.item}</div>)
               }
             </div>
             <div className="card text-white text-center bg-dark mb-3">

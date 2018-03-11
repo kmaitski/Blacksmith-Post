@@ -143,14 +143,25 @@ app.get('/logout', function(req, res) {
 });
 
 app.post('/userFeedback', function(req, res) {
-  database.addFeedback(req.query, (data) => {
-    console.log(data)
+  console.log(req.body);
+  let result;
+  database.addFeedback(req.body, (data) => {
+    result = result + data
   })
+  res.send(result);
 })
 
 app.get('/userFeedback', function(req, res) {
   database.getFeedback(req.query.username, (data) => {
-    console.log(data);
+    let ending = {};
+    if (data.feedback.length > 0) {
+      ending.feedback = data.feedback;
+    }
+    if (data.rating.length > 0) {
+      ending.rating = data.rating
+    }
+    console.log('ENDDDDDDDDDDING', ending)
+    res.json(ending)
   })
 })
 
@@ -158,7 +169,6 @@ app.get('/userSells', function(req, res) {
   //res.setHeader('Content-Type', 'application/json')
   database.getSells(req.query.username, (data) => {
     if (data.length > 0) {
-      console.log(data);
       res.json({sells: data});
     }
   });
@@ -167,7 +177,6 @@ app.get('/userSells', function(req, res) {
 app.get('/userBuys', function(req, res) {
   database.getBuys(req.query.username, (data) => {
     if (data.length > 0) {
-      console.log(data);
       res.json({buys: data});
     }
   });
@@ -175,7 +184,6 @@ app.get('/userBuys', function(req, res) {
 app.get('/userCurrentItems', function(req, res) {
   database.getCurrentItems(req.query.username, (data) => {
     if (data.length > 0) {
-      console.log(data);
       res.json({currentItems: data});
     }
   });

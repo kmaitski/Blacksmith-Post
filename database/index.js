@@ -133,20 +133,21 @@ var allItems = function(callback) {
 };
 
 var getFeedback = function(data, cb) {
-  User.findOne({'local.username': data}, 'rating feedback', function(err, info) {
+  User.findOne({'local.username': data}, function(err, info) {
     if (err) {console.log(err);}
     cb(info)
   });
 };
 
 var addFeedback = function(data, cb) {
-  if (data.rating) {
+  console.log('DATAAAAAAAAAAA IN ADD', data);
+  if (data.rating.rating != '') {
     User.findOneAndUpdate({'local.username': data.username}, {$push: {rating: data.rating}});
-    cb(data.username + ' updated with: ' + data.rating)
+    cb(data.username + ' updated with: ' + data.rating.rating)
   }
-  if (data.feedback) {
+  if (data.feedback.message != '') {
     User.findOneAndUpdate({'local.username': data.username}, {$push: {feedback: data.feedback}});
-    cb(data.username + ' updated with: ' + data.feedback)
+    cb(data.username + ' updated with: ' + data.feedback.message)
   }
 };
 

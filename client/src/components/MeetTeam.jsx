@@ -6,12 +6,17 @@ const MeetTeam = (props) => {
   return (
     <div>
       <p className="about-text" style={{marginTop:'50px', marginTop:'50px'}}>  __________________________________________________________________</p>
-      <h1 className="about-text">BlackSmithPost</h1>
-      <h4 className="about-text" style={{marginLeft:'50px', marginRight:'50px'}}>A marketplace for blacksmiths to showcase their mastery and provide one of kind creations to the world!
-                         We want to support our local smithies and keep this age old craft of at least like 100 years alive.
-                         So fire up the furnace and experience the market as the ancients did!</h4>
+      <h1 className="about-text">Welcome to Blacksmith Post</h1>
+      <h4 className="about-text" style={{marginLeft:'50px', marginRight:'50px'}}>A marketplace for blacksmiths to showcase their mastery and provide one of kind creations to the world!</h4>
+      <h4 className="about-text" style={{marginLeft:'50px', marginRight:'50px'}}> We want to support our local smithies and keep this age-old craft alive. </h4>
+      <h4 className="about-text" style={{marginLeft:'50px', marginRight:'50px'}}>So fire up the furnace and experience the market as the ancients did!</h4>
                          <p className="about-text" style={{marginTop:'50px', marginTop:'50px'}}>  __________________________________________________________________</p>
-      <h1 className="about-text">Meet the Team</h1>    
+      <h1 className="about-text">Getting Started</h1>
+       <h4 className="about-text" style={{marginLeft:'50px', marginRight:'50px'}}>If you'd like to look through our growing collection of forgeworks, click on "Browse".</h4>
+       <h4 className="about-text" style={{marginLeft:'50px', marginRight:'50px'}}>Interested in buying a fine suit of armor? Sign up for an account and you'll be able to pay a smithy right through our marketplace.</h4>
+        <h4 className="about-text" style={{marginLeft:'50px', marginRight:'50px'}}>Have some wares of your own to sell? With an account, you'll just need to visit the "Sell" tab to put an item up for sale with a few clicks!</h4>
+           <p className="about-text" style={{marginTop:'50px', marginTop:'50px'}}>  __________________________________________________________________</p>
+      <h1 className="about-text">Meet the Team</h1>
       <div>
         <div className="row">
         <div className="col">
@@ -34,13 +39,13 @@ const MeetTeam = (props) => {
             <h4 className="about-text">Sam Donner</h4>
               <p className="about-text">Lead Engineer</p>
           </div>
-        </div> 
-    </div> 
-      
-    
+        </div>
+    </div>
 
-    
-         
+
+
+
+
     </div>
   );
 };

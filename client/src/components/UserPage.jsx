@@ -39,7 +39,7 @@ class UserPage extends React.Component {
     return (
       <div>
         <div className="jumbotron">
-          <h1 className="display-4 text-white">{this.props.user}</h1>
+          <h1 className="display-4 text-white">{this.props.user}    <button onClick={this.props.goback} className="btn btw-white align-right">Back</button></h1>
           <div className="card-deck">
             <div className="card text-white bg-dark mb-3">
               <h4 className="card-title">Currently Listed Items</h4>

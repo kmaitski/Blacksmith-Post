@@ -211,7 +211,7 @@ class App extends React.Component {
           </div>
         </nav>
         <div style={{paddingTop: "51px"}}>
-          {this.state.viewState === 'UserPage' && <UserPage feedback={this.submitReview} user={this.state.clickedUser} />}
+          {this.state.viewState === 'UserPage' && <UserPage goback={this.buyItem} feedback={this.submitReview} user={this.state.clickedUser} />}
           {this.state.viewState === 'MyPage' && <MyPage user={this.state.currentUser} />}
           {this.state.viewState === 'LandingPage' && <LandingPage buyclick={this.buyItem} sellclick={this.sellItem}/>}
           {this.state.viewState === 'ItemForm' && <ItemForm user={this.state.currentUser.local.username} fetch={this.fetch} />}

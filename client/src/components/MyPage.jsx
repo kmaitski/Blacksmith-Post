@@ -42,7 +42,7 @@ class MyPage extends React.Component {
         <div className="jumbotron">
           <h1 className="display-4 text-white">{this.props.user.local.username}</h1>
           {this.state.thisUserRatings &&
-            <h2 className="display-4 text-white">{this.state.thisUserRatings[0].rating}</h2>
+            <h2 className="display-4 text-white">5</h2>
           }
           <div className="card-deck">
             <div className="card text-white bg-dark mb-3">

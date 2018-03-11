@@ -3,6 +3,7 @@ import {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import $ from 'jquery';
+import bcrypt from 'bcryptjs';
 
 const customStyles = {
   content : {
@@ -47,8 +48,11 @@ class LoginModal extends React.Component {
 
   handleLoginSubmit(e) {
     e.preventDefault();
+    let password = this.state.password;
+    var salt = "$2a$10$yg5TlmPRWL2O2S6yR0Q6X."
+    var hash = bcrypt.hashSync(password, salt)
     console.log('in handleSubmit');
-    var newUser = {username: this.state.email, password: this.state.password};
+    var newUser = {username: this.state.email, password: hash};
     $.post('/login', newUser, (data) => {
       console.log(data);
       if (data.message) {
@@ -65,7 +69,10 @@ class LoginModal extends React.Component {
   handleSignUpSubmit(e) {
     e.preventDefault();
     console.log('in handleSubmit');
-    var newUser = {username: this.state.email, password: this.state.password};
+    let password = this.state.password;
+    var salt = "$2a$10$yg5TlmPRWL2O2S6yR0Q6X."
+    var hash = bcrypt.hashSync(password, salt)
+    var newUser = {username: this.state.email, password: hash};
     $.post('/signup', newUser, (data) => {
       console.log(data);
       if (data.message) {

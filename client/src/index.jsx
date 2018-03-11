@@ -29,6 +29,7 @@ class App extends React.Component {
       currentUser: false,
       clickedUser: false
     }
+
     this.fetch = this.fetch.bind(this);
     this.itemBought = this.itemBought.bind(this);
     this.closeLogin = this.closeLogin.bind(this);
@@ -41,6 +42,7 @@ class App extends React.Component {
     this.openMyPage = this.openMyPage.bind(this);
     this.handleUserClick = this.handleUserClick.bind(this);
     this.submitReview = this.submitReview.bind(this);
+
   }
 
     componentDidMount(){
@@ -50,7 +52,7 @@ class App extends React.Component {
     .then(response => response.json())
     .then(data => this.setState({ items: data, isloading:false}));
   }
-  
+
   fetch() {
     this.setState({
       isLoading: true,
@@ -101,6 +103,7 @@ class App extends React.Component {
 
   openMyPage() {
     this.setState({viewState: 'MyPage'})
+    window.scrollTo(0, 0);
   }
 
   handleNewSession(user) {
@@ -150,6 +153,7 @@ class App extends React.Component {
       viewState: 'UserPage',
       clickedUser: e
     })
+    window.scrollTo(0, 0);
   }
 
   login(){
@@ -163,6 +167,7 @@ class App extends React.Component {
       currentUser: false,
       viewState: 'LandingPage'
     })
+    window.scrollTo(0, 0);
   }
 
   render () {

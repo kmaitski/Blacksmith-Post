@@ -6,9 +6,9 @@ class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentItems: [],
-      soldItems: [],
-      boughtItems: [],
+      currentItems: false,
+      soldItems: false,
+      boughtItems: false,
       thisUserRatings: false,
       thisUserFeedback: false
     }
@@ -27,7 +27,7 @@ class MyPage extends React.Component {
       this.setState({currentItems: data.currentItems});
     })
     $.get('/userFeedback', thisUser, (data) => {
-      if (data.rating.rating && data.feedback.message) {
+      if (data.rating && data.feedback) {
         this.setState({
           thisUserRatings: data.rating,
           thisUserFeedback: data.feedback

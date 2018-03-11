@@ -9,10 +9,15 @@ class UserPage extends React.Component {
       currentItems: [],
       soldItems: [],
       boughtItems: [],
-      feedbackSent: false
+      thisUserRatings: [],
+      thisUserFeedback: [],
+      feedbackSent: false,
+      myRating: '',
+      myFeedback: ''
     }
 
-    this.feedback = this.feedback.bind(this);
+    this.submitFeedback = this.submitFeedback.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -26,20 +31,48 @@ class UserPage extends React.Component {
     $.get('/userCurrentItems', thisUser, (data) => {
       this.setState({currentItems: data.currentItems});
     })
+    $.get('/userFeedback', thisUser, (data) => {
+      this.setState({
+        thisUserRatings: data.rating,
+        thisUserFeedback: data.feedback
+      })
+    })
   }
 
-  feedback() {
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  submitFeedback() {
     this.setState({
       feedbackSent: true
-    })
-    this.props.feedback(this.props.user)
-  }
+    });
+    var feedback = {
+      username: this.props.user,
+      rating: {
+        user: this.props.currentUser.local.username,
+        rating: this.state.myRating
+      },
+      feedback: {
+        user: this.props.currentUser.local.username,
+        message: this.state.myFeedback
+      }
+    }
+    $.post('/userFeedback', feedback, (data) => {
+      console.log(data);
+  })
+};
 
   render() {
     return (
       <div>
         <div className="jumbotron">
           <h1 className="display-4 text-white">{this.props.user}</h1>
+          {this.state.thisUserRatings.length > 0 &&
+          <h2 className="display-4 text-white">{this.state.thisUserRatings[0].rating}</h2>
+          }
           <div className="card-deck">
             <div className="card text-white bg-dark mb-3">
               <h4 className="card-title">Currently Listed Items</h4>
@@ -63,11 +96,30 @@ class UserPage extends React.Component {
               }
             </div>
             <div className="card text-white text-center bg-dark mb-3">
+              <h4 className="card-title">User Reviews</h4>
+              {!this.state.thisUserFeedback.length && <div>None so far . . .</div>}
+              {this.state.thisUserFeedback &&
+                this.state.thisUserFeedback.map((review) => <div>{review.user} : {review.message}</div>)
+              }
+            </div>
+            <div className="card text-white text-center bg-dark mb-3">
               <h4 className="card-title"> Give Feedback</h4>
               <p>Review</p>
-              <textarea className="user-feedback"></textarea>
+              <textarea
+                className="user-feedback"
+                name="myFeedback"
+                type="string"
+                value={this.state.myFeedback}
+                onChange={e => this.handleChange(e)}
+                rows="3"
+                placeholder="..."
+              >
+              </textarea>
               <p>Rating</p>
-              <select className="user-review">
+              <select
+              className="user-review"
+              name="myRating"
+              onChange={e => this.handleChange(e)}>
                 <option>Select a rating</option>
                 <option value="1">1 Star</option>
                 <option value="2">2 Stars</option>
@@ -75,7 +127,7 @@ class UserPage extends React.Component {
                 <option value="4">4 Stars</option>
                 <option value="5">5 Stars</option>
               </select>
-              {!this.state.feedbackSent && <button className="btn btn-white" onClick={this.feedback}>Submit Feedback</button>}
+              {!this.state.feedbackSent && <button className="btn btn-white" onClick={this.submitFeedback}>Submit Feedback</button>}
               {this.state.feedbackSent && <button className="btn btn-white" disabled>Feedback Sent</button>}
               <form>
               </form>

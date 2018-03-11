@@ -29,6 +29,7 @@ class App extends React.Component {
       currentUser: false,
       clickedUser: false
     }
+
     this.fetch = this.fetch.bind(this);
     this.itemBought = this.itemBought.bind(this);
     this.closeLogin = this.closeLogin.bind(this);
@@ -100,6 +101,7 @@ class App extends React.Component {
 
   openMyPage() {
     this.setState({viewState: 'MyPage'})
+    window.scrollTo(0, 0);
   }
 
   handleNewSession(user) {
@@ -130,6 +132,7 @@ class App extends React.Component {
       viewState: 'UserPage',
       clickedUser: e
     })
+    window.scrollTo(0, 0);
   }
 
   login(){
@@ -143,6 +146,7 @@ class App extends React.Component {
       currentUser: false,
       viewState: 'LandingPage'
     })
+    window.scrollTo(0, 0);
   }
 
   render () {
@@ -186,7 +190,7 @@ class App extends React.Component {
           </div>
         </nav>
         <div style={{paddingTop: "51px"}}>
-          {this.state.viewState === 'UserPage' && <UserPage currentUser={this.state.currentUser} user={this.state.clickedUser} />}
+          {this.state.viewState === 'UserPage' && <UserPage goback={this.buyItem} currentUser={this.state.currentUser} user={this.state.clickedUser} />}
           {this.state.viewState === 'MyPage' && <MyPage user={this.state.currentUser} />}
           {this.state.viewState === 'LandingPage' && <LandingPage buyclick={this.buyItem} sellclick={this.sellItem}/>}
           {this.state.viewState === 'ItemForm' && <ItemForm user={this.state.currentUser.local.username} fetch={this.fetch} />}

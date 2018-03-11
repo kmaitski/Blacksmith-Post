@@ -11,10 +11,15 @@ const Footer = () => (
 
                   <div className="col-md-4 col-lg-4">
                       <h5 className="text-uppercase mb-4 font-weight-bold" style={{marginTop:'50px'}}>BlackSmithPost</h5>
-                      <p style={{textAlign:'justify', fontStyle:'italic'}}> Under a spreading chestnut-tree The village smithy stands; The smith, a mighty man is he, With large and sinewy hands; And the muscles of his brawny arms Are strong as iron bands.
+                      <p style={{textAlign:'justify', fontStyle:'italic'}}> "Under a spreading chestnut-tree
+                        The village smithy stands;
+                        The smith, a mighty man is he,
+                        With large and sinewy hands;
+                        And the muscles of his brawny arms
+                        Are strong as iron bands."
                       </p>
                       <p style={{fontStyle:'italic'}}>
-                          Speak softly but carry a big Sword - Joe Ford </p>
+                          Speak softly but carry a big sword - Joe Ford </p>
                   </div>
 
 
@@ -36,7 +41,7 @@ const Footer = () => (
                   <div className="col-md-4 col-lg-3" style={{marginTop:'50px'}}>
                       <h5 className="text-uppercase mb-4 font-weight-bold">Address</h5>
 
-                      <p><i className="fa fa-home mr-3"></i> Fort Lauderdale, FL 10012, US</p>
+                      <p><i className="fa fa-home mr-3"></i> 1066 Faire St., Anvilton, Ye Olde Englande</p>
                       <p><i className="fa fa-envelope mr-3"></i> info@blacksmithpost.com</p>
                       <p><i className="fa fa-phone mr-3"></i> + 01 800 888 8888</p>
                       <p><i className="fa fa-print mr-3"></i> + 01 800 867 5309</p>

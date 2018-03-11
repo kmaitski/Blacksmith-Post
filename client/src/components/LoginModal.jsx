@@ -25,7 +25,9 @@ class LoginModal extends React.Component {
       signUpView: false,
       email:'',
       password:'',
-      errMsg: ''
+      errMsg: '',
+      validEmail: false,
+      passWordClicked: false
     };
 
     this.openModal = this.openModal.bind(this);
@@ -36,6 +38,7 @@ class LoginModal extends React.Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSignUpView = this.handleSignUpView.bind(this);
+    this.checkEmail = this.checkEmail.bind(this);
   }
 
   handleSignUpView() {
@@ -98,6 +101,24 @@ class LoginModal extends React.Component {
     this.setState({signUpView: false})
     this.setState({modalIsOpen: false});
     this.props.close();
+  }
+
+  checkEmail() {
+    this.setState({passwordClicked: true})
+    let email = this.state.email;
+    let atIndex = email.indexOf('@') || 0;
+    let periodAfterAt = false;
+    for (let i = 0; i < email.length; i++) {
+      if (email[i] === '.' && i > atIndex && email[i + 2]) {
+        periodAfterAt = true;
+        break;
+      }
+    }
+    if (atIndex && periodAfterAt) {
+      this.setState({
+        validEmail: true
+      });
+    }
   }
 
   render() {
@@ -170,8 +191,15 @@ class LoginModal extends React.Component {
             onChange={this.handlePasswordChange}
             placeholder='Create a new password...'
             style={{marginBottom: '20px'}}
+            onClick={this.checkEmail}
           />
-          <button className="btn btn-info btn-lg btn-block" type='submit'>Sign up</button>
+          <button
+            className="btn btn-info btn-lg btn-block"
+            type='submit'
+            disabled={!this.state.validEmail}
+          >
+            Sign up
+          </button>
           {this.state.errMsg &&
             <p style={{color: 'red'}}>{this.state.errMsg}</p>
           }

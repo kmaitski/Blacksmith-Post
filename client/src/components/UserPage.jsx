@@ -53,7 +53,7 @@ class UserPage extends React.Component {
       username: this.props.user,
       rating: {
         user: this.props.currentUser.local.username,
-        rating: this.state.myRating
+        rating: Number(this.state.myRating)
       },
       feedback: {
         user: this.props.currentUser.local.username,

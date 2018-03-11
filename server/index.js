@@ -143,12 +143,9 @@ app.get('/logout', function(req, res) {
 });
 
 app.post('/userFeedback', function(req, res) {
-  console.log(req.body);
-  let result;
   database.addFeedback(req.body, (data) => {
-    result = result + data
+    console.log(data)
   })
-  res.send(result);
 })
 
 app.get('/userFeedback', function(req, res) {
@@ -160,7 +157,6 @@ app.get('/userFeedback', function(req, res) {
     if (data.rating.length > 0) {
       ending.rating = data.rating
     }
-    console.log('ENDDDDDDDDDDING', ending)
     res.json(ending)
   })
 })

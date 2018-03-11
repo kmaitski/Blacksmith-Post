@@ -78,7 +78,7 @@ class LoginModal extends React.Component {
 
   handleEmailChange(e) {
     this.setState({email: e.target.value, errMsg:''});
-  
+
   }
 
   handlePasswordChange(e) {
@@ -114,10 +114,10 @@ class LoginModal extends React.Component {
 {this.state.signUpView === false &&
 <div>
           <h2 ref={subtitle => this.subtitle = subtitle}></h2>
-          <button style={{marginLeft:"90%"}} class="btn btn-secondary" onClick={this.closeModal}>X</button>
+          <button style={{marginLeft:"90%"}} className="btn btn-secondary" onClick={this.closeModal}>X</button>
           <div>
         <form onSubmit={this.handleLoginSubmit}>
-          
+
           <h1>Login</h1>
           <div>
           <label></label>
@@ -126,7 +126,7 @@ class LoginModal extends React.Component {
             onChange={this.handleEmailChange}
             className="form-control"
             placeholder="Email"
-          
+
           />
           </div>
           <div>
@@ -152,7 +152,7 @@ class LoginModal extends React.Component {
 {this.state.signUpView &&
   <div>
           <h2 ref={subtitle => this.subtitle = subtitle}></h2>
-          <button style={{marginLeft:"90%"}} class="btn btn-secondary" onClick={this.closeModal}>X</button>
+          <button style={{marginLeft:"90%"}} className="btn btn-secondary" onClick={this.closeModal}>X</button>
           <div>
         <form onSubmit={this.handleSignUpSubmit}>
           <h1>Sign up</h1>

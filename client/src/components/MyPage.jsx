@@ -28,10 +28,11 @@ class MyPage extends React.Component {
   }
 
   render() {
+    console.log(this.props.user);
     return (
        <div>
         <div className="jumbotron">
-          <h1 className="display-4 text-white">{this.props.user}</h1>
+          <h1 className="display-4 text-white">{this.props.user.local.username}</h1>
           <div className="card-deck">
             <div className="card text-white bg-dark mb-3">
               <h4 className="card-title">Currently Listed Items</h4>
@@ -55,9 +56,7 @@ class MyPage extends React.Component {
               }
             </div>
             <div className="card text-white text-center bg-dark mb-3">
-              <h4 className="card-title"> User Feedback</h4>
-              <p>Review</p>
-              <textarea className="user-feedback"></textarea>
+              <h4 className="card-title">My Feedback</h4>
               {!this.state.ratings.length && <div>None so far . . .</div>}
             </div>
           </div>

@@ -9,9 +9,8 @@ class MyPage extends React.Component {
       currentItems: [],
       soldItems: [],
       boughtItems: [],
-      ratings: [],
-      thisUserRatings: [],
-      thisUserFeedback: []
+      thisUserRatings: false,
+      thisUserFeedback: false
     }
 
   }
@@ -28,10 +27,12 @@ class MyPage extends React.Component {
       this.setState({currentItems: data.currentItems});
     })
     $.get('/userFeedback', thisUser, (data) => {
-      this.setState({
-        thisUserRatings: data.rating,
-        thisUserFeedback: data.feedback
-      })
+      if (data.rating.rating && data.feedback.message) {
+        this.setState({
+          thisUserRatings: data.rating,
+          thisUserFeedback: data.feedback
+        })
+      }
     })
   }
 
@@ -71,10 +72,6 @@ class MyPage extends React.Component {
               {this.state.boughtItems &&
                 this.state.boughtItems.map((item) => <div>Bought: {item.item}</div>)
               }
-            </div>
-            <div className="card text-white text-center bg-dark mb-3">
-              <h4 className="card-title">My Feedback</h4>
-              {!this.state.ratings && <div>None so far . . .</div>}
             </div>
           </div>
         </div>

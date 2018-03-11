@@ -9,7 +9,9 @@ class MyPage extends React.Component {
       currentItems: [],
       soldItems: [],
       boughtItems: [],
-      ratings: []
+      ratings: [],
+      thisUserRatings: [],
+      thisUserFeedback: []
     }
 
   }
@@ -25,14 +27,22 @@ class MyPage extends React.Component {
     $.get('/userCurrentItems', thisUser, (data) => {
       this.setState({currentItems: data.currentItems});
     })
+    $.get('/userFeedback', thisUser, (data) => {
+      this.setState({
+        thisUserRatings: data.rating,
+        thisUserFeedback: data.feedback
+      })
+    })
   }
 
   render() {
-    console.log(this.props.user);
     return (
        <div>
         <div className="jumbotron">
           <h1 className="display-4 text-white">{this.props.user.local.username}</h1>
+          {this.state.thisUserRatings.length > 0 &&
+            <h2 className="display-4 text-white">{this.state.thisUserRatings[0].rating}</h2>
+          }
           <div className="card-deck">
             <div className="card text-white bg-dark mb-3">
               <h4 className="card-title">Currently Listed Items</h4>
@@ -46,6 +56,13 @@ class MyPage extends React.Component {
               {!this.state.soldItems.length && <div>None so far . . .</div>}
               {this.state.soldItems &&
                 this.state.soldItems.map((item) => <div>Sold: {item.item}</div>)
+              }
+            </div>
+            <div className="card text-white text-center bg-dark mb-3">
+              <h4 className="card-title">User Reviews</h4>
+              {!this.state.thisUserFeedback.length && <div>None so far . . .</div>}
+              {this.state.thisUserFeedback &&
+                this.state.thisUserFeedback.map((review) => <div>{review.user} : {review.message}</div>)
               }
             </div>
             <div className="card text-white text-center bg-dark mb-3">

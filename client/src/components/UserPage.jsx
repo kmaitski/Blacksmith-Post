@@ -6,11 +6,11 @@ class UserPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentItems: [],
-      soldItems: [],
-      boughtItems: [],
-      thisUserRatings: [],
-      thisUserFeedback: [],
+      currentItems: false,
+      soldItems: false,
+      boughtItems: false,
+      thisUserRatings: false,
+      thisUserFeedback: false,
       feedbackSent: false,
       myRating: '',
       myFeedback: ''
@@ -32,10 +32,12 @@ class UserPage extends React.Component {
       this.setState({currentItems: data.currentItems});
     })
     $.get('/userFeedback', thisUser, (data) => {
-      this.setState({
-        thisUserRatings: data.rating,
-        thisUserFeedback: data.feedback
-      })
+      if (data.rating && data.feedback) {
+        this.setState({
+          thisUserRatings: data.rating,
+          thisUserFeedback: data.feedback
+        })
+      }
     })
   }
 
@@ -70,34 +72,34 @@ class UserPage extends React.Component {
       <div>
         <div className="jumbotron">
           <h1 className="display-4 text-white">{this.props.user}    <button onClick={this.props.goback} className="btn btw-white align-right">Back</button></h1>
-          {this.state.thisUserRatings.length > 0 &&
+          {this.state.thisUserRatings &&
             <h2 className="display-4 text-white">{this.state.thisUserRatings[0].rating}</h2>
           }
           <div className="card-deck">
             <div className="card text-white bg-dark mb-3">
               <h4 className="card-title">Currently Listed Items</h4>
-              {!this.state.currentItems.length && <div>None so far . . .</div>}
+              {!this.state.currentItems && <div>None so far . . .</div>}
               {this.state.currentItems &&
                 this.state.currentItems.map((item) => <div>{item.name}</div>)
               }
             </div>
             <div className="card text-white text-center bg-dark mb-3">
               <h4 className="card-title">Sold items</h4>
-              {!this.state.soldItems.length && <div>None so far . . .</div>}
+              {!this.state.soldItems && <div>None so far . . .</div>}
               {this.state.soldItems &&
                 this.state.soldItems.map((item) => <div>{item.item}</div>)
               }
             </div>
             <div className="card text-white text-center bg-dark mb-3">
               <h4 className="card-title">Purchased items</h4>
-              {!this.state.boughtItems.length && <div>None so far . . .</div>}
+              {!this.state.boughtItems && <div>None so far . . .</div>}
               {this.state.boughtItems &&
                 this.state.boughtItems.map((item) => <div>{item.item}</div>)
               }
             </div>
             <div className="card text-white text-center bg-dark mb-3">
               <h4 className="card-title">User Reviews</h4>
-              {!this.state.thisUserFeedback.length && <div>None so far . . .</div>}
+              {!this.state.thisUserFeedback && <div>None so far . . .</div>}
               {this.state.thisUserFeedback &&
                 this.state.thisUserFeedback.map((review) => <div>{review.user} : {review.message}</div>)
               }

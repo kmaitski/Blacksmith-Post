@@ -203,7 +203,7 @@ class LoginModal extends React.Component {
           <button
             className="btn btn-info btn-lg btn-block"
             type='submit'
-            disabled={!this.state.validEmail}
+            // disabled={!this.state.validEmail}
           >
             Sign up
           </button>

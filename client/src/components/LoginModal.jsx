@@ -28,7 +28,7 @@ class LoginModal extends React.Component {
       password:'',
       errMsg: '',
       validEmail: false,
-      passWordClicked: false
+      passwordClicked: false
     };
 
     this.openModal = this.openModal.bind(this);
@@ -40,6 +40,7 @@ class LoginModal extends React.Component {
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSignUpView = this.handleSignUpView.bind(this);
     this.checkEmail = this.checkEmail.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleSignUpView() {
@@ -110,13 +111,14 @@ class LoginModal extends React.Component {
     this.props.close();
   }
 
-  checkEmail() {
+  checkEmail(charsAfter) {
+    charsAfter = charsAfter || 2;
     this.setState({passwordClicked: true})
     let email = this.state.email;
     let atIndex = email.indexOf('@') || 0;
     let periodAfterAt = false;
     for (let i = 0; i < email.length; i++) {
-      if (email[i] === '.' && i > atIndex && email[i + 2]) {
+      if (email[i] === '.' && i > atIndex && email[i + charsAfter]) {
         periodAfterAt = true;
         break;
       }
@@ -125,6 +127,12 @@ class LoginModal extends React.Component {
       this.setState({
         validEmail: true
       });
+    }
+  }
+
+  handleKeyPress(e) {
+    if (e.keyCode === 9 || this.state.passwordClicked) {
+      this.checkEmail(1);
     }
   }
 
@@ -190,7 +198,13 @@ class LoginModal extends React.Component {
             className="form-control"
             onChange={this.handleEmailChange}
             placeholder='Enter your email here...'
+            onKeyDown={this.handleKeyPress}
           />
+          {!this.state.validEmail && this.state.passwordClicked &&
+          <div>
+            <label style={{color: "red"}}>Please enter a valid email</label>
+            <br />
+          </div>}
           <label>Password</label>
           <input
             type='password'

@@ -2,7 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 import ReactDOM from 'react-dom';
 import UserEntry from './UserEntry.jsx';
-import Grid from 'react-css-grid'
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import FeedBackEntry from './FeedBackEntry.jsx';
 
 class UserPage extends React.Component {
   constructor(props) {
@@ -71,110 +72,112 @@ class UserPage extends React.Component {
 };
 
   render() {
+    console.log(this.state.thisUserFeedback);
     return (
       <div>
-        <div>
+        <div style={{paddingTop: "40px"}}>
           {this.state.thisUserRatings ? 
-            <h2>{this.props.user} ({this.state.thisUserRatings[0].rating}<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Star_icon-72a7cf.svg/32px-Star_icon-72a7cf.svg.png" />)</h2> :
-            <h2>{this.props.user} (0<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Star_icon-72a7cf.svg/32px-Star_icon-72a7cf.svg.png" />)</h2>
+            <h2 style={{paddingLeft: "15px"}}>{this.props.user} ({this.state.thisUserRatings[0].rating}<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Star_icon-72a7cf.svg/32px-Star_icon-72a7cf.svg.png" />)</h2> :
+            <h2 style= {{paddingLeft: "15px"}}>{this.props.user} (0<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Star_icon-72a7cf.svg/32px-Star_icon-72a7cf.svg.png" />)</h2>
           }
-          <div>
-            <h3 style={{textDecoration: "underline"}}>Currently Listed Items</h3>
-            <Grid
-              width={150}
-              gap={24}
+          <div className="card text-white text-center bg-dark mb-3" style={{width: "100%", align: "center"}}>
+            <h4 className="card-title"> Give Feedback</h4>
+            <p>Review</p>
+            <textarea
+              className="user-feedback"
+              name="myFeedback"
+              type="string"
+              value={this.state.myFeedback}
+              onChange={e => this.handleChange(e)}
+              rows="3"
+              placeholder="..."
             >
-              {this.state.currentItems ?
-              this.state.currentItems.map((item) => <UserEntry item={item} />) : 
-              <div>None so far . . .</div>}
+            </textarea>
+            <p>Rating</p>
+            <select
+              className="user-review"
+              name="myRating"
+              onChange={e => this.handleChange(e)}>
+              <option>Select a rating</option>
+              <option value="1">1 Star</option>
+              <option value="2">2 Stars</option>
+              <option value="3">3 Stars</option>
+              <option value="4">4 Stars</option>
+              <option value="5">5 Stars</option>
+            </select>
+            {!this.state.feedbackSent && <button className="btn btn-white" onClick={this.submitFeedback}>Submit Feedback</button>}
+            {this.state.feedbackSent && <button className="btn btn-white" disabled>Feedback Sent</button>}
+            <form>
+            </form>
+          </div>
+          <div>
+            <h3 style={{textDecoration: "underline"}}>Feedback</h3>
+            <Grid>
+              <Row>
+                {this.state.thisUserFeedback ?
+                this.state.thisUserFeedback.map((item) => {
+                  return (
+                    <Col xs ={12} sm={3} md={2} lg={3}>
+                      <FeedBackEntry item={item} />
+                    </Col>
+                  )
+                }) :
+                <div>None so far . . .</div>}
+              </Row>
             </Grid>
           </div>
           <div>
-            <h3 style={{ textDecoration: "underline" }}>Previously Sold Items</h3>
-            <Grid
-              width={150}
-              gap={24}
-            >
-              {this.state.soldItems ?
-              this.state.soldItems.map((item) => <UserEntry item={item} />) :
+            <h3 style={{textDecoration: "underline", paddingLeft: "10px"}}>Currently Listed Items</h3>
+            <Grid>
+              <Row>
+                {this.state.currentItems ?
+                this.state.currentItems.map((item) => {
+                  return (
+                    <Col xs={12} sm={3} md={2} lg={2}>
+                      <UserEntry item={item} />  
+                    </Col>
+                  )
+                }) :
+                <div>None so far . . .</div>}
+              </Row>
+            </Grid>
+          </div>
+          <div>
+            <h3 style={{ textDecoration: "underline", paddingLeft: "10px" }}>Previously Sold Items</h3>
+            <Grid>
+              <Row>
+                {this.state.soldItems ?
+                this.state.soldItems.map((item) => {
+                  return (
+                    <Col xs={12} sm={3} md={2} lg={2}>
+                      <UserEntry item={item} />
+                    </Col>
+                  )
+                }) : 
+                <div>None so far . . .</div>
+                }
+              </Row>
+            </Grid>
+          </div>
+          <div>
+            <h3 style={{textDecoration: "underline", paddingLeft: "10px"}}>Items Purchased</h3>
+            <Grid>
+              <Row>
+              {this.state.boughtItems ?
+              this.state.boughtItems.map((item) => {
+                return (
+                  <Col xs={12} sm={3} md={2} lg={2}>
+                    <UserEntry item={item} />
+                  </Col>
+                )
+              }) :
               <div>None so far . . .</div>
               }
+              </Row>
             </Grid>
           </div>
-          
         </div>
       </div>
-
-
-
-      // <div>
-      //   <div className="jumbotron">
-      //     <h1 className="display-4 text-white">{this.props.user}    <button onClick={this.props.goback} className="btn btw-white align-right">Back</button></h1>
-      //     {this.state.thisUserRatings &&
-      //     <h2 className="display-4 text-white">{this.state.thisUserRatings[0].rating}</h2>
-      //     }
-      //     <div className="card-deck">
-      //       <div className="card text-white bg-dark mb-3">
-      //         <h4 className="card-title">Currently Listed Items</h4>
-      //         {!this.state.currentItems && <div>None so far . . .</div>}
-      //         {this.state.currentItems &&
-      //           this.state.currentItems.map((item) => <div>{item.name}</div>)
-      //         }
-      //       </div>
-      //       <div className="card text-white text-center bg-dark mb-3">
-      //         <h4 className="card-title">Sold items</h4>
-      //         {!this.state.soldItems && <div>None so far . . .</div>}
-      //         {this.state.soldItems &&
-      //           this.state.soldItems.map((item) => <div>{item.item}</div>)
-      //         }
-      //       </div>
-      //       <div className="card text-white text-center bg-dark mb-3">
-      //         <h4 className="card-title">Purchased items</h4>
-      //         {!this.state.boughtItems && <div>None so far . . .</div>}
-      //         {this.state.boughtItems &&
-      //           this.state.boughtItems.map((item) => <div>{item.item}</div>)
-      //         }
-      //       </div>
-      //       <div className="card text-white text-center bg-dark mb-3">
-      //         <h4 className="card-title">User Reviews</h4>
-      //         {!this.state.thisUserFeedback && <div>None so far . . .</div>}
-      //         {this.state.thisUserFeedback &&
-      //           this.state.thisUserFeedback.map((review) => <div>{review.user} : {review.message}</div>)
-      //         }
-      //       </div>
-      //       <div className="card text-white text-center bg-dark mb-3">
-      //         <h4 className="card-title"> Give Feedback</h4>
-      //         <p>Review</p>
-      //         <textarea
-      //           className="user-feedback"
-      //           name="myFeedback"
-      //           type="string"
-      //           value={this.state.myFeedback}
-      //           onChange={e => this.handleChange(e)}
-      //           rows="3"
-      //           placeholder="..."
-      //         >
-      //         </textarea>
-      //         <p>Rating</p>
-      //         <select
-      //         className="user-review"
-      //         name="myRating"
-      //         onChange={e => this.handleChange(e)}>
-      //           <option>Select a rating</option>
-      //           <option value="1">1 Star</option>
-      //           <option value="2">2 Stars</option>
-      //           <option value="3">3 Stars</option>
-      //           <option value="4">4 Stars</option>
-      //           <option value="5">5 Stars</option>
-      //         </select>
-      //         {!this.state.feedbackSent && <button className="btn btn-white" onClick={this.submitFeedback}>Submit Feedback</button>}
-      //         {this.state.feedbackSent && <button className="btn btn-white" disabled>Feedback Sent</button>}
-      //         <form>
-      //         </form>
-      //       </div>
-      //     </div>
-      //   </div>
-      // </div>
     )
   }
 }

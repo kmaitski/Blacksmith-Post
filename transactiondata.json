@@ -3,29 +3,33 @@
     "date": "2018-03-10 10:24:06.510",
     "buyer": "johnnythesmith66@smithsforge.org",
     "seller": "moxie@moxman.com",
-    "item": "The Light Mox Man Blade",
-    "cost": 999999
+    "name": "The Light Mox Man Blade",
+    "cost": 999999,
+    "image": "https://i0.wp.com/masculine-style.com/wp-content/uploads/2013/11/31MXKS13FNL.jpg?w=500"
   },
   {
     "date": "2018-03-14 10:24:06.510",
     "buyer": "moxie@moxman.com",
     "seller": "johnnythesmith66@smithsforge.org",
-    "item": "Johnny's sword",
-    "cost": 8
+    "name": "Johnny's sword",
+    "cost": 8,
+    "image": "http://cdn7.bigcommerce.com/s-hkb12/images/stencil/1280x1280/products/797/1876/NCRS101_2__11827.1489780182.jpg?c=2&imbypass=on"
   },
   {
     "date": "2018-03-10 10:24:06.510",
     "buyer": "johnnythesmith66@smithsforge.org",
     "seller": "ashen1@smithsforge.org",
-    "item": "Ultra Greatsword",
-    "cost": 13000
+    "name": "Ultra Greatsword",
+    "cost": 13000,
+    "image": "https://cdna.artstation.com/p/assets/images/images/008/628/886/large/patrick-faulkner-greatsword-001.jpg?1514056439"
   },
   {
     "date": "2018-03-10 10:24:06.510",
     "buyer": "ryanm@hackreactor.edu",
     "seller": "johnnythesmith66@smithsforge.org",
-    "item": "Mirror Shield",
-    "cost": 13000
+    "name": "Mirror Shield",
+    "cost": 13000,
+    "image": "https://vignette.wikia.nocookie.net/zelda/images/9/9e/Mirror_Shield_%28Link%27s_Awakening%29.png/revision/latest?cb=20100128014257"
   }
 
 ]

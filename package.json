@@ -19,7 +19,10 @@
     "url": "https://github.com/Goliath-Solutions/blacksmithpost/issues"
   },
   "homepage": "https://github.com/Goliath-Solutions/blacksmithpost#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "css-loader": "^0.28.10",
+    "style-loader": "^0.20.3"
+  },
   "dependencies": {
     "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
@@ -40,8 +43,10 @@
     "passport-local": "^1.0.0",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
+    "react-css-grid-layout": "^1.0.0",
     "react-dom": "^16.2.0",
     "react-dropzone": "^4.2.9",
+    "react-flexbox-grid": "^2.0.0",
     "react-modal": "^3.3.1",
     "react-popup": "^0.9.2",
     "reactstrap": "^5.0.0-beta.2",

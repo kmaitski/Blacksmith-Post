@@ -1,6 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
-import ReactDOM from 'react-dom';
+import UserEntry from './UserEntry.jsx';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import FeedBackEntry from './FeedBackEntry.jsx';
 
 class MyPage extends React.Component {
   constructor(props) {
@@ -29,7 +31,7 @@ class MyPage extends React.Component {
     $.get('/userFeedback', thisUser, (data) => {
       if (data.rating && data.feedback) {
         this.setState({
-          thisUserRatings: data.rating,
+          thisUserRatings: data.rating || 0,
           thisUserFeedback: data.feedback
         })
       }
@@ -37,42 +39,79 @@ class MyPage extends React.Component {
   }
 
   render() {
+    console.log(this.state.thisUserFeedback);
     return (
-       <div>
-        <div className="jumbotron">
-          <h1 className="display-4 text-white">{this.props.user.local.username}</h1>
-          {this.state.thisUserRatings &&
-            <h2 className="display-4 text-white">5</h2>
+      <div>
+        <div style={{paddingTop: "50px", paddingLeft: "15px"}}>
+          {this.state.thisUserRatings ?
+            <h2>{this.props.user} ({this.state.thisUserRatings[0].rating}<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Star_icon-72a7cf.svg/32px-Star_icon-72a7cf.svg.png" />)</h2> : 
+            <h2>{this.props.user.local.username} (0<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Star_icon-72a7cf.svg/32px-Star_icon-72a7cf.svg.png" />)</h2>
           }
-          <div className="card-deck">
-            <div className="card text-white bg-dark mb-3">
-              <h4 className="card-title">Currently Listed Items</h4>
-              {!this.state.currentItems && <div>None so far . . .</div>}
-              {this.state.currentItems &&
-                this.state.currentItems.map((item) => <div>{item.name}</div>)
-              }
-            </div>
-            <div className="card text-white text-center bg-dark mb-3">
-              <h4 className="card-title">Sold items</h4>
-              {!this.state.soldItems && <div>None so far . . .</div>}
-              {this.state.soldItems &&
-                this.state.soldItems.map((item) => <div>Sold: {item.item}</div>)
-              }
-            </div>
-            <div className="card text-white text-center bg-dark mb-3">
-              <h4 className="card-title">User Reviews</h4>
-              {!this.state.thisUserFeedback && <div>None so far . . .</div>}
-              {this.state.thisUserFeedback &&
-                this.state.thisUserFeedback.map((review) => <div>{review.user} : {review.message}</div>)
-              }
-            </div>
-            <div className="card text-white text-center bg-dark mb-3">
-              <h4 className="card-title">Purchased items</h4>
-              {!this.state.boughtItems && <div>None so far . . .</div>}
-              {this.state.boughtItems &&
-                this.state.boughtItems.map((item) => <div>Bought: {item.item}</div>)
-              }
-            </div>
+          <div>
+            <h3 style={{ textDecoration: "underline" }}>Feedback</h3>
+            <Grid>
+              <Row>
+                {this.state.thisUserFeedback ?
+                  this.state.thisUserFeedback.map((item) => {
+                    return (
+                      <Col xs={12} sm={3} md={2} lg={3}>
+                        <FeedBackEntry item={item} />
+                      </Col>
+                    )
+                  }) :
+                  <div>None so far . . .</div>}
+              </Row>
+            </Grid>
+          </div>
+          <div>
+            <h3 style={{ textDecoration: "underline" }}>Currently Listed Items</h3>
+            <Grid>
+              <Row>
+                {this.state.currentItems ?
+                  this.state.currentItems.map((item) => {
+                    return (
+                      <Col xs={12} sm={3} md={2} lg={2}>
+                        <UserEntry item={item} />
+                      </Col>
+                    )
+                  }) :
+                  <div>None so far . . .</div>}
+              </Row>
+            </Grid>
+          </div>
+          <div>
+            <h3 style={{ textDecoration: "underline" }}>Previously Sold Items</h3>
+            <Grid>
+              <Row>
+                {this.state.soldItems ?
+                  this.state.soldItems.map((item) => {
+                    return (
+                      <Col xs={12} sm={3} md={2} lg={2}>
+                        <UserEntry item={item} />
+                      </Col>
+                    )
+                  }) :
+                  <div>None so far . . .</div>
+                }
+              </Row>
+            </Grid>
+          </div>
+          <div>
+            <h3 style={{ textDecoration: "underline" }}>Items Purchased</h3>
+            <Grid>
+              <Row>
+                {this.state.boughtItems ?
+                  this.state.boughtItems.map((item) => {
+                    return (
+                      <Col xs={12} sm={3} md={2} lg={2}>
+                        <UserEntry item={item} />
+                      </Col>
+                    )
+                  }) :
+                  <div>None so far . . .</div>
+                }
+              </Row>
+            </Grid>
           </div>
         </div>
       </div>

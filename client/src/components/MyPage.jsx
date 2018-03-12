@@ -18,7 +18,7 @@ class MyPage extends React.Component {
   componentDidMount() {
     let thisUser = {username: this.props.user.local.username};
     $.get('/userSells', thisUser, (data) => {
-      this.setState({soldItem: data.sells});
+      this.setState({soldItems: data.sells});
     })
     $.get('/userBuys', thisUser, (data) => {
       this.setState({boughtItems: data.buys});

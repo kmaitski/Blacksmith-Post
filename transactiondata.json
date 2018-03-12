@@ -1,7 +1,7 @@
 [
   {
     "date": "2018-03-10 10:24:06.510",
-    "buyer": "johnnysmith66@smithsforge.org",
+    "buyer": "johnnythesmith66@smithsforge.org",
     "seller": "moxie@moxman.com",
     "item": "The Light Mox Man Blade",
     "cost": 999999
@@ -9,8 +9,23 @@
   {
     "date": "2018-03-14 10:24:06.510",
     "buyer": "moxie@moxman.com",
-    "seller": "johnnysmith66@smithsforge.org",
+    "seller": "johnnythesmith66@smithsforge.org",
     "item": "Johnny's sword",
     "cost": 8
+  },
+  {
+    "date": "2018-03-10 10:24:06.510",
+    "buyer": "johnnythesmith66@smithsforge.org",
+    "seller": "ashen1@smithsforge.org",
+    "item": "Ultra Greatsword",
+    "cost": 13000
+  },
+  {
+    "date": "2018-03-10 10:24:06.510",
+    "buyer": "ryanm@hackreactor.edu",
+    "seller": "johnnythesmith66@smithsforge.org",
+    "item": "Mirror Shield",
+    "cost": 13000
   }
+
 ]

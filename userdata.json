@@ -1,8 +1,8 @@
 [
   {
     "local": {
-      "username": "johnnysmith66@smithsforge.org",
-      "password": "testpw"
+      "username": "johnnythesmith66@smithsforge.org",
+      "password": "$2a$10$yg5TlmPRWL2O2S6yR0Q6X.fe5fi7V4n8Tzk95nN1MuZY0fenP5Myq"
     },
     "rating": [
       {
@@ -15,12 +15,18 @@
         "date": "2018-03-10 11:33:36.500",
         "user": "moxie@moxman.com",
         "message": "smooth transaction! would purchase from again!"
-      }]
+      },
+      {
+        "date": "2018-03-10 11:33:36.500",
+        "user": "jford@hackreactor.edu",
+        "message": "delivered a custom helm in time for DragonCon! can't wait to go larping in this bad boy!"
+      }
+    ]
   },
   {
     "local": {
       "username": "moxie@moxman.com",
-      "password": "testpw"
+      "password": "$2a$10$yg5TlmPRWL2O2S6yR0Q6X.fe5fi7V4n8Tzk95nN1MuZY0fenP5Myq"
     },
     "rating": [
       {
@@ -33,6 +39,36 @@
         "date": "2018-03-10 11:33:36.500",
         "user": "johnnysmith66@smithsforge.org",
         "message": "friendly and quick!"
-      }]
+      },
+      {
+        "date": "2018-03-11 13:42:10.500",
+        "user": "ryanm@hackreator.edu",
+        "message": "extremely cuddly and fuzzy!"
+      }
+    ]
+  },
+  {
+    "local": {
+      "username": "ashen1@smithsforge.org",
+      "password": "$2a$10$yg5TlmPRWL2O2S6yR0Q6X.fe5fi7V4n8Tzk95nN1MuZY0fenP5Myq"
+    },
+    "rating": [
+      {
+        "user": "firekeeper@smithsforge.org",
+        "rating": 4
+      }
+    ],
+    "feedback": [
+      {
+        "date": "2018-03-10 11:33:36.500",
+        "user": "firekeeper@smithsforge.org",
+        "message": "ashen one... bring me more souls"
+      },
+      {
+        "date": "2018-03-11 13:42:10.500",
+        "user": "ryanm@hackreator.edu",
+        "message": "10/10 A++ would buy from again!"
+      }
+    ]
   }
 ]

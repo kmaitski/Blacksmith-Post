@@ -7,44 +7,27 @@ class SignUp extends React.Component {
     this.state = {
       email: '',
       password: ''
-    }
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
   }
 
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  //   console.log('new message for handle submit');
-  //   // fetch('/login',
-  //   // {
-  //   //   headers: {
-  //   //     Accept: 'application/json',
-  //   //     'Content-Type': 'application/json'
-  //   //   },
-  //   //   method: 'POST',
-  //   //   body: JSON.stringify(this.state)
-  //   // });
-  //   $.post('/login', this.state, (one, that) => {
-  //     // console.log(one);
-  //     // console.log('done');
-  //   });
-  // }
-
   handleSubmit(e) {
     e.preventDefault();
     console.log('in handleSubmit');
-    var newUser = {username: this.state.email, password: this.state.password};
+    var newUser = { username: this.state.email, password: this.state.password };
     $.post('/login', newUser, () =>
-      console.log('user ' + newUser + ' created'));
+      console.log('user ' + newUser + ' created')
+    );
   }
 
   handleEmailChange(e) {
-    this.setState({email: e.target.value});
+    this.setState({ email: e.target.value });
   }
 
   handlePasswordChange(e) {
-    this.setState({password: e.target.value});
+    this.setState({ password: e.target.value });
   }
 
   render() {
@@ -53,16 +36,10 @@ class SignUp extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <h1>Please Sign Up</h1>
           <label>Enter your email here</label>
-          <input
-            type='text'
-            onChange={this.handleEmailChange}
-          />
+          <input type="text" onChange={this.handleEmailChange} />
           <label>Enter your password here</label>
-          <input
-            type='text'
-            onChange={this.handlePasswordChange}
-          />
-          <button type='submit' />
+          <input type="text" onChange={this.handlePasswordChange} />
+          <button type="submit" />
         </form>
       </div>
     );

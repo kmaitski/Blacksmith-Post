@@ -3,11 +3,11 @@ mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/blacksmith');
 
 var db = mongoose.connection;
 
-db.on('error', function () {
+db.on('error', function() {
   console.log('mongoose connection error');
 });
 
-db.once('open', function () {
+db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
@@ -27,35 +27,35 @@ var itemSchema = mongoose.Schema({
   active: Boolean
 });
 
-const userSchema = mongoose.Schema({
-  local: {
-    username: String,
-    password: String
+const userSchema = mongoose.Schema(
+  {
+    local: {
+      username: String,
+      password: String
+    },
+    rating: [
+      {
+        user: String,
+        rating: Number
+      }
+    ],
+    feedback: [
+      {
+        date: { type: Date, default: Date.now },
+        user: String,
+        message: String
+      }
+    ]
   },
-  rating: [
-    {
-      user: String,
-      rating: Number
-    }
-  ],
-  feedback: [
-    {
-      date: {type: Date, default: Date.now},
-      user: String,
-      message: String
-    }
-  ]
-},
-{
-  usePushEach: true
-});
-
-
+  {
+    usePushEach: true
+  }
+);
 
 const User = mongoose.model('User', userSchema);
 
 const transactionSchema = mongoose.Schema({
-  date: {type: Date, default: Date.now},
+  date: { type: Date, default: Date.now },
   buyer: String,
   seller: String,
   item: String,
@@ -66,21 +66,23 @@ const Transaction = mongoose.model('Transaction', transactionSchema);
 
 var createTransaction = function(data, cb) {
   new Transaction({
-    'date': data.date,
-    'buyer': data.buyer,
-    'seller': data.seller,
-    'item': data.item,
-    'cost': data.cost
+    date: data.date,
+    buyer: data.buyer,
+    seller: data.seller,
+    item: data.item,
+    cost: data.cost
   }).save((err, newTrans) => {
-    if (err) { return cb(err); }
+    if (err) {
+      return cb(err);
+    }
     cb(null, newTrans);
   });
 };
 
-var item = module.exports = mongoose.model('item', itemSchema);
+var item = (module.exports = mongoose.model('item', itemSchema));
 
 //create a item listing
-var createItem = function (data, cb) {
+var createItem = function(data, cb) {
   console.log('create item func starting', data);
   new item({
     name: data.name || 'greatHelm',
@@ -96,27 +98,35 @@ var createItem = function (data, cb) {
     class: data.class || 'weapon or armor',
     active: true
   }).save((err, newItem) => {
-    if (err) { return cb(err); }
+    if (err) {
+      return cb(err);
+    }
     cb(null, newItem);
   });
 };
 
 var getSells = function(data, cb) {
-  Transaction.find({seller: data}, function(err, info) {
-    if (err) { console.log(err); }
+  Transaction.find({ seller: data }, function(err, info) {
+    if (err) {
+      console.log(err);
+    }
     cb(info);
   });
 };
 
 var getBuys = function(data, cb) {
-  Transaction.find({buyer: data}, function(err, info) {
-    if (err) { console.log(err); }
+  Transaction.find({ buyer: data }, function(err, info) {
+    if (err) {
+      console.log(err);
+    }
     cb(info);
   });
 };
 var getCurrentItems = function(data, cb) {
-  item.find({email: data}, function(err, info) {
-    if (err) { console.log(err); }
+  item.find({ email: data }, function(err, info) {
+    if (err) {
+      console.log(err);
+    }
     cb(info);
   });
 };
@@ -125,61 +135,68 @@ var getCurrentItems = function(data, cb) {
 var allItems = function(callback) {
   //weapon.find takes 200 years
   //database is releated to async, across network async
-  item.find(function(err, data) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, data);
-
-    }
-  }).limit(200);
+  item
+    .find(function(err, data) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, data);
+      }
+    })
+    .limit(200);
 };
 
 var getFeedback = function(data, cb) {
-  User.findOne({'local.username': data}, function(err, info) {
-    if (err) {console.log(err);}
-    cb(info)
+  User.findOne({ 'local.username': data }, function(err, info) {
+    if (err) {
+      console.log(err);
+    }
+    cb(info);
   });
 };
 
 var addFeedback = function(data, cb) {
   if (data.rating.rating != '') {
-    User.findOne({'local.username': data.username}, function(err, info) {
-      if (err) {console.log('ERR in dbsave', err);}
+    User.findOne({ 'local.username': data.username }, function(err, info) {
+      if (err) {
+        console.log('ERR in dbsave', err);
+      }
       info.rating.push(data.rating);
-      info.save(cb)
+      info.save(cb);
 
       //   function(err) {
       //   if (err) {console.log('ERR IN DBSAVE', err);}
       // });
       // console.log(info)
       // cb('updated : ', info);
-    })
+    });
   }
   if (data.feedback.message != '') {
-    User.findOne({'local.username': data.username}, function(err, info) {
-      if (err) {console.log('ERR in dbsave', err);}
+    User.findOne({ 'local.username': data.username }, function(err, info) {
+      if (err) {
+        console.log('ERR in dbsave', err);
+      }
       info.feedback.push(data.feedback);
-      info.save(cb)
+      info.save(cb);
 
       //   function(err) {
       //   if(err){console.log('ERR IN DBSAVE', err);}
       // });
       // console.log(info)
       // cb('updated : ', info);
-    })
-  };
-}
+    });
+  }
+};
 
 var deleteItem = function(data) {
-  item.remove({name: data.name}).then(() =>
-    console.log(data.type + ' has been deleted database'));
+  item
+    .remove({ name: data.name })
+    .then(() => console.log(data.type + ' has been deleted database'));
 };
 
 //search for item by type
 var findItem = function(data, callback) {
-
-  item.findOne({'name': data.name}).exec(callback);
+  item.findOne({ name: data.name }).exec(callback);
 };
 
 // exports.findAll

@@ -20,13 +20,13 @@ var style = {
     color: '#5ebc01',
     iconColor: '#6ddb00'
   },
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)'
   }
 };
 
@@ -43,13 +43,13 @@ class Receipt extends React.Component {
 
   okay() {
     this.setState({
-        modalisOpen: false
+      modalisOpen: false
     });
     this.props.close();
   }
 
-   render() {
-    return(
+  render() {
+    return (
       <div>
         <Modal
           isOpen={this.props.modalIsOpen}
@@ -57,17 +57,21 @@ class Receipt extends React.Component {
           style={style}
           ariaHideApp={false}
           contentLabel="Payment Modal"
-          >
+        >
           <h2>Payment Success</h2>
-            <p>Congratulations on your new {this.props.itemname}!</p>
-            <img width="100px" height="100px" src={this.props.image}></img>
-            <p>Blacksmith {this.props.owner} has received your payment of ${this.props.price} and will be in touch shortly for shipping details.</p>
-            <button onClick={this.okay}>Okay</button>
+          <p>Congratulations on your new {this.props.itemname}!</p>
+          <img width="100px" height="100px" src={this.props.image} />
+          <p>
+            Blacksmith {this.props.owner} has received your payment of ${
+              this.props.price
+            }{' '}
+            and will be in touch shortly for shipping details.
+          </p>
+          <button onClick={this.okay}>Okay</button>
         </Modal>
       </div>
-      )
+    );
   }
-
 }
 
 export default Receipt;
